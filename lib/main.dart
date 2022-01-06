@@ -1,11 +1,37 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'features/ecommerce/presentation/pages/tab_bar_page.dart';
 
 void main() {
-  runApp(MaterialApp(
-    title: "eCommerce Sample",
-    home: TabBarPage(),
-    theme: ThemeData.light(),
-  ));
+  runApp(
+    CupertinoApp(
+      title: "eCommerce Sample",
+      home: TabBarPage(),
+      theme: CupertinoThemeData(
+        textTheme: _textTheme,
+        scaffoldBackgroundColor: _mainColor,
+        primaryColor: _mainColor,
+        brightness: Brightness.light,
+        primaryContrastingColor: Colors.black,
+        barBackgroundColor: Colors.white,
+      ),
+    ),
+  );
 }
+
+final Color _mainColor = Color(0xFFF9F9F9);
+
+final TextStyle _textStyle =
+    TextStyle(fontFamily: "Metropolis", color: Colors.black);
+
+final CupertinoTextThemeData _textTheme = CupertinoTextThemeData(
+  textStyle: _textStyle,
+  actionTextStyle: _textStyle,
+  tabLabelTextStyle: _textStyle,
+  navTitleTextStyle: _textStyle,
+  navLargeTitleTextStyle: _textStyle,
+  navActionTextStyle: _textStyle,
+  pickerTextStyle: _textStyle,
+  dateTimePickerTextStyle: _textStyle,
+);
