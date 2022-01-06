@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({
+class ShopPage extends StatelessWidget {
+  const ShopPage({
     Key? key,
   }) : super(key: key);
 
@@ -11,7 +11,7 @@ class ProfilePage extends StatelessWidget {
       navigationBar: const CupertinoNavigationBar(),
       child: Center(
         child: Text(
-          "Profile page",
+          "Shop page",
           style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
         ),
       ),
