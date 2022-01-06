@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/login_page.dart';
 
 import 'features/ecommerce/presentation/pages/tab_bar_page.dart';
 
@@ -7,7 +8,7 @@ void main() {
   runApp(
     CupertinoApp(
       title: "eCommerce Sample",
-      home: TabBarPage(),
+      home: LoginPage(),
       theme: CupertinoThemeData(
         textTheme: _textTheme,
         scaffoldBackgroundColor: _mainColor,
