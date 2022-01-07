@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 
 class RedButton extends StatelessWidget {
   final String text;
+  final VoidCallback? onPressed;
 
-  const RedButton({Key? key, required this.text}) : super(key: key);
+  RedButton({Key? key, required this.text, this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class RedButton extends StatelessWidget {
       child: CupertinoButton(
         borderRadius: BorderRadius.circular(30),
         color: const Color.fromRGBO(219, 48, 34, 1),
-        onPressed: () {},
+        onPressed: onPressed,
         child: Text(
           text,
           style: const TextStyle(color: Colors.white),

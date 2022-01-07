@@ -8,7 +8,11 @@ void main() {
   runApp(
     CupertinoApp(
       title: "eCommerce Sample",
-      home: LoginPage(),
+      initialRoute: "/",
+      routes: {
+        "/": (context) => const LoginPage(),
+        "/main": (context) => const TabBarPage(),
+      },
       theme: CupertinoThemeData(
         textTheme: _textTheme,
         scaffoldBackgroundColor: _mainColor,
