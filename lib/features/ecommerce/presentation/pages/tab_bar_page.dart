@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/bag/bag_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/home_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/profile/profile_page.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/shop_page.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/shop/shop_page.dart';
 
 import 'favorites_page.dart';
 

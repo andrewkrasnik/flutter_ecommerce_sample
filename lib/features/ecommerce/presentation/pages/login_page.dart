@@ -15,199 +15,194 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => LoginCubit(),
-      child: BlocBuilder<LoginCubit, LoginState>(
-        builder: (context, state) {
-          List<Widget> _elements = [];
-          if (state is LoginSignUp) {
-            _elements = [
-              const Text("Sign up",
-                  style: TextStyle(
-                    fontSize: 34,
-                    fontWeight: FontWeight.bold,
-                  )),
-              const SizedBox(
-                height: 73,
-              ),
-              Form(
-                  child: Column(
-                children: [
-                  const CastomTextInput(
-                    placeholder: "Name",
-                  ),
-                  const CastomTextInput(
-                    placeholder: "Email",
-                  ),
-                  const CastomTextInput(
-                    placeholder: "Password",
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      BlocProvider.of<LoginCubit>(context).haveAnAccount();
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        const Text("Already have an account?",
-                            style:
-                                TextStyle(fontSize: 14, color: Colors.black)),
-                        Image.asset("assets/icons/arrow_right.png")
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  RedButton(
-                    text: "SIGN UP",
-                    onPressed: () {
-                      BlocProvider.of<LoginCubit>(context).login(context);
-                    },
-                  ),
-                  const SizedBox(
-                    height: 60,
-                  ),
-                  const Text("Or sign up with social account",
-                      style: TextStyle(fontSize: 14, color: Colors.black)),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  LoginSocials(),
-                ],
-              ))
-            ];
-          } else if (state is LoginLogin) {
-            _elements = [
-              const Text("Login",
-                  style: TextStyle(
-                    fontSize: 34,
-                    fontWeight: FontWeight.bold,
-                  )),
-              const SizedBox(
-                height: 73,
-              ),
-              Form(
-                  child: Column(
-                children: [
-                  const CastomTextInput(
-                    placeholder: "Email",
-                  ),
-                  const CastomTextInput(
-                    placeholder: "Password",
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      BlocProvider.of<LoginCubit>(context).forgotPassword();
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        const Text("Forgot your password?",
-                            style:
-                                TextStyle(fontSize: 14, color: Colors.black)),
-                        Image.asset("assets/icons/arrow_right.png")
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  RedButton(
-                    text: "LOGIN",
-                    onPressed: () {
-                      BlocProvider.of<LoginCubit>(context).login(context);
-                    },
-                  ),
-                  const SizedBox(
-                    height: 60,
-                  ),
-                  const Text("Or sign up with social account",
-                      style: TextStyle(fontSize: 14, color: Colors.black)),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  LoginSocials(),
-                ],
-              ))
-            ];
-          } else if (state is LoginForgotPassword) {
-            _elements = [
-              const Text("Forgot password",
-                  style: TextStyle(
-                    fontSize: 34,
-                    fontWeight: FontWeight.bold,
-                  )),
-              const SizedBox(
-                height: 73,
-              ),
-              Form(
-                  child: Column(
-                children: [
-                  const Text(
-                      "Please, enter your email address. You will receive "
-                      "a link to create a new password via email.",
-                      style: TextStyle(fontSize: 14, color: Colors.black)),
-                  const CastomTextInput(
-                    placeholder: "Email",
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  RedButton(
-                    text: "SEND",
-                    onPressed: () {
-                      BlocProvider.of<LoginCubit>(context).toLoginState();
-                    },
-                  ),
-                  const SizedBox(
-                    height: 60,
-                  ),
-                  const Text("Or sign up with social account",
-                      style: TextStyle(fontSize: 14, color: Colors.black)),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                ],
-              ))
-            ];
-          } else if (state is LoginLoading) {
-            _elements = [
-              const Center(
-                child: CircularProgressIndicator(),
-              )
-            ];
-          }
-          return CupertinoPageScaffold(
-              navigationBar: const CupertinoNavigationBar(
-                leading: CupertinoButton(
-                    onPressed: null,
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.black,
-                    )),
-                border: null,
-                backgroundColor: Color(0xFFF9F9F9),
-              ),
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 14, right: 14, top: 18),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: _elements),
+    return BlocBuilder<LoginCubit, LoginState>(
+      builder: (context, state) {
+        List<Widget> _elements = [];
+        if (state is LoginSignUp) {
+          _elements = [
+            const Text("Sign up",
+                style: TextStyle(
+                  fontSize: 34,
+                  fontWeight: FontWeight.bold,
+                )),
+            const SizedBox(
+              height: 73,
+            ),
+            Form(
+                child: Column(
+              children: [
+                const CastomTextInput(
+                  placeholder: "Name",
                 ),
-              ));
-        },
-      ),
+                const CastomTextInput(
+                  placeholder: "Email",
+                ),
+                const CastomTextInput(
+                  placeholder: "Password",
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    BlocProvider.of<LoginCubit>(context).haveAnAccount();
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      const Text("Already have an account?",
+                          style: TextStyle(fontSize: 14, color: Colors.black)),
+                      Image.asset("assets/icons/arrow_right.png")
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                RedButton(
+                  text: "SIGN UP",
+                  onPressed: () {
+                    BlocProvider.of<LoginCubit>(context).login(context);
+                  },
+                ),
+                const SizedBox(
+                  height: 60,
+                ),
+                const Text("Or sign up with social account",
+                    style: TextStyle(fontSize: 14, color: Colors.black)),
+                const SizedBox(
+                  height: 20,
+                ),
+                LoginSocials(),
+              ],
+            ))
+          ];
+        } else if (state is LoginLogin) {
+          _elements = [
+            const Text("Login",
+                style: TextStyle(
+                  fontSize: 34,
+                  fontWeight: FontWeight.bold,
+                )),
+            const SizedBox(
+              height: 73,
+            ),
+            Form(
+                child: Column(
+              children: [
+                const CastomTextInput(
+                  placeholder: "Email",
+                ),
+                const CastomTextInput(
+                  placeholder: "Password",
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    BlocProvider.of<LoginCubit>(context).forgotPassword();
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      const Text("Forgot your password?",
+                          style: TextStyle(fontSize: 14, color: Colors.black)),
+                      Image.asset("assets/icons/arrow_right.png")
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                RedButton(
+                  text: "LOGIN",
+                  onPressed: () {
+                    BlocProvider.of<LoginCubit>(context).login(context);
+                  },
+                ),
+                const SizedBox(
+                  height: 60,
+                ),
+                const Text("Or sign up with social account",
+                    style: TextStyle(fontSize: 14, color: Colors.black)),
+                const SizedBox(
+                  height: 20,
+                ),
+                LoginSocials(),
+              ],
+            ))
+          ];
+        } else if (state is LoginForgotPassword) {
+          _elements = [
+            const Text("Forgot password",
+                style: TextStyle(
+                  fontSize: 34,
+                  fontWeight: FontWeight.bold,
+                )),
+            const SizedBox(
+              height: 73,
+            ),
+            Form(
+                child: Column(
+              children: [
+                const Text(
+                    "Please, enter your email address. You will receive "
+                    "a link to create a new password via email.",
+                    style: TextStyle(fontSize: 14, color: Colors.black)),
+                const CastomTextInput(
+                  placeholder: "Email",
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                RedButton(
+                  text: "SEND",
+                  onPressed: () {
+                    BlocProvider.of<LoginCubit>(context).toLoginState();
+                  },
+                ),
+                const SizedBox(
+                  height: 60,
+                ),
+                const Text("Or sign up with social account",
+                    style: TextStyle(fontSize: 14, color: Colors.black)),
+                const SizedBox(
+                  height: 20,
+                ),
+              ],
+            ))
+          ];
+        } else if (state is LoginLoading) {
+          _elements = [
+            const Center(
+              child: CircularProgressIndicator(),
+            )
+          ];
+        }
+        return CupertinoPageScaffold(
+            navigationBar: const CupertinoNavigationBar(
+              leading: CupertinoButton(
+                  onPressed: null,
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.black,
+                  )),
+              border: null,
+              backgroundColor: Color(0xFFF9F9F9),
+            ),
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 14, right: 14, top: 18),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: _elements),
+              ),
+            ));
+      },
     );
   }
 }
