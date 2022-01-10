@@ -27,7 +27,7 @@ CupertinoNavigationBar shopAppBar(
         ? Container()
         : Text(
             title,
-            style: const TextStyle(fontSize: 18),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
     trailing: const CupertinoButton(
         onPressed: null,

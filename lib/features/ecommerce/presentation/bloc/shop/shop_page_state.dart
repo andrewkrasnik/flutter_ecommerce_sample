@@ -30,6 +30,12 @@ class ShopPageProductList extends ShopPageState {
     required this.productList,
     required this.catalogItem,
     this.itemView = true,
-    this.sortBy = "",
+    this.sortBy = "Price: lowest to high",
   });
+}
+
+class ShopPageFilters extends ShopPageState {
+  final CatalogItem catalogItem;
+
+  ShopPageFilters({required this.catalogItem});
 }

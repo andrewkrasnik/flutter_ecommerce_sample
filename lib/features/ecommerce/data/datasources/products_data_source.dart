@@ -64,7 +64,7 @@ class ProductsDataSourceImpl implements ProductsDataSource {
           sale: 0,
           reviewCount: 10,
           images: ["assets/images/products/t-shirt.png"],
-          isFavorite: false));
+          isFavorite: true));
 
       resultList.add(ProductModel(
           id: 4,
@@ -77,6 +77,58 @@ class ProductsDataSourceImpl implements ProductsDataSource {
           sale: 0,
           reviewCount: 3,
           images: ["assets/images/products/shirt.png"],
+          isFavorite: false));
+
+      resultList.add(ProductModel(
+          id: 5,
+          name: "T-Shirt SPANISH",
+          description: "T-Shirt SPANISH",
+          brand: mango,
+          rating: 4,
+          price: 9,
+          salePrice: 0,
+          sale: 0,
+          reviewCount: 3,
+          images: ["assets/images/products/t-shitt_spanish.png"],
+          isFavorite: false));
+
+      resultList.add(ProductModel(
+          id: 6,
+          name: "Blouse",
+          description: "Blouse",
+          brand: dorothyPerkins,
+          rating: 5,
+          price: 21,
+          salePrice: 14,
+          sale: 20,
+          reviewCount: 10,
+          images: ["assets/images/products/blouse_sale.png"],
+          isFavorite: false));
+
+      resultList.add(ProductModel(
+          id: 7,
+          name: "Shirt",
+          description: "Shirt",
+          brand: mango,
+          rating: 0,
+          price: 19,
+          salePrice: 0,
+          sale: 0,
+          reviewCount: 0,
+          images: ["assets/images/products/t-shitt_spanish.png"],
+          isFavorite: false));
+
+      resultList.add(ProductModel(
+          id: 8,
+          name: "Light blouse",
+          description: "Light blouse",
+          brand: dorothyPerkins,
+          rating: 5,
+          price: 25,
+          salePrice: 20,
+          sale: 20,
+          reviewCount: 10,
+          images: ["assets/images/products/blouse_sale.png"],
           isFavorite: false));
     }
     return Future.value(resultList);
