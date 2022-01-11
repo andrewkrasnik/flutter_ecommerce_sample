@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/catalog_item.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/category.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/scategory.dart';
@@ -7,6 +8,8 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/prod
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/get_catalog_by_category.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/get_categories_by_scategory.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/get_products_by_catalog_Item.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/product_page.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/shop/filters_page.dart';
 import 'package:meta/meta.dart';
 
 part 'shop_page_state.dart';
@@ -51,8 +54,41 @@ class ShopPageCubit extends Cubit<ShopPageState> {
       selectSCategory((state as ShopPageCatalog).category.sCategory);
     } else if (state is ShopPageProductList) {
       toCatalog((state as ShopPageProductList).catalogItem.category);
+    } else if (state is ShopPageFilters) {
+      toProductList((state as ShopPageFilters).catalogItem);
     } else {
       // Navigator.of(context).pop();
     }
+  }
+
+  void changeItemView() async {
+    if (state is ShopPageProductList) {
+      await Future.delayed(const Duration(milliseconds: 500));
+      emit(ShopPageProductList(
+          productList: (state as ShopPageProductList).productList,
+          catalogItem: (state as ShopPageProductList).catalogItem,
+          itemView: !(state as ShopPageProductList).itemView,
+          sortBy: (state as ShopPageProductList).sortBy));
+    }
+  }
+
+  void toFilters(BuildContext context) async {
+    //Navigator.of(context).pushNamed("/shop/filters");
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => FiltersPage()));
+  }
+
+  void changeSortType(BuildContext context, String sortBy) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    emit(ShopPageProductList(
+        productList: (state as ShopPageProductList).productList,
+        catalogItem: (state as ShopPageProductList).catalogItem,
+        itemView: (state as ShopPageProductList).itemView,
+        sortBy: sortBy));
+  }
+
+  void toProductPage(BuildContext context, Product product) {
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => ProductPage(product: product)));
   }
 }

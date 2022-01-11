@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/shop/shop_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/shop/catalog_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/shop/categories_page.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/shop/filters_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/shop/product_list_page.dart';
 
 class ShopPage extends StatelessWidget {
@@ -16,17 +17,13 @@ class ShopPage extends StatelessWidget {
     return BlocBuilder<ShopPageCubit, ShopPageState>(
       builder: (context, state) {
         if (state is ShopPageCategories) {
-          return CategoriesPage(
-            sCategory: state.sCategory,
-            categoriesList: state.categoriesList,
-          );
+          return CategoriesPage();
         } else if (state is ShopPageCatalog) {
-          return CatalogPage(catalog: state.catalog);
+          return CatalogPage();
         } else if (state is ShopPageProductList) {
-          return ProductListPage(
-            productList: state.productList,
-            catalogItem: state.catalogItem,
-          );
+          return ProductListPage();
+        } else if (state is ShopPageFilters) {
+          return FiltersPage();
         } else {
           return Container();
         }

@@ -4,19 +4,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/category.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/scategory.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/shop/shop_page_cubit.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/circle_bordered_image.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/shop_app_bar.dart';
 
 class CategoriesPage extends StatelessWidget {
-  final SCategory sCategory;
-  final List<Category> categoriesList;
+  late final SCategory sCategory;
+  late final List<Category> categoriesList;
   CategoriesPage({
-    required this.sCategory,
-    required this.categoriesList,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    sCategory =
+        (BlocProvider.of<ShopPageCubit>(context).state as ShopPageCategories)
+            .sCategory;
+    categoriesList =
+        (BlocProvider.of<ShopPageCubit>(context).state as ShopPageCategories)
+            .categoriesList;
     return CupertinoPageScaffold(
       navigationBar: shopAppBar(
         context: context,
@@ -149,10 +154,13 @@ class CategoriesPage extends StatelessWidget {
                                 style: const TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold),
                               ),
-                              Image.asset(
-                                category.image,
-                                fit: BoxFit.fill,
-                              )
+                              CircleBorderedImage(
+                                height: 100,
+                                width: 172,
+                                image: category.image,
+                                bottomRight: Radius.circular(10),
+                                topRight: Radius.circular(10),
+                              ),
                             ],
                           ),
                         ),

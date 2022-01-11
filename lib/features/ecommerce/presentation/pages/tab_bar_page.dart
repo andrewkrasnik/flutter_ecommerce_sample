@@ -81,28 +81,3 @@ class TabBarPage extends StatelessWidget {
     );
   }
 }
-
-class _CupertinoDemoTab extends StatelessWidget {
-  const _CupertinoDemoTab({
-    Key? key,
-    @required this.title = "",
-  }) : super(key: key);
-
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(),
-      child: Center(
-        child: Text(
-          title,
-          style: TextStyle(
-              //fontFamily: "Metropolis",
-              fontSize: 36,
-              fontWeight: FontWeight.bold),
-        ),
-      ),
-    );
-  }
-}

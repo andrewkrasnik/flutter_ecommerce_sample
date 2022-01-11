@@ -7,7 +7,10 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/repositories/
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/repositories/products_repository.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/get_catalog_by_category.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/get_categories_by_scategory.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/get_new_products.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/get_products_by_catalog_Item.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/get_sale_products.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/home/home_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/login/login_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/shop/shop_page_cubit.dart';
 import 'package:get_it/get_it.dart';
@@ -24,11 +27,15 @@ Future<void> init() async {
       getCatalogByCategory: sl(),
       getProductsByCatalogItem: sl()));
   sl.registerFactory(() => LoginCubit());
+  sl.registerFactory(
+      () => HomePageCubit(getNewProducts: sl(), getSaleProducts: sl()));
 
   //UseCases
   sl.registerLazySingleton(() => GetCategoriesBySCategory(sl()));
   sl.registerLazySingleton(() => GetCatalogByCategory(sl()));
   sl.registerLazySingleton(() => GetProductsByCatalogItem(sl()));
+  sl.registerLazySingleton(() => GetSaleProducts(sl()));
+  sl.registerLazySingleton(() => GetNewProducts(sl()));
 
   //Repository
   sl.registerLazySingleton<CategoriesRepository>(

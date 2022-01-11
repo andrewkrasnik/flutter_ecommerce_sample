@@ -18,4 +18,14 @@ class ProductsRepositoryImpl implements ProductsRepository {
       CatalogItem catalogItem) async {
     return await productsDataSource.getCategoryByCatalogItem(catalogItem);
   }
+
+  @override
+  Future<List<Product>> getNewProducts() async {
+    return await productsDataSource.getNewProducts();
+  }
+
+  @override
+  Future<List<Product>> getSaleProducts() async {
+    return await productsDataSource.getSaleProducts();
+  }
 }

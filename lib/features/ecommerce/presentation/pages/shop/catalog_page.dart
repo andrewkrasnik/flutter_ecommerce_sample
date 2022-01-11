@@ -3,17 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/catalog_item.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/shop/shop_page_cubit.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/red_button.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/shop_app_bar.dart';
 
 class CatalogPage extends StatelessWidget {
-  final List<CatalogItem> catalog;
+  late final List<CatalogItem> catalog;
 
-  const CatalogPage({Key? key, required this.catalog}) : super(key: key);
+  CatalogPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Color _grayColor = const Color(0xFF9B9B9B);
+    catalog = (BlocProvider.of<ShopPageCubit>(context).state as ShopPageCatalog)
+        .catalog;
+
     return CupertinoPageScaffold(
         navigationBar: shopAppBar(
           context: context,
@@ -25,7 +29,19 @@ class CatalogPage extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
-              child: RedButton(text: "VIEW ALL ITEMS"),
+              child: Container(
+                height: 48,
+                width: double.maxFinite,
+                child: CupertinoButton(
+                  borderRadius: BorderRadius.circular(30),
+                  color: const Color.fromRGBO(219, 48, 34, 1),
+                  onPressed: () {},
+                  child: const Text(
+                    "VIEW ALL ITEMS",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(
