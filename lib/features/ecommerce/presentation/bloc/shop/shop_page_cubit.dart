@@ -9,6 +9,7 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/get_
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/get_categories_by_scategory.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/get_products_by_catalog_Item.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/product_page.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/shop/filters_page.dart';
 import 'package:meta/meta.dart';
 
 part 'shop_page_state.dart';
@@ -66,14 +67,15 @@ class ShopPageCubit extends Cubit<ShopPageState> {
       emit(ShopPageProductList(
           productList: (state as ShopPageProductList).productList,
           catalogItem: (state as ShopPageProductList).catalogItem,
-          itemView: !(state as ShopPageProductList).itemView));
+          itemView: !(state as ShopPageProductList).itemView,
+          sortBy: (state as ShopPageProductList).sortBy));
     }
   }
 
   void toFilters(BuildContext context) async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    emit(ShopPageFilters(
-        catalogItem: (state as ShopPageProductList).catalogItem));
+    //Navigator.of(context).pushNamed("/shop/filters");
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => FiltersPage()));
   }
 
   void changeSortType(BuildContext context, String sortBy) async {

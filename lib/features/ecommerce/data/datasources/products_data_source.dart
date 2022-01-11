@@ -5,6 +5,8 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/cata
 abstract class ProductsDataSource {
   Future<List<ProductModel>> getAllProducts();
   Future<List<ProductModel>> getCategoryByCatalogItem(CatalogItem catalogItem);
+  Future<List<ProductModel>> getSaleProducts();
+  Future<List<ProductModel>> getNewProducts();
 }
 
 class ProductsDataSourceImpl implements ProductsDataSource {
@@ -131,6 +133,80 @@ class ProductsDataSourceImpl implements ProductsDataSource {
           images: ["assets/images/products/blouse_sale.png"],
           isFavorite: false));
     }
+    return Future.value(resultList);
+  }
+
+  @override
+  Future<List<ProductModel>> getNewProducts() {
+    Brand ovs = Brand(id: 5, name: "OVS");
+    Brand mangoBoy = Brand(id: 6, name: "Mango Boy");
+    Brand cool = Brand(id: 7, name: "Cool");
+
+    List<ProductModel> resultList = [];
+    resultList.add(ProductModel(
+        id: 9,
+        name: "Blouse",
+        description: "Blouse",
+        brand: ovs,
+        rating: 0,
+        price: 30,
+        salePrice: 0,
+        sale: 0,
+        reviewCount: 0,
+        images: ["assets/images/products/new_blouse.png"],
+        isFavorite: false));
+
+    resultList.add(ProductModel(
+        id: 10,
+        name: "T-Shirt Sailling",
+        description: "T-Shirt Sailling",
+        brand: mangoBoy,
+        rating: 0,
+        price: 10,
+        salePrice: 0,
+        sale: 0,
+        reviewCount: 0,
+        images: ["assets/images/products/new_shirt.png"],
+        isFavorite: false));
+
+    resultList.add(ProductModel(
+        id: 11,
+        name: "Jeans",
+        description: "T-shirt",
+        brand: cool,
+        rating: 0,
+        price: 45,
+        salePrice: 0,
+        sale: 0,
+        reviewCount: 0,
+        images: ["assets/images/products/new_shirt.png"],
+        isFavorite: true));
+
+    return Future.value(resultList);
+  }
+
+  @override
+  Future<List<ProductModel>> getSaleProducts() {
+    Brand dorothyPerkins = Brand(id: 1, name: "Dorothy Perkins");
+    Brand mango = Brand(id: 2, name: "Mango");
+    Brand lost = Brand(id: 3, name: "LOST Inc");
+    Brand topshop = Brand(id: 4, name: "Topshop");
+
+    List<ProductModel> resultList = [];
+
+    resultList.add(ProductModel(
+        id: 6,
+        name: "Blouse",
+        description: "Blouse",
+        brand: dorothyPerkins,
+        rating: 5,
+        price: 21,
+        salePrice: 14,
+        sale: 20,
+        reviewCount: 10,
+        images: ["assets/images/products/blouse_sale.png"],
+        isFavorite: false));
+
     return Future.value(resultList);
   }
 }

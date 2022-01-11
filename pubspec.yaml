@@ -64,12 +64,14 @@ flutter:
      - assets/icons/
      - assets/images/products/
      - assets/images/categories/
+     - assets/images/main_page/
   #   - images/a_dot_ham.jpeg
 
   fonts:
     - family:  Metropolis
       fonts:
         - asset: assets/fonts/metropolis/Metropolis-Regular.otf
+        - asset: assets/fonts/metropolis/Metropolis-ExtraBold.otf
         - asset: assets/fonts/metropolis/Metropolis-Bold.otf
         - asset: assets/fonts/metropolis/Metropolis-BoldItalic.otf
         - asset: assets/fonts/metropolis/Metropolis-SemiBold.otf

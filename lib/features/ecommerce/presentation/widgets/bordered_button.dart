@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class RedButton extends StatelessWidget {
+class BorderedButton extends StatelessWidget {
   final String text;
   final VoidCallback? onTap;
   final double? width;
   final double height;
 
-  RedButton(
+  BorderedButton(
       {Key? key, required this.text, this.onTap, this.width, this.height = 48})
       : super(key: key);
 
@@ -18,14 +18,14 @@ class RedButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
-          color: const Color.fromRGBO(219, 48, 34, 1),
+          border: Border.all(),
         ),
         height: height,
         width: width ?? double.maxFinite,
         child: Center(
           child: Text(
             text,
-            style: const TextStyle(color: Colors.white, fontSize: 14),
+            style: const TextStyle(fontSize: 14),
           ),
         ),
       ),

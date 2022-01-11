@@ -61,7 +61,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 RedButton(
                   text: "SIGN UP",
-                  onPressed: () {
+                  onTap: () {
                     BlocProvider.of<LoginCubit>(context).login(context);
                   },
                 ),
@@ -117,7 +117,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 RedButton(
                   text: "LOGIN",
-                  onPressed: () {
+                  onTap: () {
                     BlocProvider.of<LoginCubit>(context).login(context);
                   },
                 ),
@@ -161,7 +161,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 RedButton(
                   text: "SEND",
-                  onPressed: () {
+                  onTap: () {
                     BlocProvider.of<LoginCubit>(context).toLoginState();
                   },
                 ),
