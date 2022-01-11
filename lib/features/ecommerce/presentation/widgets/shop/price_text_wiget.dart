@@ -12,7 +12,7 @@ class PriceTextWiget extends StatelessWidget {
     if (product.salePrice == 0.0) {
       return Text(
         "${product.price.toStringAsFixed(0)}\$",
-        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+        style: TextStyle(fontSize: fontSize, fontWeight: FontWeight.bold),
       );
     } else {
       return Row(

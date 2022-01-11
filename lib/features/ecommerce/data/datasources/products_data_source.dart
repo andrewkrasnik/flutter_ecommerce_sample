@@ -21,119 +21,16 @@ class ProductsDataSourceImpl implements ProductsDataSource {
   }
 
   @override
-  Future<List<ProductModel>> getCategoryByCatalogItem(CatalogItem catalogItem) {
-    Brand dorothyPerkins = Brand(id: 1, name: "Dorothy Perkins");
-    Brand mango = Brand(id: 2, name: "Mango");
-    Brand lost = Brand(id: 3, name: "LOST Inc");
-    Brand topshop = Brand(id: 4, name: "Topshop");
-
+  Future<List<ProductModel>> getCategoryByCatalogItem(
+      CatalogItem catalogItem) async {
     List<ProductModel> resultList = [];
     if (catalogItem.name == "Tops") {
-      resultList.add(ProductModel(
-          id: 1,
-          name: "Pullover",
-          description: "Pullover",
-          brand: mango,
-          rating: 4,
-          price: 51,
-          salePrice: 0,
-          sale: 0,
-          reviewCount: 3,
-          images: ["assets/images/products/pullover.png"],
-          isFavorite: false));
-
-      resultList.add(ProductModel(
-          id: 2,
-          name: "Blouse",
-          description: "Blouse",
-          brand: dorothyPerkins,
-          rating: 0,
-          price: 34,
-          salePrice: 0,
-          sale: 0,
-          reviewCount: 0,
-          images: ["assets/images/products/blouse.png"],
-          isFavorite: false));
-
-      resultList.add(ProductModel(
-          id: 3,
-          name: "T-shirt",
-          description: "T-shirt",
-          brand: lost,
-          rating: 5,
-          price: 12,
-          salePrice: 0,
-          sale: 0,
-          reviewCount: 10,
-          images: ["assets/images/products/t-shirt.png"],
-          isFavorite: true));
-
-      resultList.add(ProductModel(
-          id: 4,
-          name: "Shirt",
-          description: "Shirt",
-          brand: topshop,
-          rating: 4,
-          price: 51,
-          salePrice: 0,
-          sale: 0,
-          reviewCount: 3,
-          images: ["assets/images/products/shirt.png"],
-          isFavorite: false));
-
-      resultList.add(ProductModel(
-          id: 5,
-          name: "T-Shirt SPANISH",
-          description: "T-Shirt SPANISH",
-          brand: mango,
-          rating: 4,
-          price: 9,
-          salePrice: 0,
-          sale: 0,
-          reviewCount: 3,
-          images: ["assets/images/products/t-shitt_spanish.png"],
-          isFavorite: false));
-
-      resultList.add(ProductModel(
-          id: 6,
-          name: "Blouse",
-          description: "Blouse",
-          brand: dorothyPerkins,
-          rating: 5,
-          price: 21,
-          salePrice: 14,
-          sale: 20,
-          reviewCount: 10,
-          images: ["assets/images/products/blouse_sale.png"],
-          isFavorite: false));
-
-      resultList.add(ProductModel(
-          id: 7,
-          name: "Shirt",
-          description: "Shirt",
-          brand: mango,
-          rating: 0,
-          price: 19,
-          salePrice: 0,
-          sale: 0,
-          reviewCount: 0,
-          images: ["assets/images/products/t-shitt_spanish.png"],
-          isFavorite: false));
-
-      resultList.add(ProductModel(
-          id: 8,
-          name: "Light blouse",
-          description: "Light blouse",
-          brand: dorothyPerkins,
-          rating: 5,
-          price: 25,
-          salePrice: 20,
-          sale: 20,
-          reviewCount: 10,
-          images: ["assets/images/products/blouse_sale.png"],
-          isFavorite: false));
+      resultList = tops();
+    } else if (catalogItem.name == "Dresses") {
+      resultList = dresses();
     }
-    return Future.value(resultList);
+
+    return resultList;
   }
 
   @override
@@ -154,7 +51,8 @@ class ProductsDataSourceImpl implements ProductsDataSource {
         sale: 0,
         reviewCount: 0,
         images: ["assets/images/products/new_blouse.png"],
-        isFavorite: false));
+        isFavorite: false,
+        isNew: true));
 
     resultList.add(ProductModel(
         id: 10,
@@ -167,7 +65,8 @@ class ProductsDataSourceImpl implements ProductsDataSource {
         sale: 0,
         reviewCount: 0,
         images: ["assets/images/products/new_shirt.png"],
-        isFavorite: false));
+        isFavorite: false,
+        isNew: true));
 
     resultList.add(ProductModel(
         id: 11,
@@ -180,17 +79,136 @@ class ProductsDataSourceImpl implements ProductsDataSource {
         sale: 0,
         reviewCount: 0,
         images: ["assets/images/products/new_shirt.png"],
-        isFavorite: true));
+        isFavorite: true,
+        isNew: true));
 
     return Future.value(resultList);
   }
 
   @override
   Future<List<ProductModel>> getSaleProducts() {
+    return Future.value(
+        dresses().where((element) => element.salePrice > 0).toList());
+  }
+
+  List<ProductModel> tops() {
     Brand dorothyPerkins = Brand(id: 1, name: "Dorothy Perkins");
-    Brand sitlly = Brand(id: 8, name: "Sitlly");
+    Brand mango = Brand(id: 2, name: "Mango");
     Brand lost = Brand(id: 3, name: "LOST Inc");
     Brand topshop = Brand(id: 4, name: "Topshop");
+
+    List<ProductModel> resultList = [];
+
+    resultList.add(ProductModel(
+        id: 1,
+        name: "Pullover",
+        description: "Pullover",
+        brand: mango,
+        rating: 4,
+        price: 51,
+        salePrice: 0,
+        sale: 0,
+        reviewCount: 3,
+        images: ["assets/images/products/pullover.png"],
+        isFavorite: false));
+
+    resultList.add(ProductModel(
+        id: 2,
+        name: "Blouse",
+        description: "Blouse",
+        brand: dorothyPerkins,
+        rating: 0,
+        price: 34,
+        salePrice: 0,
+        sale: 0,
+        reviewCount: 0,
+        images: ["assets/images/products/blouse.png"],
+        isFavorite: false));
+
+    resultList.add(ProductModel(
+        id: 3,
+        name: "T-shirt",
+        description: "T-shirt",
+        brand: lost,
+        rating: 5,
+        price: 12,
+        salePrice: 0,
+        sale: 0,
+        reviewCount: 10,
+        images: ["assets/images/products/t-shirt.png"],
+        isFavorite: true));
+
+    resultList.add(ProductModel(
+        id: 4,
+        name: "Shirt",
+        description: "Shirt",
+        brand: topshop,
+        rating: 4,
+        price: 51,
+        salePrice: 0,
+        sale: 0,
+        reviewCount: 3,
+        images: ["assets/images/products/shirt.png"],
+        isFavorite: false));
+
+    resultList.add(ProductModel(
+        id: 5,
+        name: "T-Shirt SPANISH",
+        description: "T-Shirt SPANISH",
+        brand: mango,
+        rating: 4,
+        price: 9,
+        salePrice: 0,
+        sale: 0,
+        reviewCount: 3,
+        images: ["assets/images/products/t-shitt_spanish.png"],
+        isFavorite: false));
+
+    resultList.add(ProductModel(
+        id: 6,
+        name: "Blouse",
+        description: "Blouse",
+        brand: dorothyPerkins,
+        rating: 5,
+        price: 21,
+        salePrice: 14,
+        sale: 20,
+        reviewCount: 10,
+        images: ["assets/images/products/blouse_sale.png"],
+        isFavorite: false));
+
+    resultList.add(ProductModel(
+        id: 7,
+        name: "Shirt",
+        description: "Shirt",
+        brand: mango,
+        rating: 0,
+        price: 19,
+        salePrice: 0,
+        sale: 0,
+        reviewCount: 0,
+        images: ["assets/images/products/t-shitt_spanish.png"],
+        isFavorite: false));
+
+    resultList.add(ProductModel(
+        id: 8,
+        name: "Light blouse",
+        description: "Light blouse",
+        brand: dorothyPerkins,
+        rating: 5,
+        price: 25,
+        salePrice: 20,
+        sale: 20,
+        reviewCount: 10,
+        images: ["assets/images/products/blouse_sale.png"],
+        isFavorite: false));
+    return resultList;
+  }
+
+  List<ProductModel> dresses() {
+    Brand dorothyPerkins = Brand(id: 1, name: "Dorothy Perkins");
+    Brand sitlly = Brand(id: 8, name: "Sitlly");
+    Brand hm = Brand(id: 9, name: "H&M");
 
     List<ProductModel> resultList = [];
 
@@ -233,6 +251,27 @@ class ProductsDataSourceImpl implements ProductsDataSource {
         images: ["assets/images/products/sport_dress_2.png"],
         isFavorite: false));
 
-    return Future.value(resultList);
+    resultList.add(ProductModel(
+        id: 15,
+        name: "Short black dress",
+        shortName: "Short dress",
+        description:
+            "Short dress in soft cotton jersey with decorative buttons "
+            "down the front and a wide, frill-trimmed square neckline with concealed"
+            " elastication. Elasticated seam under the bust and short puff sleeves"
+            " with a small frill trim.",
+        brand: hm,
+        rating: 5,
+        price: 19.99,
+        salePrice: 0,
+        sale: 0,
+        reviewCount: 10,
+        images: [
+          "assets/images/products/short_black_dress_1.png",
+          "assets/images/products/short_black_dress_2.png"
+        ],
+        isFavorite: false));
+
+    return resultList;
   }
 }
