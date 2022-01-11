@@ -52,7 +52,7 @@ class HomePage extends StatelessWidget {
           ];
         } else if (state is HomePageSales) {
           headWigets = [
-            Container(
+            SizedBox(
               width: double.maxFinite,
               height: 220,
               child: Stack(fit: StackFit.expand, children: const [

@@ -188,23 +188,49 @@ class ProductsDataSourceImpl implements ProductsDataSource {
   @override
   Future<List<ProductModel>> getSaleProducts() {
     Brand dorothyPerkins = Brand(id: 1, name: "Dorothy Perkins");
-    Brand mango = Brand(id: 2, name: "Mango");
+    Brand sitlly = Brand(id: 8, name: "Sitlly");
     Brand lost = Brand(id: 3, name: "LOST Inc");
     Brand topshop = Brand(id: 4, name: "Topshop");
 
     List<ProductModel> resultList = [];
 
     resultList.add(ProductModel(
-        id: 6,
-        name: "Blouse",
-        description: "Blouse",
+        id: 12,
+        name: "Evening dress",
+        description: "Evening dress",
         brand: dorothyPerkins,
         rating: 5,
-        price: 21,
-        salePrice: 14,
+        price: 15,
+        salePrice: 12,
         sale: 20,
         reviewCount: 10,
-        images: ["assets/images/products/blouse_sale.png"],
+        images: ["assets/images/products/evening_dress.png"],
+        isFavorite: false));
+
+    resultList.add(ProductModel(
+        id: 13,
+        name: "Sport dress",
+        description: "Sport dress",
+        brand: sitlly,
+        rating: 5,
+        price: 22,
+        salePrice: 19,
+        sale: 15,
+        reviewCount: 10,
+        images: ["assets/images/products/sport_dress.png"],
+        isFavorite: false));
+
+    resultList.add(ProductModel(
+        id: 14,
+        name: "Sport dress",
+        description: "Sport dress",
+        brand: dorothyPerkins,
+        rating: 5,
+        price: 14,
+        salePrice: 12,
+        sale: 20,
+        reviewCount: 10,
+        images: ["assets/images/products/sport_dress_2.png"],
         isFavorite: false));
 
     return Future.value(resultList);
