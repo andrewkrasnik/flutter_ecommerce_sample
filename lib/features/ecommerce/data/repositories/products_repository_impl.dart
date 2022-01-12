@@ -28,4 +28,9 @@ class ProductsRepositoryImpl implements ProductsRepository {
   Future<List<Product>> getSaleProducts() async {
     return await productsDataSource.getSaleProducts();
   }
+
+  @override
+  Future<List<Product>> getRecomendedProducts() async {
+    return await productsDataSource.getRecomendedProducts();
+  }
 }

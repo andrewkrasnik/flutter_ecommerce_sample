@@ -46,6 +46,16 @@ class CategoryDataSourceImpl implements CategoryDataSource {
             sCategory: sCategory));
         break;
       case SCategory.Men:
+        resultList.add(CategoryModel(
+            id: 5,
+            name: "New",
+            image: "assets/images/products/new_shirt.png",
+            sCategory: sCategory));
+        resultList.add(CategoryModel(
+            id: 6,
+            name: "Clothes",
+            image: "assets/images/products/new_shirt.png",
+            sCategory: sCategory));
         break;
       case SCategory.Kids:
         break;

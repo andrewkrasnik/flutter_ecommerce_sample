@@ -88,7 +88,7 @@ class _FiltersPageState extends State<FiltersPage> {
                 height: 42,
                 alignment: Alignment.centerLeft,
                 child: const Text(
-                  "Colors ",
+                  "Colors",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 )),
             Container(

@@ -14,8 +14,8 @@ class InfoWiget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 60,
-      padding: EdgeInsets.symmetric(horizontal: 16),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: const BoxDecoration(
           border: Border(
               bottom: BorderSide(width: 0.1), top: BorderSide(width: 0.1))),
       child: Row(
@@ -29,6 +29,7 @@ class InfoWiget extends StatelessWidget {
               child: const Icon(
                 Icons.arrow_forward_ios,
                 color: Colors.black,
+                size: 12,
               ),
               onPressed: onTap)
         ],

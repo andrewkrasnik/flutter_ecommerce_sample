@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
 
 class RedButton extends StatelessWidget {
   final String text;
@@ -18,7 +19,7 @@ class RedButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
-          color: const Color.fromRGBO(219, 48, 34, 1),
+          color: AppColors.red,
         ),
         height: height,
         width: width ?? double.maxFinite,

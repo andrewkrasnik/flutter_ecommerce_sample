@@ -4,6 +4,7 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/prod
 abstract class ProductsRepository {
   Future<List<Product>> getAllProducts();
   Future<List<Product>> getSaleProducts();
+  Future<List<Product>> getRecomendedProducts();
   Future<List<Product>> getNewProducts();
   Future<List<Product>> getProductsByCatalogItem(CatalogItem catalogItem);
 }

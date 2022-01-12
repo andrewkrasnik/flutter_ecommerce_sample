@@ -7,6 +7,7 @@ abstract class ProductsDataSource {
   Future<List<ProductModel>> getCategoryByCatalogItem(CatalogItem catalogItem);
   Future<List<ProductModel>> getSaleProducts();
   Future<List<ProductModel>> getNewProducts();
+  Future<List<ProductModel>> getRecomendedProducts();
 }
 
 class ProductsDataSourceImpl implements ProductsDataSource {
@@ -35,6 +36,21 @@ class ProductsDataSourceImpl implements ProductsDataSource {
 
   @override
   Future<List<ProductModel>> getNewProducts() {
+    return Future.value(news());
+  }
+
+  @override
+  Future<List<ProductModel>> getSaleProducts() {
+    return Future.value(
+        dresses().where((element) => element.salePrice > 0).toList());
+  }
+
+  @override
+  Future<List<ProductModel>> getRecomendedProducts() async {
+    return Future.value([dresses()[0], ...news().sublist(1)]);
+  }
+
+  List<ProductModel> news() {
     Brand ovs = Brand(id: 5, name: "OVS");
     Brand mangoBoy = Brand(id: 6, name: "Mango Boy");
     Brand cool = Brand(id: 7, name: "Cool");
@@ -82,13 +98,7 @@ class ProductsDataSourceImpl implements ProductsDataSource {
         isFavorite: true,
         isNew: true));
 
-    return Future.value(resultList);
-  }
-
-  @override
-  Future<List<ProductModel>> getSaleProducts() {
-    return Future.value(
-        dresses().where((element) => element.salePrice > 0).toList());
+    return resultList;
   }
 
   List<ProductModel> tops() {
