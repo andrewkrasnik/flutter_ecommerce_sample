@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
 
 class FilterButton extends StatelessWidget {
   final String text;
@@ -7,15 +8,21 @@ class FilterButton extends StatelessWidget {
   final double width;
   final double height;
   final bool selected;
+  final Color? borderColor;
+  final Color? backgroundColor;
+  final double borderRadius;
 
-  FilterButton(
-      {Key? key,
-      required this.text,
-      this.onTap,
-      this.width = 40,
-      this.height = 40,
-      this.selected = false})
-      : super(key: key);
+  FilterButton({
+    Key? key,
+    required this.text,
+    this.onTap,
+    this.width = 40,
+    this.height = 40,
+    this.borderRadius = 5,
+    this.selected = false,
+    this.backgroundColor,
+    this.borderColor,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +31,8 @@ class FilterButton extends StatelessWidget {
       child: selected
           ? Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: const Color.fromRGBO(219, 48, 34, 1),
+                borderRadius: BorderRadius.circular(borderRadius),
+                color: AppColors.red,
               ),
               height: height,
               width: width,
@@ -41,8 +48,9 @@ class FilterButton extends StatelessWidget {
             )
           : Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                border: Border.all(),
+                borderRadius: BorderRadius.circular(borderRadius),
+                color: backgroundColor,
+                border: Border.all(color: borderColor ?? AppColors.black),
               ),
               height: height,
               width: width,

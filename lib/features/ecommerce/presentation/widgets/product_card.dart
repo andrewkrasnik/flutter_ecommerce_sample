@@ -40,16 +40,7 @@ class ProductCard extends StatelessWidget {
                 const SizedBox(
                   height: 8,
                 ),
-                Row(
-                  children: [
-                    StarRatingWidget(product.rating),
-                    Text(
-                      "(${product.reviewCount.toString()})",
-                      style: const TextStyle(
-                          fontSize: 10, color: Color(0xFF9B9B9B)),
-                    )
-                  ],
-                ),
+                StarRatingWidget(product),
                 const SizedBox(
                   height: 4,
                 ),
@@ -77,7 +68,9 @@ class ProductCard extends StatelessWidget {
             top: 8,
             left: 9,
             child: product.sale == 0
-                ? const NewTextWidget()
+                ? product.isNew
+                    ? const NewTextWidget()
+                    : Container()
                 : SaleTextWidget(product: product),
           ),
           Positioned(

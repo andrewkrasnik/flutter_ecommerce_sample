@@ -11,18 +11,25 @@ class Product {
   final double salePrice;
   final double sale;
   final int reviewCount;
-  final bool isFavorite;
-  Product({
-    required this.id,
-    required this.name,
-    required this.description,
-    required this.brand,
-    required this.rating,
-    required this.price,
-    required this.salePrice,
-    required this.sale,
-    required this.reviewCount,
-    required this.images,
-    required this.isFavorite,
-  });
+  bool isFavorite;
+  String shortName;
+  final bool isNew;
+  Product(
+      {required this.id,
+      required this.name,
+      required this.description,
+      required this.brand,
+      this.rating = 0,
+      required this.price,
+      this.salePrice = 0,
+      this.sale = 0,
+      this.reviewCount = 0,
+      required this.images,
+      this.isFavorite = false,
+      this.isNew = false,
+      this.shortName = ""}) {
+    if (shortName.isEmpty) {
+      shortName = name;
+    }
+  }
 }

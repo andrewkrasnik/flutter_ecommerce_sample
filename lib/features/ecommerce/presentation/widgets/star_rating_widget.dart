@@ -1,14 +1,15 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
 
 class StarRatingWidget extends StatelessWidget {
-  final int reating;
-  const StarRatingWidget(this.reating, {Key? key}) : super(key: key);
+  final Product product;
+  const StarRatingWidget(this.product, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     List<Widget> starList = [];
     for (var i = 0; i < 5; i++) {
-      if (reating >= i + 1) {
+      if (product.rating >= i + 1) {
         starList.add(const Icon(CupertinoIcons.star_fill,
             size: 14, color: Color(0xFFFFBA49)));
       } else {
@@ -20,7 +21,13 @@ class StarRatingWidget extends StatelessWidget {
       ));
     }
     return Row(
-      children: starList,
+      children: [
+        ...starList,
+        Text(
+          "(${product.reviewCount.toString()})",
+          style: const TextStyle(fontSize: 10, color: Color(0xFF9B9B9B)),
+        )
+      ],
     );
   }
 }

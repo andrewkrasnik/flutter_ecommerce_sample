@@ -14,6 +14,8 @@ class ProductModel extends Product {
     required int reviewCount,
     required List<String> images,
     required bool isFavorite,
+    String shortName = "",
+    bool isNew = false,
   }) : super(
             id: id,
             name: name,
@@ -25,5 +27,7 @@ class ProductModel extends Product {
             sale: sale,
             reviewCount: reviewCount,
             images: images,
-            isFavorite: isFavorite);
+            isFavorite: isFavorite,
+            shortName: shortName,
+            isNew: isNew);
 }

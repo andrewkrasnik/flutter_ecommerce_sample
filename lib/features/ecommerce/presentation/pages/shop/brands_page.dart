@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/bordered_button.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/castom_text_input.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/red_button.dart';
 
 class BrandsPage extends StatefulWidget {

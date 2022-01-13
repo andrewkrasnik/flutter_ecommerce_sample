@@ -88,7 +88,7 @@ class _FiltersPageState extends State<FiltersPage> {
                 height: 42,
                 alignment: Alignment.centerLeft,
                 child: const Text(
-                  "Colors ",
+                  "Colors",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 )),
             Container(
@@ -186,7 +186,9 @@ class _FiltersPageState extends State<FiltersPage> {
               alignment: Alignment.centerLeft,
               child: Column(children: [
                 Row(
-                  children: ["All", "Women", "Men"]
+                  children: categories.keys
+                      .toList()
+                      .sublist(0, 3)
                       .map((category) => Padding(
                             padding: const EdgeInsets.only(
                                 left: 11, right: 11.0, top: 16),
@@ -204,7 +206,9 @@ class _FiltersPageState extends State<FiltersPage> {
                       .toList(),
                 ),
                 Row(
-                  children: ["Boys", "Girls"]
+                  children: categories.keys
+                      .toList()
+                      .sublist(3, 5)
                       .map((category) => Padding(
                             padding: const EdgeInsets.only(
                                 left: 11, right: 11.0, top: 12),
