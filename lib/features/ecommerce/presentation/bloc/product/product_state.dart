@@ -5,11 +5,23 @@ abstract class ProductState {}
 
 class ProductPageState extends ProductState {
   final List<Product> recomendedProducts;
-  final String size;
-  final String color;
+  final ProductSize? size;
+  final ProductColor? color;
   ProductPageState({
     required this.recomendedProducts,
-    this.size = "Size",
-    this.color = "",
+    this.size,
+    this.color,
   });
+
+  ProductPageState copyWith({
+    List<Product>? recomendedProducts,
+    ProductSize? size,
+    ProductColor? color,
+  }) {
+    return ProductPageState(
+      recomendedProducts: recomendedProducts ?? this.recomendedProducts,
+      size: size ?? this.size,
+      color: color ?? this.color,
+    );
+  }
 }

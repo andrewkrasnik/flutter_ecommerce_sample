@@ -1,4 +1,6 @@
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/brand.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/product_colors.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/product_sizes.dart';
 
 class Product {
   final int id;
@@ -14,6 +16,9 @@ class Product {
   bool isFavorite;
   String shortName;
   final bool isNew;
+  final bool outOfStock;
+  // late List<ProductColor> colors;
+  // late List<ProductSize> sizes;
   Product(
       {required this.id,
       required this.name,
@@ -27,9 +32,12 @@ class Product {
       required this.images,
       this.isFavorite = false,
       this.isNew = false,
+      this.outOfStock = false,
       this.shortName = ""}) {
     if (shortName.isEmpty) {
       shortName = name;
     }
   }
+  List<ProductColor> get colors => ProductColors.values;
+  List<ProductSize> get sizes => ProductSizes.values;
 }

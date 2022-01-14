@@ -25,12 +25,12 @@ class ShopPageProductList extends ShopPageState {
   final List<Product> productList;
   final CatalogItem catalogItem;
   final bool itemView;
-  final String sortBy;
+  final SortType? sortBy;
   ShopPageProductList({
     required this.productList,
     required this.catalogItem,
     this.itemView = true,
-    this.sortBy = "Price: lowest to high",
+    this.sortBy,
   });
 }
 

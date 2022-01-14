@@ -1,18 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
 
-class FavoriteIconButton extends StatelessWidget {
+class BagIconButton extends StatelessWidget {
   final Product product;
-  final VoidCallback? onTap;
 
-  const FavoriteIconButton({Key? key, required this.product, this.onTap})
-      : super(key: key);
+  const BagIconButton({
+    Key? key,
+    required this.product,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
-      child: Container(
+        onTap: () {},
+        child: Container(
           width: 36,
           height: 36,
           decoration: BoxDecoration(
@@ -25,19 +27,12 @@ class FavoriteIconButton extends StatelessWidget {
               ),
             ],
             borderRadius: BorderRadius.circular(20),
-            color: Colors.white,
+            color: AppColors.red,
           ),
-          child: product.isFavorite
-              ? const Icon(
-                  Icons.favorite,
-                  color: Color.fromRGBO(219, 48, 34, 1),
-                  size: 16,
-                )
-              : const Icon(
-                  Icons.favorite_border,
-                  color: Colors.grey,
-                  size: 16,
-                )),
-    );
+          child: ImageIcon(
+            const AssetImage("assets/icons/add_to_bag.png"),
+            color: AppColors.white,
+          ),
+        ));
   }
 }

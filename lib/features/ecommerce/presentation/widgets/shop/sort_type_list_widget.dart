@@ -1,23 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/sort_types.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/shop/shop_page_cubit.dart';
 
 class SortTypeListWiget extends StatelessWidget {
-  const SortTypeListWiget({Key? key}) : super(key: key);
+  final void Function(BuildContext, SortType) changeSortType;
+  final SortType selectedSortType;
+  const SortTypeListWiget(
+      {Key? key, required this.changeSortType, required this.selectedSortType})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final List<String> sortTypeList = [
-      "Popular",
-      "Newest",
-      "Customer review",
-      "Price: lowest to high",
-      "Price: highest to low",
-    ];
     return Container(
       height: 332,
-      padding: EdgeInsets.only(top: 6),
+      padding: const EdgeInsets.only(top: 6),
       margin: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       decoration: BoxDecoration(
           color: CupertinoColors.systemBackground.resolveFrom(context),
@@ -37,16 +35,13 @@ class SortTypeListWiget extends StatelessWidget {
         ),
         Expanded(
           child: ListView.builder(
-              itemCount: sortTypeList.length,
+              itemCount: SortTypes.values.length,
               itemBuilder: (BuildContext context, int index) {
-                final bool selected = sortTypeList[index] ==
-                    (BlocProvider.of<ShopPageCubit>(context).state
-                            as ShopPageProductList)
-                        .sortBy;
+                final bool selected =
+                    SortTypes.values[index] == selectedSortType;
                 return GestureDetector(
                   onTap: () {
-                    BlocProvider.of<ShopPageCubit>(context)
-                        .changeSortType(context, sortTypeList[index]);
+                    changeSortType(context, SortTypes.values[index]);
                     Navigator.of(context).pop();
                   },
                   child: Container(
@@ -57,7 +52,7 @@ class SortTypeListWiget extends StatelessWidget {
                         ? const Color.fromRGBO(219, 48, 34, 1)
                         : CupertinoColors.systemBackground.resolveFrom(context),
                     child: Text(
-                      sortTypeList[index],
+                      SortTypes.values[index].name,
                       style: TextStyle(
                           fontSize: 16,
                           color: selected ? Colors.white : Colors.black,

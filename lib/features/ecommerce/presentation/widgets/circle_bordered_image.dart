@@ -33,7 +33,7 @@ class CircleBorderedImage extends StatelessWidget {
           image: DecorationImage(
               image: AssetImage(image),
               alignment: Alignment.topLeft,
-              fit: BoxFit.fitWidth)),
+              fit: BoxFit.fill)),
     );
   }
 }

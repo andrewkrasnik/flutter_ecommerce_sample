@@ -1,17 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/product/product_cubit.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/shop/shop_page_cubit.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/product_sizes.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/info_wiget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/red_button.dart';
 
 import 'shop/filter_button.dart';
 
 class SelectSizeWidget extends StatefulWidget {
-  String selectedSize;
-  SelectSizeWidget({Key? key, this.selectedSize = ""}) : super(key: key);
+  Product product;
+  ProductSize? selectedSize;
+  final void Function(ProductSize)? selectSize;
+  final String buttonTitle;
+  final void Function(ProductSize)? redButtonCallBack;
+  SelectSizeWidget(
+      {Key? key,
+      this.selectedSize,
+      required this.product,
+      this.buttonTitle = "ADD TO CARD",
+      this.redButtonCallBack,
+      this.selectSize})
+      : super(key: key);
 
   @override
   State<SelectSizeWidget> createState() => _SelectSizeWidgetState();
@@ -20,32 +30,25 @@ class SelectSizeWidget extends StatefulWidget {
 class _SelectSizeWidgetState extends State<SelectSizeWidget> {
   @override
   Widget build(BuildContext context) {
-    List<String> sizes = [
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL",
-    ];
-
-    List<Widget> sizeWigets = sizes
+    List<Widget> sizeWigets = widget.product.sizes
         .map((size) => Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               child: FilterButton(
-                text: size,
-                selected: size == widget.selectedSize,
-                width: 100,
-                height: 40,
-                borderRadius: 10,
-                backgroundColor: AppColors.white,
-                borderColor: AppColors.shadow,
-                onTap: () {
-                  BlocProvider.of<ProductCubit>(context).selectSize(size);
-                  setState(() {
-                    widget.selectedSize = size;
-                  });
-                },
-              ),
+                  text: size.name,
+                  selected: size == widget.selectedSize,
+                  width: 100,
+                  height: 40,
+                  borderRadius: 10,
+                  backgroundColor: AppColors.white,
+                  borderColor: AppColors.shadow,
+                  onTap: () {
+                    if (widget.selectSize != null) {
+                      widget.selectSize!(size);
+                    }
+                    setState(() {
+                      widget.selectedSize = size;
+                    });
+                  }),
             ))
         .toList();
 
@@ -94,7 +97,15 @@ class _SelectSizeWidgetState extends State<SelectSizeWidget> {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: RedButton(text: "ADD TO CARD"),
+          child: RedButton(
+            text: widget.buttonTitle,
+            onTap: () {
+              if (widget.redButtonCallBack != null) {
+                widget.redButtonCallBack!(widget.selectedSize!);
+              }
+              Navigator.of(context).pop();
+            },
+          ),
         ),
         const SizedBox(
           height: 16,

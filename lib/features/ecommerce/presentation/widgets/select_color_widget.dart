@@ -1,25 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/product_colors.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/product/product_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/info_wiget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/red_button.dart';
 
 import 'shop/filter_color_button.dart';
 
-class SelectColorWidget extends StatelessWidget {
-  final Color? selectedColor;
-  const SelectColorWidget({Key? key, this.selectedColor}) : super(key: key);
+class SelectColorWidget extends StatefulWidget {
+  ProductColor? selectedColor;
+  final Product product;
+  SelectColorWidget({Key? key, this.selectedColor, required this.product})
+      : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    List<Color> colors = [
-      const Color(0xFF020202),
-      const Color(0xFFF6F6F6),
-      const Color(0xFFB82222),
-      const Color(0xFFBEA9A9),
-      const Color(0xFFE2BB8D),
-      const Color(0xFF151867),
-    ];
+  State<SelectColorWidget> createState() => _SelectColorWidgetState();
+}
 
+class _SelectColorWidgetState extends State<SelectColorWidget> {
+  @override
+  Widget build(BuildContext context) {
     return Container(
       height: 360,
       width: double.maxFinite,
@@ -49,11 +51,17 @@ class SelectColorWidget extends StatelessWidget {
             height: 82,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: colors
+              children: widget.product.colors
                   .map((color) => FilterColorButton(
-                        color: color,
-                        selected: color == selectedColor,
-                        onTap: () {},
+                        color: color.color,
+                        selected: color == widget.selectedColor,
+                        onTap: () {
+                          BlocProvider.of<ProductCubit>(context)
+                              .selectColor(color);
+                          setState(() {
+                            widget.selectedColor = color;
+                          });
+                        },
                       ))
                   .toList(),
             )),

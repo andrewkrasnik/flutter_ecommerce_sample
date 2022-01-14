@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/shop/shop_page_cubit.dart';
 
+import '../search_bar_button.dart';
+
 CupertinoNavigationBar shopAppBar(
     {required BuildContext context, String title = "", bool noBorder = false}) {
   return CupertinoNavigationBar(
@@ -16,6 +18,7 @@ CupertinoNavigationBar shopAppBar(
             ),
           ),
     leading: CupertinoButton(
+        padding: const EdgeInsets.only(bottom: 4),
         onPressed: () {
           BlocProvider.of<ShopPageCubit>(context).goBack(context);
         },
@@ -29,11 +32,6 @@ CupertinoNavigationBar shopAppBar(
             title,
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
-    trailing: const CupertinoButton(
-        onPressed: null,
-        child: Icon(
-          Icons.search,
-          color: Colors.black,
-        )),
+    trailing: const SearchBarButton(),
   );
 }

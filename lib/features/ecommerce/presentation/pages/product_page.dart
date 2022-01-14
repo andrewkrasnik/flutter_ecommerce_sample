@@ -7,15 +7,16 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/pr
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/field_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/info_wiget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/recomended_products_list.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/select_color_wiget.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/select_size_wiget.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/red_button.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/select_color_widget.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/select_size_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/favorite_icon_button.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/price_text_wiget.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/price_text_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/star_rating_widget.dart';
 
 class ProductPage extends StatelessWidget {
-  final Product product;
-  const ProductPage({
+  Product product;
+  ProductPage({
     Key? key,
     required this.product,
   }) : super(key: key);
@@ -64,14 +65,20 @@ class ProductPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       FieldWidget(
-                        text: (state as ProductPageState).size,
+                        text: (state as ProductPageState).size == null
+                            ? "Size"
+                            : (state as ProductPageState).size!.name,
                         width: MediaQuery.of(context).size.width / 2.7,
                         onTap: () {
                           showCupertinoModalPopup<void>(
                             context: context,
                             builder: (context) => SelectSizeWidget(
-                              selectedSize: (state as ProductPageState).size,
-                            ),
+                                product: product,
+                                buttonTitle: "ADD TO CARD",
+                                selectedSize: (state as ProductPageState).size,
+                                selectSize:
+                                    BlocProvider.of<ProductCubit>(context)
+                                        .selectSize),
                           );
                         },
                       ),
@@ -79,18 +86,27 @@ class ProductPage extends StatelessWidget {
                         width: 16,
                       ),
                       FieldWidget(
-                        text: "Color",
+                        text: (state as ProductPageState).color == null
+                            ? "Color"
+                            : (state as ProductPageState).color!.name,
                         width: MediaQuery.of(context).size.width / 2.7,
                         onTap: () {
                           showCupertinoModalPopup<void>(
                               context: context,
-                              builder: (context) => SelectColorWidget());
+                              builder: (context) => SelectColorWidget(
+                                    product: product,
+                                  ));
                         },
                       ),
                       const SizedBox(
                         width: 16,
                       ),
-                      FavoriteIconButton(product: product)
+                      FavoriteIconButton(
+                          product: product,
+                          onTap: () {
+                            BlocProvider.of<ProductCubit>(context)
+                                .addToFavorites(product);
+                          })
                     ],
                   ),
                 ),
