@@ -2,20 +2,25 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/catalog_item.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/product_sizes.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/sort_types.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/shop/shop_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/circle_bordered_image.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/product_label_wiget.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/red_button.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/select_size_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/favorite_icon_button.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/price_text_wiget.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/price_text_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/sale_text_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/shop_app_bar.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/sort_type_list_wiget.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/sort_type_list_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/star_rating_widget.dart';
 
 class ProductListPage extends StatelessWidget {
   late final List<Product> productList;
   late final CatalogItem catalogItem;
-  late String sortBy;
+  late SortType sortBy;
   late bool itemView;
 
   ProductListPage({
@@ -32,7 +37,8 @@ class ProductListPage extends StatelessWidget {
             .catalogItem;
     sortBy =
         (BlocProvider.of<ShopPageCubit>(context).state as ShopPageProductList)
-            .sortBy;
+                .sortBy ??
+            SortTypes.priceLowest;
     itemView =
         (BlocProvider.of<ShopPageCubit>(context).state as ShopPageProductList)
             .itemView;
@@ -105,7 +111,12 @@ class ProductListPage extends StatelessWidget {
                                 //     .selectSortType(context);
                                 showCupertinoModalPopup<void>(
                                   context: context,
-                                  builder: (context) => SortTypeListWiget(),
+                                  builder: (context) => SortTypeListWiget(
+                                    selectedSortType: sortBy,
+                                    changeSortType:
+                                        BlocProvider.of<ShopPageCubit>(context)
+                                            .changeSortType,
+                                  ),
                                 );
                               },
                               child: SizedBox(
@@ -120,7 +131,7 @@ class ProductListPage extends StatelessWidget {
                                       width: 6,
                                     ),
                                     Text(
-                                      sortBy,
+                                      sortBy.name,
                                       style: const TextStyle(fontSize: 11),
                                     ),
                                   ],
@@ -226,17 +237,20 @@ class ProductListPage extends StatelessWidget {
                                     height: 10,
                                   )
                                 ]),
-                                product.sale == 0
-                                    ? Container()
-                                    : Positioned(
-                                        bottom: 16,
-                                        left: 24,
-                                        child: SaleTextWidget(product: product),
-                                      ),
+                                Positioned(
+                                  top: 20,
+                                  left: 20,
+                                  child: ProductLabelWiget(product: product),
+                                ),
                                 Positioned(
                                     right: 18,
                                     bottom: 0,
-                                    child: FavoriteIconButton(product: product))
+                                    child: FavoriteIconButton(
+                                      product: product,
+                                      onTap: () {
+                                        favoriteButtonOnTap(context, product);
+                                      },
+                                    ))
                               ],
                             ),
                           );
@@ -302,21 +316,40 @@ class ProductListPage extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                product.sale == 0
-                                    ? Container()
-                                    : Positioned(
-                                        top: 28,
-                                        left: 30,
-                                        child: SaleTextWidget(product: product),
-                                      ),
+                                Positioned(
+                                  top: 28,
+                                  left: 30,
+                                  child: ProductLabelWiget(product: product),
+                                ),
                                 Positioned(
                                     right: 30,
                                     top: 178,
-                                    child: FavoriteIconButton(product: product))
+                                    child: FavoriteIconButton(
+                                      product: product,
+                                      onTap: () {
+                                        favoriteButtonOnTap(context, product);
+                                      },
+                                    ))
                               ]));
                         }),
                   )
           ],
         ));
+  }
+
+  void favoriteButtonOnTap(BuildContext context, Product product) {
+    if (!product.isFavorite) {
+      showCupertinoModalPopup<void>(
+        context: context,
+        builder: (context) => SelectSizeWidget(
+          product: product,
+          buttonTitle: "ADD TO FAVORITES",
+          redButtonCallBack: (ProductSize size) {
+            BlocProvider.of<ShopPageCubit>(context)
+                .addToFavorites(product: product, size: size);
+          },
+        ),
+      );
+    }
   }
 }

@@ -4,7 +4,7 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/prod
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/product_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/favorite_icon_button.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/new_text_widget.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/price_text_wiget.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/price_text_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/sale_text_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/star_rating_widget.dart';
 

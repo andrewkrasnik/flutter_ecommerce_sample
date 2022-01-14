@@ -6,4 +6,5 @@ class AppColors {
   static final Color shadow = Colors.grey;
   static final Color grayText = Color(0xFF9B9B9B);
   static final Color red = Color.fromRGBO(219, 48, 34, 1);
+  static final Color mainColor = Color(0xFFF9F9F9);
 }

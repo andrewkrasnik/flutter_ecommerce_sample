@@ -3,8 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/catalog_item.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/category.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/product_sizes.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/scategory.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/sort_types.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/favorite.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/favorites/add_favorite.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/get_catalog_by_category.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/get_categories_by_scategory.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/get_products_by_catalog_Item.dart';
@@ -18,12 +22,14 @@ class ShopPageCubit extends Cubit<ShopPageState> {
   final GetCategoriesBySCategory getCategoriesBySCategory;
   final GetCatalogByCategory getCatalogByCategory;
   final GetProductsByCatalogItem getProductsByCatalogItem;
+  final AddFavorite addFavorite;
 
-  ShopPageCubit({
-    required this.getCategoriesBySCategory,
-    required this.getCatalogByCategory,
-    required this.getProductsByCatalogItem,
-  }) : super(
+  ShopPageCubit(
+      {required this.getCategoriesBySCategory,
+      required this.getCatalogByCategory,
+      required this.getProductsByCatalogItem,
+      required this.addFavorite})
+      : super(
             ShopPageCategories(sCategory: SCategory.Woman, categoriesList: []));
 
   void selectSCategory(SCategory sCategory) async {
@@ -78,7 +84,7 @@ class ShopPageCubit extends Cubit<ShopPageState> {
         .push(MaterialPageRoute(builder: (context) => FiltersPage()));
   }
 
-  void changeSortType(BuildContext context, String sortBy) async {
+  void changeSortType(BuildContext context, SortType sortBy) async {
     await Future.delayed(const Duration(milliseconds: 500));
     emit(ShopPageProductList(
         productList: (state as ShopPageProductList).productList,
@@ -90,5 +96,15 @@ class ShopPageCubit extends Cubit<ShopPageState> {
   void toProductPage(BuildContext context, Product product) {
     Navigator.of(context).push(
         MaterialPageRoute(builder: (context) => ProductPage(product: product)));
+  }
+
+  void addToFavorites(
+      {required Product product, required ProductSize size}) async {
+    if (!product.isFavorite) {
+      await addFavorite(
+          Favorite(product: product, size: size, color: product.colors[0]));
+      product.isFavorite = true;
+      emit(state);
+    }
   }
 }
