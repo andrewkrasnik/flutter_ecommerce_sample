@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/shop/shop_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/product_card.dart';
 
-class SaleProductsList extends StatelessWidget {
+class NewProductsList extends StatelessWidget {
   final List<Product> productList;
-  const SaleProductsList({Key? key, required this.productList})
+  const NewProductsList({Key? key, required this.productList})
       : super(key: key);
 
   @override
@@ -20,20 +21,24 @@ class SaleProductsList extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
-                  Text("Sale",
+                  Text("New",
                       style:
                           TextStyle(fontSize: 34, fontWeight: FontWeight.bold)),
                   SizedBox(
                     height: 4,
                   ),
                   Text(
-                    "Super summer sale",
+                    "You’ve never seen it before!",
                     style: TextStyle(color: Color(0xFF9B9B9B), fontSize: 11),
                   )
                 ],
               ),
               TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            ShopPage.newProducts()));
+                  },
                   child: const Text("View all",
                       textAlign: TextAlign.end,
                       style: TextStyle(color: Colors.black, fontSize: 11)))

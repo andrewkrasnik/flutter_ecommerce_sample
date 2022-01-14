@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class InfoWiget extends StatelessWidget {
+class InfoWidget extends StatelessWidget {
   final String text;
   final VoidCallback? onTap;
-  const InfoWiget({
+  const InfoWidget({
     Key? key,
     required this.text,
     this.onTap,

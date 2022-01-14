@@ -1,7 +1,7 @@
 part of 'shop_page_cubit.dart';
 
 @immutable
-abstract class ShopPageState {}
+abstract class ShopPageState extends Equatable {}
 
 class ShopPageCategories extends ShopPageState {
   SCategory sCategory;
@@ -10,6 +10,8 @@ class ShopPageCategories extends ShopPageState {
     required this.sCategory,
     required this.categoriesList,
   });
+  @override
+  List<Object?> get props => [sCategory, categoriesList];
 }
 
 class ShopPageCatalog extends ShopPageState {
@@ -19,6 +21,9 @@ class ShopPageCatalog extends ShopPageState {
     required this.catalog,
     required this.category,
   });
+
+  @override
+  List<Object?> get props => [catalog, category];
 }
 
 class ShopPageProductList extends ShopPageState {
@@ -32,10 +37,31 @@ class ShopPageProductList extends ShopPageState {
     this.itemView = true,
     this.sortBy,
   });
+
+  @override
+  List<Object?> get props => [productList, catalogItem, itemView, sortBy];
 }
 
-class ShopPageFilters extends ShopPageState {
-  final CatalogItem catalogItem;
+class ShopPageNewProductList extends ShopPageState {
+  final List<Product> productList;
+  final bool itemView;
+  final SortType? sortBy;
 
-  ShopPageFilters({required this.catalogItem});
+  ShopPageNewProductList(
+      {required this.productList, this.itemView = true, this.sortBy});
+
+  @override
+  List<Object?> get props => [productList, itemView, sortBy];
+}
+
+class ShopPageSaleProductList extends ShopPageState {
+  final List<Product> productList;
+  final bool itemView;
+  final SortType? sortBy;
+
+  ShopPageSaleProductList(
+      {required this.productList, this.itemView = true, this.sortBy});
+
+  @override
+  List<Object?> get props => [productList, itemView, sortBy];
 }

@@ -3,9 +3,9 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/prod
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/new_text_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/sale_text_widget.dart';
 
-class ProductLabelWiget extends StatelessWidget {
+class ProductLabelWidget extends StatelessWidget {
   final Product product;
-  const ProductLabelWiget({
+  const ProductLabelWidget({
     Key? key,
     required this.product,
   }) : super(key: key);

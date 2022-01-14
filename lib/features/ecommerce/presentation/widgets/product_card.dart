@@ -18,8 +18,10 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => ProductPage(product: product)));
+        Navigator.push(
+            context,
+            CupertinoPageRoute(
+                builder: (context) => ProductPage(product: product)));
       },
       child: Stack(
         children: [

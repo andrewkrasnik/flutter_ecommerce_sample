@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/scategory.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/favorites/favorites_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/home/home_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/login/login_cubit.dart';
@@ -21,8 +20,7 @@ void main() async {
     MultiBlocProvider(
         providers: [
           BlocProvider<ShopPageCubit>(
-              create: (context) =>
-                  di.sl<ShopPageCubit>()..selectSCategory(SCategory.Woman)),
+              create: (context) => di.sl<ShopPageCubit>()..init(context)),
           BlocProvider<LoginCubit>(create: (context) => di.sl<LoginCubit>()),
           BlocProvider<HomePageCubit>(
               create: (context) => di.sl<HomePageCubit>()..loadNewProducts()),
@@ -38,9 +36,6 @@ void main() async {
           routes: {
             "/": (context) => const LoginPage(),
             "/main": (context) => const TabBarPage(),
-            "/shop": (context) => const ShopPage(),
-            "/shop/filters": (context) => FiltersPage(),
-            "/shop/brands": (context) => const BrandsPage(),
           },
           theme: CupertinoThemeData(
             textTheme: _textTheme,
