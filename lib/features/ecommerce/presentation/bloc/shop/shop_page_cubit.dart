@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/catalog_item.dart';
@@ -11,7 +12,9 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/prod
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/favorites/add_favorite.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/get_catalog_by_category.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/get_categories_by_scategory.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/get_new_products.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/get_products_by_catalog_Item.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/get_sale_products.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/product_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/shop/filters_page.dart';
 import 'package:meta/meta.dart';
@@ -23,14 +26,22 @@ class ShopPageCubit extends Cubit<ShopPageState> {
   final GetCatalogByCategory getCatalogByCategory;
   final GetProductsByCatalogItem getProductsByCatalogItem;
   final AddFavorite addFavorite;
+  final GetNewProducts getNewProducts;
+  final GetSaleProducts getSaleProducts;
 
-  ShopPageCubit(
-      {required this.getCategoriesBySCategory,
-      required this.getCatalogByCategory,
-      required this.getProductsByCatalogItem,
-      required this.addFavorite})
-      : super(
+  ShopPageCubit({
+    required this.getCategoriesBySCategory,
+    required this.getCatalogByCategory,
+    required this.getProductsByCatalogItem,
+    required this.addFavorite,
+    required this.getNewProducts,
+    required this.getSaleProducts,
+  }) : super(
             ShopPageCategories(sCategory: SCategory.Woman, categoriesList: []));
+
+  void init(BuildContext context) {
+    selectSCategory(SCategory.Woman);
+  }
 
   void selectSCategory(SCategory sCategory) async {
     emit(ShopPageCategories(sCategory: sCategory, categoriesList: []));
@@ -60,10 +71,16 @@ class ShopPageCubit extends Cubit<ShopPageState> {
       selectSCategory((state as ShopPageCatalog).category.sCategory);
     } else if (state is ShopPageProductList) {
       toCatalog((state as ShopPageProductList).catalogItem.category);
-    } else if (state is ShopPageFilters) {
-      toProductList((state as ShopPageFilters).catalogItem);
+    } else if (state is ShopPageSaleProductList) {
+      if (Navigator.of(context).canPop()) {
+        Navigator.of(context).pop();
+      } else {
+        selectSCategory(SCategory.Woman);
+      }
     } else {
-      // Navigator.of(context).pop();
+      if (Navigator.of(context).canPop()) {
+        Navigator.of(context).pop();
+      }
     }
   }
 
@@ -79,9 +96,7 @@ class ShopPageCubit extends Cubit<ShopPageState> {
   }
 
   void toFilters(BuildContext context) async {
-    //Navigator.of(context).pushNamed("/shop/filters");
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => FiltersPage()));
+    Navigator.pushNamed(context, "/filters");
   }
 
   void changeSortType(BuildContext context, SortType sortBy) async {
@@ -106,5 +121,26 @@ class ShopPageCubit extends Cubit<ShopPageState> {
       product.isFavorite = true;
       emit(state);
     }
+  }
+
+  void showNewProducts() async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    emit(
+      ShopPageNewProductList(
+        productList: await getNewProducts(),
+      ),
+    );
+  }
+
+  void showSaleProducts() async {
+    emit(ShopPageSaleProductList(
+      productList: [],
+    ));
+    await Future.delayed(const Duration(milliseconds: 500));
+    emit(
+      ShopPageSaleProductList(
+        productList: await getSaleProducts(),
+      ),
+    );
   }
 }

@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
 
-class CaptionFieldWiget extends StatelessWidget {
+class CaptionFieldWidget extends StatelessWidget {
   final String caption;
   final String text;
-  const CaptionFieldWiget({Key? key, required this.caption, required this.text})
+  const CaptionFieldWidget(
+      {Key? key, required this.caption, required this.text})
       : super(key: key);
 
   @override
@@ -17,7 +18,7 @@ class CaptionFieldWiget extends StatelessWidget {
           width: 4,
         ),
         Text(text,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 11,
             ))
       ],

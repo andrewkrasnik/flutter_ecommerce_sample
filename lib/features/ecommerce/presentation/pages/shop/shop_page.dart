@@ -4,11 +4,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/shop/shop_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/shop/catalog_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/shop/categories_page.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/shop/filters_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/shop/product_list_page.dart';
 
 class ShopPage extends StatelessWidget {
-  const ShopPage({
+  bool? _showNew;
+  bool? _showSale;
+  ShopPage.newProducts() {
+    _showNew = true;
+  }
+  ShopPage.saleProducts() {
+    _showSale = true;
+  }
+  ShopPage({
     Key? key,
   }) : super(key: key);
 
@@ -16,17 +23,19 @@ class ShopPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ShopPageCubit, ShopPageState>(
       builder: (context, state) {
+        Widget newPage = Container();
         if (state is ShopPageCategories) {
-          return CategoriesPage();
+          newPage = CategoriesPage();
         } else if (state is ShopPageCatalog) {
-          return CatalogPage();
+          newPage = CatalogPage();
         } else if (state is ShopPageProductList) {
-          return ProductListPage();
-        } else if (state is ShopPageFilters) {
-          return FiltersPage();
-        } else {
-          return Container();
+          newPage = ProductListPage();
+        } else if (state is ShopPageNewProductList) {
+          newPage = ProductListPage();
+        } else if (state is ShopPageSaleProductList) {
+          newPage = ProductListPage();
         }
+        return newPage;
       },
     );
   }

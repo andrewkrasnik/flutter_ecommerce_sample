@@ -8,9 +8,9 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/prod
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/favorites/favorites_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/shop/shop_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/bag_icon_button.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/caption_field_wiget.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/caption_field_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/circle_bordered_image.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/product_label_wiget.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/product_label_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/search_bar_button.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/favorite_icon_button.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/price_text_widget.dart';
@@ -264,7 +264,7 @@ class FavoritesPage extends StatelessWidget {
                                                                       CrossAxisAlignment
                                                                           .start,
                                                                   children: [
-                                                                    CaptionFieldWiget(
+                                                                    CaptionFieldWidget(
                                                                         caption:
                                                                             "Color",
                                                                         text: favoritesList[index]
@@ -286,7 +286,7 @@ class FavoritesPage extends StatelessWidget {
                                                                     CrossAxisAlignment
                                                                         .start,
                                                                 children: [
-                                                                  CaptionFieldWiget(
+                                                                  CaptionFieldWidget(
                                                                       caption:
                                                                           "Size",
                                                                       text: favoritesList[
@@ -331,7 +331,7 @@ class FavoritesPage extends StatelessWidget {
                                     Positioned(
                                       top: 20,
                                       left: 20,
-                                      child: ProductLabelWiget(
+                                      child: ProductLabelWidget(
                                         product: product,
                                       ),
                                     ),
@@ -436,13 +436,13 @@ class FavoritesPage extends StatelessWidget {
                                             children: [
                                               SizedBox(
                                                 width: 78,
-                                                child: CaptionFieldWiget(
+                                                child: CaptionFieldWidget(
                                                     caption: "Color",
                                                     text: favoritesList[index]
                                                         .color
                                                         .name),
                                               ),
-                                              CaptionFieldWiget(
+                                              CaptionFieldWidget(
                                                   caption: "Size",
                                                   text: favoritesList[index]
                                                       .size
@@ -459,7 +459,7 @@ class FavoritesPage extends StatelessWidget {
                                     Positioned(
                                         top: 22,
                                         left: 24,
-                                        child: ProductLabelWiget(
+                                        child: ProductLabelWidget(
                                           product: product,
                                         )),
                                     product.outOfStock

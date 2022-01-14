@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/product_sizes.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/info_wiget.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/info_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/red_button.dart';
 
 import 'shop/filter_button.dart';
@@ -91,7 +91,7 @@ class _SelectSizeWidgetState extends State<SelectSizeWidget> {
         const SizedBox(
           height: 16,
         ),
-        const InfoWiget(text: "Size info"),
+        const InfoWidget(text: "Size info"),
         const SizedBox(
           height: 24,
         ),

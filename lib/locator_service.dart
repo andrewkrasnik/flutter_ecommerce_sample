@@ -36,6 +36,8 @@ Future<void> init() async {
         getCatalogByCategory: sl(),
         getProductsByCatalogItem: sl(),
         addFavorite: sl(),
+        getNewProducts: sl(),
+        getSaleProducts: sl(),
       ));
   sl.registerFactory(() => LoginCubit());
   sl.registerFactory(

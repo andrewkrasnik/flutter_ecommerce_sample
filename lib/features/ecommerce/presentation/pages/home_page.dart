@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/home/home_page_cubit.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/new_products_list.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/home/new_products_list.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/red_button.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/sale_products_list.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/home/sale_products_list.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({

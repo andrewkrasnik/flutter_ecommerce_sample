@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/product_colors.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/product/product_cubit.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/info_wiget.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/info_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/red_button.dart';
 
 import 'shop/filter_color_button.dart';
@@ -68,7 +68,7 @@ class _SelectColorWidgetState extends State<SelectColorWidget> {
         const SizedBox(
           height: 16,
         ),
-        const InfoWiget(text: "Color info"),
+        const InfoWidget(text: "Color info"),
         const SizedBox(
           height: 24,
         ),

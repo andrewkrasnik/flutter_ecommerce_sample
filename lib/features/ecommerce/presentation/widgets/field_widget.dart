@@ -27,7 +27,7 @@ class FieldWidget extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
             border: Border.all(
-                color: selected ? AppColors.red : AppColors.grayText,
+                color: selected ? AppColors.grayText : AppColors.red,
                 width: 0.5),
             borderRadius: BorderRadius.circular(5),
             color: AppColors.white),

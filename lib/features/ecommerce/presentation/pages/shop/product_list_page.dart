@@ -7,19 +7,18 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emum
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/shop/shop_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/circle_bordered_image.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/product_label_wiget.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/product_label_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/red_button.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/select_size_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/favorite_icon_button.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/price_text_widget.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/sale_text_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/shop_app_bar.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/sort_type_list_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/star_rating_widget.dart';
 
 class ProductListPage extends StatelessWidget {
   late final List<Product> productList;
-  late final CatalogItem catalogItem;
+
   late SortType sortBy;
   late bool itemView;
 
@@ -29,19 +28,26 @@ class ProductListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    productList =
-        (BlocProvider.of<ShopPageCubit>(context).state as ShopPageProductList)
-            .productList;
-    catalogItem =
-        (BlocProvider.of<ShopPageCubit>(context).state as ShopPageProductList)
-            .catalogItem;
-    sortBy =
-        (BlocProvider.of<ShopPageCubit>(context).state as ShopPageProductList)
-                .sortBy ??
-            SortTypes.priceLowest;
-    itemView =
-        (BlocProvider.of<ShopPageCubit>(context).state as ShopPageProductList)
-            .itemView;
+    String title = "";
+    ShopPageState state = BlocProvider.of<ShopPageCubit>(context).state;
+    if (state is ShopPageProductList) {
+      productList = state.productList;
+      itemView = state.itemView;
+      sortBy = state.sortBy ?? SortTypes.priceLowest;
+      title = state.catalogItem.fullName;
+    } else if (state is ShopPageNewProductList) {
+      productList = state.productList;
+      itemView = state.itemView;
+      sortBy = state.sortBy ?? SortTypes.priceLowest;
+      title = "New";
+    } else if (state is ShopPageSaleProductList) {
+      productList = state.productList;
+      itemView = state.itemView;
+      sortBy = state.sortBy ?? SortTypes.priceLowest;
+      title = "Sale";
+    } else {
+      return Container();
+    }
 
     return CupertinoPageScaffold(
         navigationBar: shopAppBar(context: context, noBorder: true),
@@ -60,7 +66,7 @@ class ProductListPage extends StatelessWidget {
                         height: 76,
                         alignment: Alignment.bottomLeft,
                         child: Text(
-                          catalogItem.fullName,
+                          title,
                           style: const TextStyle(
                               fontSize: 34, fontWeight: FontWeight.bold),
                         ),
@@ -240,7 +246,7 @@ class ProductListPage extends StatelessWidget {
                                 Positioned(
                                   top: 20,
                                   left: 20,
-                                  child: ProductLabelWiget(product: product),
+                                  child: ProductLabelWidget(product: product),
                                 ),
                                 Positioned(
                                     right: 18,
@@ -319,7 +325,7 @@ class ProductListPage extends StatelessWidget {
                                 Positioned(
                                   top: 28,
                                   left: 30,
-                                  child: ProductLabelWiget(product: product),
+                                  child: ProductLabelWidget(product: product),
                                 ),
                                 Positioned(
                                     right: 30,

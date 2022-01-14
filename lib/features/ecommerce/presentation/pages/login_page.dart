@@ -183,26 +183,66 @@ class LoginPage extends StatelessWidget {
             )
           ];
         }
-        return CupertinoPageScaffold(
-            navigationBar: const CupertinoNavigationBar(
-              leading: CupertinoButton(
-                  onPressed: null,
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.black,
-                  )),
-              border: null,
-              backgroundColor: Color(0xFFF9F9F9),
-            ),
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 14, right: 14, top: 18),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: _elements),
+        return WillPopScope(
+          onWillPop: () => _onBackPressed(context),
+          child: CupertinoPageScaffold(
+              navigationBar: const CupertinoNavigationBar(
+                leading: CupertinoButton(
+                    onPressed: null,
+                    child: Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.black,
+                    )),
+                border: null,
+                backgroundColor: Color(0xFFF9F9F9),
               ),
-            ));
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 14, right: 14, top: 18),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: _elements),
+                ),
+              )),
+        );
       },
     );
+  }
+
+  Future<bool> _onBackPressed(BuildContext context) async {
+    bool res = await showCupertinoDialog<bool>(
+          context: context,
+          builder: (context) => CupertinoAlertDialog(
+            title: const Text(
+              'Are you sure?',
+              style: TextStyle(fontSize: 22),
+            ),
+            content: const Text('Do you want to exit an App',
+                style: TextStyle(fontSize: 16)),
+            actions: <Widget>[
+              GestureDetector(
+                onTap: () => Navigator.of(context).pop(false),
+                child: const Center(
+                  child: Text(
+                    "No",
+                    style: TextStyle(fontSize: 22),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              GestureDetector(
+                onTap: () => Navigator.of(context).pop(true),
+                child: const Center(
+                  child: Text(
+                    "Yes",
+                    style: TextStyle(fontSize: 22),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ) ??
+        false;
+    return res;
   }
 }
