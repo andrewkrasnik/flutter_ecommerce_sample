@@ -6,7 +6,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/bag/bag_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/home_page.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/profile/orders_page.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/profile/payment_methods_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/profile/profile_page.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/profile/promocodes_page.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/profile/reviews_page.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/profile/settings_page.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/profile/shipping_adresses_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/shop/filters_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/shop/shop_page.dart';
 
@@ -96,6 +102,12 @@ class TabBarPage extends StatelessWidget {
           return CupertinoTabView(
               routes: {
                 "/filters": (context) => FiltersPage(),
+                "/settings": (context) => SettingsPage(),
+                "/promocodes": (context) => PromocodesPage(),
+                "/adresses": (context) => ShippingAdressesPage(),
+                "/payments": (context) => PaymentsMethodsPage(),
+                "/reviews": (context) => ReviewsPage(),
+                "/orders": (context) => OrdersPage(),
               },
               builder: (context) {
                 return currentPage;

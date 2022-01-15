@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/search_bar_button.dart';
 
-class OrdersPage extends StatelessWidget {
-  const OrdersPage({Key? key}) : super(key: key);
+class ReviewsPage extends StatelessWidget {
+  const ReviewsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class OrdersPage extends StatelessWidget {
                   height: 64,
                   alignment: Alignment.bottomLeft,
                   child: const Text(
-                    "My Orders",
+                    "My Promocodes",
                     style: TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
                   ),
                 ),

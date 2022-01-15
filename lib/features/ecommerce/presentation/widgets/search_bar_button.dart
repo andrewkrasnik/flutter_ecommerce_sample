@@ -2,13 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SearchBarButton extends StatelessWidget {
-  const SearchBarButton({Key? key}) : super(key: key);
+  final VoidCallback? onPressed;
+  const SearchBarButton({Key? key, this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const CupertinoButton(
+    return CupertinoButton(
         padding: EdgeInsets.only(bottom: 4),
-        onPressed: null,
+        onPressed: onPressed,
         child: Icon(
           Icons.search,
           color: Colors.black,

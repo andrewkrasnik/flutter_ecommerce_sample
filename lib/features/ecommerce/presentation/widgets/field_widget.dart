@@ -38,7 +38,11 @@ class FieldWidget extends StatelessWidget {
               text,
               style: const TextStyle(fontSize: 14),
             ),
-            const Icon(Icons.arrow_drop_down, color: Colors.black)
+            const Icon(
+              Icons.expand_more,
+              color: Colors.black,
+              size: 20,
+            )
           ],
         ),
       ),

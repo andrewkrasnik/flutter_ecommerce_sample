@@ -1,19 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
 
-class BagIconButton extends StatelessWidget {
-  final Product product;
+class BagChangeCountButton extends StatelessWidget {
   final VoidCallback? onTap;
+  final IconData iconData;
 
-  const BagIconButton({Key? key, required this.product, this.onTap})
+  const BagChangeCountButton({Key? key, required this.iconData, this.onTap})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: onTap,
-        child: Container(
+      onTap: onTap,
+      child: Container(
           width: 36,
           height: 36,
           decoration: BoxDecoration(
@@ -26,12 +25,13 @@ class BagIconButton extends StatelessWidget {
               ),
             ],
             borderRadius: BorderRadius.circular(20),
-            color: AppColors.red,
+            color: Colors.white,
           ),
-          child: ImageIcon(
-            const AssetImage("assets/icons/add_to_bag.png"),
-            color: AppColors.white,
-          ),
-        ));
+          child: Icon(
+            iconData,
+            color: Colors.grey,
+            size: 24,
+          )),
+    );
   }
 }

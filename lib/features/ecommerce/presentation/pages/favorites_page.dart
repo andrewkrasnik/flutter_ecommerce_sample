@@ -64,7 +64,7 @@ class FavoritesPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            height: 76,
+                            height: 64,
                             alignment: Alignment.bottomLeft,
                             child: const Text(
                               "Favorites",
@@ -341,6 +341,13 @@ class FavoritesPage extends StatelessWidget {
                                             right: 18,
                                             bottom: 0,
                                             child: BagIconButton(
+                                                onTap: () {
+                                                  BlocProvider.of<
+                                                              FavoritesPageCubit>(
+                                                          context)
+                                                      .addToCard(
+                                                          favoritesList[index]);
+                                                },
                                                 product: product)),
                                     product.outOfStock
                                         ? Container(
