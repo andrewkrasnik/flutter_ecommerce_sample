@@ -4,6 +4,7 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emum
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/product_sizes.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/favorite.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/add_to_bag.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/favorites/add_favorite.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/get_recomended_products.dart';
 import 'package:meta/meta.dart';
@@ -13,9 +14,12 @@ part 'product_state.dart';
 class ProductCubit extends Cubit<ProductState> {
   final GetRecomendedProducts getRecomendedProducts;
   final AddFavorite addFavorite;
+  final AddToBag addToBag;
+
   ProductCubit({
     required this.getRecomendedProducts,
     required this.addFavorite,
+    required this.addToBag,
   }) : super(ProductPageState(recomendedProducts: []));
 
   void loadRecomendedProducts() async {
@@ -43,5 +47,12 @@ class ProductCubit extends Cubit<ProductState> {
       emit((state as ProductPageState)
           .copyWith(recomendedProducts: await getRecomendedProducts()));
     }
+  }
+
+  void addToCart(
+      {required Product product,
+      required ProductSize size,
+      required ProductColor color}) async {
+    addToBag(product: product, size: size, color: color);
   }
 }

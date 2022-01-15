@@ -92,6 +92,14 @@ class ProductPage extends StatelessWidget {
                                     product: product,
                                     buttonTitle: "ADD TO CARD",
                                     selectedSize: (state).size,
+                                    redButtonCallBack: (size) {
+                                      BlocProvider.of<ProductCubit>(context)
+                                          .addToBag(
+                                              product: product,
+                                              size: state.size!,
+                                              color: state.color!);
+                                      Navigator.of(context).pop();
+                                    },
                                     selectSize:
                                         BlocProvider.of<ProductCubit>(context)
                                             .selectSize),
@@ -177,7 +185,7 @@ class ProductPage extends StatelessWidget {
                       productList: state.recomendedProducts,
                     ),
                     const SizedBox(
-                      height: 40,
+                      height: 60,
                     ),
                   ],
                 ),
@@ -196,6 +204,12 @@ class ProductPage extends StatelessWidget {
                   ]),
                   child: RedButton(
                     text: "ADD TO CARD",
+                    onTap: () {
+                      BlocProvider.of<ProductCubit>(context).addToBag(
+                          product: product,
+                          size: state.size!,
+                          color: state.color!);
+                    },
                     height: 48,
                   ),
                 ),

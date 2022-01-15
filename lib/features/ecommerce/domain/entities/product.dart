@@ -40,4 +40,6 @@ class Product {
   }
   List<ProductColor> get colors => ProductColors.values;
   List<ProductSize> get sizes => ProductSizes.values;
+
+  double get realPrice => salePrice == 0 ? price : salePrice;
 }

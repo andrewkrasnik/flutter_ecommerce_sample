@@ -1,15 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/bag/bag_bloc.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/favorites/favorites_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/home/home_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/login/login_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/product/product_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/shop/shop_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/login_page.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/shop/filters_page.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/shop/shop_page.dart';
-import 'features/ecommerce/presentation/pages/shop/brands_page.dart';
 import 'features/ecommerce/presentation/pages/tab_bar_page.dart';
 import 'locator_service.dart' as di;
 
@@ -29,6 +27,9 @@ void main() async {
                   di.sl<ProductCubit>()..loadRecomendedProducts()),
           BlocProvider<FavoritesPageCubit>(
               create: (context) => di.sl<FavoritesPageCubit>()..loadList()),
+          BlocProvider<BagBloc>(
+            create: (context) => di.sl<BagBloc>(),
+          )
         ],
         child: CupertinoApp(
           title: "eCommerce Sample",
