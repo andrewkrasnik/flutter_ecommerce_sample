@@ -1,0 +1,26 @@
+# Flutter eCommerce Sample
+
+Учебный проект на основе дизйана интернет магазина [Figma free design](https://www.figma.com/file/lOgdm8Y2zt0Tk95wMvKurq/E-commerce-Application-by-Fively-%2F-Light-Version/duplicate)
+
+Архитектура приложений основана на сериях уроков [Flutter TDD Clean Architecture](https://www.youtube.com/playlist?list=PLB6lc7nQ1n4iYGE_khpXRdJkJEp9WOech) and [Flutter - Чистая архитектура. Введение.](https://www.youtube.com/watch?v=EEoZEvsB7jg)
+
+Примеры элементов интерфейса приложения в основном взяты из [Flutter Gallery](https://gallery.flutter.dev/#/demo)
+
+## Цель создания проекта
+
+Применить полученные знания для создания приложения интернет-магазина.
+
+
+## Порядок создания страниц приложения
+
+0. Страница входа в приложение. Для входа нужно нажать кнопку "Sign up" или "Login", вводить какие либо данные не требуется. Планируется рефакторинг страницы
+
+0. Страница "Shop". Планируется рефакторинг страницы
+
+0. Страница "Home"
+
+0. Страница "Favorites"
+
+0. Страница "Bag". Функционал страницы в работе.
+
+0. Страница "Profile". Функционал страницы в работе. Реализована структура основного меню профиля и переход на страницы настроек. Сами страницы настроек пустые
