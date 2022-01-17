@@ -16,8 +16,8 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets
 import 'package:url_launcher/url_launcher.dart';
 
 class ProductPage extends StatelessWidget {
-  Product product;
-  ProductPage({
+  final Product product;
+  const ProductPage({
     Key? key,
     required this.product,
   }) : super(key: key);
@@ -209,6 +209,9 @@ class ProductPage extends StatelessWidget {
                           product: product,
                           size: state.size!,
                           color: state.color!);
+                      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      //     content: Container(
+                      //         color: AppColors.shadow, child: Text("test"))));
                     },
                     height: 48,
                   ),

@@ -45,6 +45,11 @@ class ProductListPage extends StatelessWidget {
       itemView = state.itemView;
       sortBy = state.sortBy ?? SortTypes.priceLowest;
       title = "Sale";
+    } else if (state is ShopPageViewAllProducts) {
+      productList = state.productList;
+      itemView = state.itemView;
+      sortBy = state.sortBy ?? SortTypes.priceLowest;
+      title = "All catalog";
     } else {
       return Container();
     }

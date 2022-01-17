@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_ecommerce_sample/core/utils/formating.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
 
 class PriceTextWiget extends StatelessWidget {
@@ -11,14 +12,14 @@ class PriceTextWiget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (product.salePrice == 0.0) {
       return Text(
-        "${product.price.toStringAsFixed(0)}\$",
+        "${priceToString(product.price)}\$",
         style: TextStyle(fontSize: fontSize, fontWeight: FontWeight.bold),
       );
     } else {
       return Row(
         children: [
           Text(
-            "${product.price.toStringAsFixed(0)}\$",
+            "${priceToString(product.price)}\$",
             style: TextStyle(
                 fontSize: fontSize,
                 fontWeight: FontWeight.bold,
@@ -30,7 +31,7 @@ class PriceTextWiget extends StatelessWidget {
             width: 4,
           ),
           Text(
-            "${product.salePrice.toStringAsFixed(0)}\$",
+            "${priceToString(product.salePrice)}\$",
             style: TextStyle(
                 fontSize: fontSize,
                 fontWeight: FontWeight.bold,

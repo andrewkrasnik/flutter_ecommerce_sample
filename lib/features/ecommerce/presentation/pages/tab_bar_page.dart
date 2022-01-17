@@ -4,8 +4,13 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/bag/bag_bloc.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/favorites/favorites_page_cubit.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/home/home_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/bag/bag_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/home_page.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/product_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/profile/orders_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/profile/payment_methods_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/profile/profile_page.dart';
@@ -15,6 +20,7 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/p
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/profile/shipping_adresses_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/shop/filters_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/shop/shop_page.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/visual_search_page.dart';
 
 import 'favorites_page.dart';
 
@@ -68,6 +74,17 @@ class TabBarPage extends StatelessWidget {
         restorationId: 'cupertino_tab_scaffold',
         tabBar: CupertinoTabBar(
           activeColor: const Color.fromRGBO(219, 48, 34, 1),
+          onTap: (value) {
+            if (value == 0) {
+              BlocProvider.of<HomePageCubit>(context).reload();
+            } else if (value == 2) {
+              if (BlocProvider.of<BagBloc>(context).state is BagPageState) {
+                BlocProvider.of<BagBloc>(context).add(BagInitListEvent());
+              }
+            } else if (value == 3) {
+              BlocProvider.of<FavoritesPageCubit>(context).loadList();
+            }
+          },
           items: [
             for (final tabInfo in _tabInfo)
               BottomNavigationBarItem(
@@ -84,7 +101,9 @@ class TabBarPage extends StatelessWidget {
               currentPage = HomePage();
               break;
             case 1:
-              currentPage = ShopPage();
+              currentPage = ShopPage(
+                context: context,
+              );
               break;
             case 2:
               currentPage = BagPage();
@@ -108,6 +127,8 @@ class TabBarPage extends StatelessWidget {
                 "/payments": (context) => PaymentsMethodsPage(),
                 "/reviews": (context) => ReviewsPage(),
                 "/orders": (context) => OrdersPage(),
+                "/search": (context) => VisualSearchPage(),
+                // "/product": (context) => ProductPage(product: product),
               },
               builder: (context) {
                 return currentPage;

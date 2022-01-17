@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/product_colors.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/product_sizes.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/favorite.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/add_to_bag.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/favorites/add_favorite.dart';
@@ -37,16 +36,13 @@ class ProductCubit extends Cubit<ProductState> {
   }
 
   void addToFavorites(Product product) async {
-    if (!product.isFavorite) {
-      await addFavorite(Favorite(
-          product: product,
-          size: (state as ProductPageState).size!,
-          color: (state as ProductPageState).color!));
-      product.isFavorite = true;
-      await Future.delayed(const Duration(milliseconds: 500));
-      emit((state as ProductPageState)
-          .copyWith(recomendedProducts: await getRecomendedProducts()));
-    }
+    await addFavorite(
+        product: product,
+        size: (state as ProductPageState).size!,
+        color: (state as ProductPageState).color!);
+    await Future.delayed(const Duration(milliseconds: 500));
+    emit((state as ProductPageState)
+        .copyWith(recomendedProducts: await getRecomendedProducts()));
   }
 
   void addToCart(

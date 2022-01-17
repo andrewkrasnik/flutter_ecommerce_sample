@@ -25,8 +25,8 @@ class BagBloc extends Bloc<BagEvent, BagState> {
     required this.addFavorite,
   }) : super(BagInitial()) {
     on<BagInitListEvent>((event, emit) async {
-      emit(BagPageState(bag: Bag()));
-      await Future.delayed(const Duration(milliseconds: 500));
+      // emit(BagPageState(bag: Bag()));
+      // await Future.delayed(const Duration(milliseconds: 500));
       emit(BagPageState(bag: await getBag()));
     });
     on<BagChangeItemCountEvent>((event, emit) async {

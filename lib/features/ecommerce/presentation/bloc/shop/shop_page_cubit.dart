@@ -7,7 +7,6 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/cate
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/product_sizes.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/scategory.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/sort_types.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/favorite.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/favorites/add_favorite.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/get_catalog_by_category.dart';
@@ -16,7 +15,6 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/get_
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/get_products_by_catalog_Item.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/get_sale_products.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/product_page.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/shop/filters_page.dart';
 import 'package:meta/meta.dart';
 
 part 'shop_page_state.dart';
@@ -115,12 +113,9 @@ class ShopPageCubit extends Cubit<ShopPageState> {
 
   void addToFavorites(
       {required Product product, required ProductSize size}) async {
-    if (!product.isFavorite) {
-      await addFavorite(
-          Favorite(product: product, size: size, color: product.colors[0]));
-      product.isFavorite = true;
-      emit(state);
-    }
+    await addFavorite(product: product, size: size, color: product.colors[0]);
+
+    emit(state);
   }
 
   void showNewProducts() async {
@@ -142,5 +137,11 @@ class ShopPageCubit extends Cubit<ShopPageState> {
         productList: await getSaleProducts(),
       ),
     );
+  }
+
+  viewAllItems() async {
+    emit(ShopPageViewAllProducts(productList: []));
+    await Future.delayed(const Duration(milliseconds: 500));
+    emit(ShopPageViewAllProducts(productList: []));
   }
 }

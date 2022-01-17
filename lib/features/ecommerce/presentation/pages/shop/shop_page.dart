@@ -7,17 +7,19 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/s
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/shop/product_list_page.dart';
 
 class ShopPage extends StatelessWidget {
-  bool? _showNew;
-  bool? _showSale;
-  ShopPage.newProducts() {
-    _showNew = true;
+  ShopPage.newProducts(BuildContext context) {
+    BlocProvider.of<ShopPageCubit>(context).showNewProducts();
   }
-  ShopPage.saleProducts() {
-    _showSale = true;
+  ShopPage.saleProducts(BuildContext context) {
+    BlocProvider.of<ShopPageCubit>(context).showSaleProducts();
   }
+
   ShopPage({
     Key? key,
-  }) : super(key: key);
+    required BuildContext context,
+  }) : super(key: key) {
+    BlocProvider.of<ShopPageCubit>(context).init(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,8 @@ class ShopPage extends StatelessWidget {
         } else if (state is ShopPageNewProductList) {
           newPage = ProductListPage();
         } else if (state is ShopPageSaleProductList) {
+          newPage = ProductListPage();
+        } else if (state is ShopPageViewAllProducts) {
           newPage = ProductListPage();
         }
         return newPage;

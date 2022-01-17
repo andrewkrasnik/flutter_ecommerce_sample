@@ -15,9 +15,7 @@ class ProfilePage extends StatelessWidget {
         navigationBar: CupertinoNavigationBar(
           backgroundColor: AppColors.mainColor,
           border: null,
-          trailing: SearchBarButton(
-            onPressed: () {},
-          ),
+          trailing: const SearchBarButton(),
         ),
         child: SingleChildScrollView(
           child: Column(

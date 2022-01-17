@@ -7,20 +7,18 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/favo
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/favorites/favorites_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/shop/shop_page_cubit.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/bag_icon_button.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/bag/bag_icon_button.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/caption_field_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/circle_bordered_image.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/product_label_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/search_bar_button.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/favorite_icon_button.dart';
+
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/price_text_widget.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/sale_text_widget.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/shop_app_bar.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/sort_type_list_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/star_rating_widget.dart';
 
 class FavoritesPage extends StatelessWidget {
-  FavoritesPage({
+  const FavoritesPage({
     Key? key,
   }) : super(key: key);
 

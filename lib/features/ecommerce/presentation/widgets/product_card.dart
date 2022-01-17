@@ -7,6 +7,10 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/price_text_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/sale_text_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/star_rating_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/product_sizes.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/select_size_widget.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/home/home_page_cubit.dart';
 
 import 'circle_bordered_image.dart';
 
@@ -25,7 +29,7 @@ class ProductCard extends StatelessWidget {
       },
       child: Stack(
         children: [
-          Container(
+          SizedBox(
             width: 150,
             height: 266,
             child: Column(
@@ -76,9 +80,31 @@ class ProductCard extends StatelessWidget {
                 : SaleTextWidget(product: product),
           ),
           Positioned(
-              right: 0, top: 160, child: FavoriteIconButton(product: product))
+              right: 0,
+              top: 160,
+              child: FavoriteIconButton(
+                  product: product,
+                  onTap: () {
+                    favoriteButtonOnTap(context, product);
+                  }))
         ],
       ),
     );
+  }
+
+  void favoriteButtonOnTap(BuildContext context, Product product) {
+    if (!product.isFavorite) {
+      showCupertinoModalPopup<void>(
+        context: context,
+        builder: (context) => SelectSizeWidget(
+          product: product,
+          buttonTitle: "ADD TO FAVORITES",
+          redButtonCallBack: (ProductSize size) {
+            BlocProvider.of<HomePageCubit>(context)
+                .addToFavorites(product: product, size: size);
+          },
+        ),
+      );
+    }
   }
 }

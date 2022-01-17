@@ -87,7 +87,7 @@ class HomePage extends StatelessWidget {
             NewProductsList(
               productList: state.newProductsList,
             ),
-            Container(
+            SizedBox(
               width: double.maxFinite,
               height: 366,
               child: Stack(fit: StackFit.expand, children: const [
@@ -108,7 +108,7 @@ class HomePage extends StatelessWidget {
                     )),
               ]),
             ),
-            Container(
+            SizedBox(
               width: double.maxFinite,
               height: 400,
               child: Stack(fit: StackFit.expand, children: [

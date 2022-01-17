@@ -68,6 +68,7 @@ flutter:
      - assets/images/categories/
      - assets/images/main_page/
      - assets/images/profile/
+     - assets/images/
   #   - images/a_dot_ham.jpeg
 
   fonts:
