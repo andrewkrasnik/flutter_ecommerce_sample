@@ -6,4 +6,4 @@ App architecture based on samples [Flutter TDD Clean Architecture](https://www.y
 
 UI samples from [Flutter Gallery](https://gallery.flutter.dev/#/demo)
 
-For russian lаnguage read README_RUS.md
+For russian lаnguage read [README_RUS.md](README_RUS.md)
