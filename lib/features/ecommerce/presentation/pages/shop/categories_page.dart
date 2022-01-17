@@ -8,18 +8,16 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/shop_app_bar.dart';
 
 class CategoriesPage extends StatelessWidget {
-  late final SCategory sCategory;
-  late final List<Category> categoriesList;
-  CategoriesPage({
+  const CategoriesPage({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    sCategory =
+    SCategory sCategory =
         (BlocProvider.of<ShopPageCubit>(context).state as ShopPageCategories)
             .sCategory;
-    categoriesList =
+    List<Category> categoriesList =
         (BlocProvider.of<ShopPageCubit>(context).state as ShopPageCategories)
             .categoriesList;
 

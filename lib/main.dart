@@ -18,7 +18,7 @@ void main() async {
     MultiBlocProvider(
         providers: [
           BlocProvider<ShopPageCubit>(
-              create: (context) => di.sl<ShopPageCubit>()..init(context)),
+              create: (context) => di.sl<ShopPageCubit>()),
           BlocProvider<LoginCubit>(create: (context) => di.sl<LoginCubit>()),
           BlocProvider<HomePageCubit>(
               create: (context) => di.sl<HomePageCubit>()..loadNewProducts()),

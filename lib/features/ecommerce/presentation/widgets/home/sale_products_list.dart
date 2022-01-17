@@ -37,7 +37,7 @@ class SaleProductsList extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).push(CupertinoPageRoute(
                         builder: (BuildContext context) =>
-                            ShopPage.saleProducts()));
+                            ShopPage.saleProducts(context)));
                   },
                   child: const Text("View all",
                       textAlign: TextAlign.end,

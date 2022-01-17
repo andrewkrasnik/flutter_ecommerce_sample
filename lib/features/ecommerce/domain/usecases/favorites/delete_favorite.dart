@@ -7,6 +7,7 @@ class DeleteFavorite {
   DeleteFavorite(this.favoritesRepository);
 
   Future<void> call(Favorite favorite) async {
+    favorite.product.isFavorite = false;
     return await favoritesRepository.delete(favorite);
   }
 }

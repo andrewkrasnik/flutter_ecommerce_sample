@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
+import 'package:flutter_ecommerce_sample/core/utils/formating.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/bag.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/bag/bag_bloc.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/bag_change_count_button.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/product_page.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/bag/bag_change_count_button.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/caption_field_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/circle_bordered_image.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/red_button.dart';
@@ -32,18 +34,25 @@ class BagListPage extends StatelessWidget {
                 blurRadius: 2,
                 color: AppColors.shadow.withOpacity(0.3),
                 spreadRadius: 0.2,
-                offset: Offset(2, -1),
+                offset: const Offset(2, -1),
               )
             ], color: Colors.white, borderRadius: BorderRadius.circular(10)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CircleBorderedImage(
-                    height: 104,
-                    width: 100,
-                    image: item.product.images[0],
-                    topLeft: const Radius.circular(10),
-                    bottomLeft: const Radius.circular(10)),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(CupertinoPageRoute(
+                        builder: (context) =>
+                            ProductPage(product: item.product)));
+                  },
+                  child: CircleBorderedImage(
+                      height: 104,
+                      width: 100,
+                      image: item.product.images[0],
+                      topLeft: const Radius.circular(10),
+                      bottomLeft: const Radius.circular(10)),
+                ),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.only(
@@ -120,7 +129,7 @@ class BagListPage extends StatelessWidget {
                               ),
                               Expanded(child: Container()),
                               Text(
-                                "${item.sum.toStringAsFixed(0)}\$",
+                                "${priceToString(item.sum)}\$",
                                 style: const TextStyle(
                                     fontSize: 14, fontWeight: FontWeight.bold),
                               ),
@@ -143,12 +152,7 @@ class BagListPage extends StatelessWidget {
         navigationBar: CupertinoNavigationBar(
           backgroundColor: AppColors.mainColor,
           border: null,
-          trailing: SearchBarButton(
-            onPressed: () {
-              BlocProvider.of<BagBloc>(context, listen: false)
-                  .add(BagInitListEvent());
-            },
-          ),
+          trailing: const SearchBarButton(),
         ),
         child: SingleChildScrollView(
           child: Padding(
@@ -179,9 +183,9 @@ class BagListPage extends StatelessWidget {
                       style: TextStyle(color: AppColors.grayText),
                     ),
                     Text(
-                      "${bag.itemsSum}\$",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      "${priceToString(bag.itemsSum)}\$",
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold),
                     )
                   ],
                 ),

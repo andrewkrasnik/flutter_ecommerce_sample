@@ -11,9 +11,7 @@ class SettingsPage extends StatelessWidget {
         navigationBar: CupertinoNavigationBar(
             backgroundColor: AppColors.mainColor,
             border: null,
-            trailing: SearchBarButton(
-              onPressed: () {},
-            )),
+            trailing: const SearchBarButton()),
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),

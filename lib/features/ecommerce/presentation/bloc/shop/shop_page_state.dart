@@ -65,3 +65,15 @@ class ShopPageSaleProductList extends ShopPageState {
   @override
   List<Object?> get props => [productList, itemView, sortBy];
 }
+
+class ShopPageViewAllProducts extends ShopPageState {
+  final List<Product> productList;
+  final bool itemView;
+  final SortType? sortBy;
+
+  ShopPageViewAllProducts(
+      {required this.productList, this.itemView = true, this.sortBy});
+
+  @override
+  List<Object?> get props => [productList, itemView, sortBy];
+}

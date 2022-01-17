@@ -61,6 +61,7 @@ Future<void> init() async {
   sl.registerFactory(() => HomePageCubit(
         getNewProducts: sl(),
         getSaleProducts: sl(),
+        addFavorite: sl(),
       ));
   sl.registerFactory(() => ProductCubit(
         getRecomendedProducts: sl(),

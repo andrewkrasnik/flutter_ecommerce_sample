@@ -6,9 +6,15 @@ class BorderedButton extends StatelessWidget {
   final VoidCallback? onTap;
   final double? width;
   final double height;
+  final Color? color;
 
-  BorderedButton(
-      {Key? key, required this.text, this.onTap, this.width, this.height = 48})
+  const BorderedButton(
+      {Key? key,
+      required this.text,
+      this.onTap,
+      this.width,
+      this.height = 48,
+      this.color})
       : super(key: key);
 
   @override
@@ -18,14 +24,14 @@ class BorderedButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
-          border: Border.all(),
+          border: Border.all(color: color ?? Colors.black),
         ),
         height: height,
         width: width ?? double.maxFinite,
         child: Center(
           child: Text(
             text,
-            style: const TextStyle(fontSize: 14),
+            style: TextStyle(fontSize: 14, color: color),
           ),
         ),
       ),

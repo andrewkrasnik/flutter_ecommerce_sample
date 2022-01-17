@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
 
 class BagChangeCountButton extends StatelessWidget {
   final VoidCallback? onTap;

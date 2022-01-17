@@ -52,65 +52,73 @@ class _SelectSizeWidgetState extends State<SelectSizeWidget> {
             ))
         .toList();
 
-    return Container(
-      height: 360,
-      width: double.maxFinite,
-      padding: const EdgeInsets.only(top: 6),
-      margin: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-      decoration: BoxDecoration(
-          color: CupertinoColors.systemBackground.resolveFrom(context),
-          borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(40), topRight: Radius.circular(40))),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-        Container(
-          width: 60,
-          height: 6,
-          margin: const EdgeInsets.only(top: 10, bottom: 20),
-          decoration: BoxDecoration(
-              color: Colors.grey, borderRadius: BorderRadius.circular(5)),
-        ),
-        const Text(
-          "Select size",
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(
-          height: 16,
-        ),
-        Container(
-          padding: const EdgeInsets.only(left: 16),
-          height: 112,
-          child: Column(children: [
-            Row(
-              children: sizeWigets.sublist(0, 3),
-            ),
-            Row(
-              children: sizeWigets.sublist(3, 5),
-            ),
-          ]),
-        ),
-        const SizedBox(
-          height: 16,
-        ),
-        const InfoWidget(text: "Size info"),
-        const SizedBox(
-          height: 24,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: RedButton(
-            text: widget.buttonTitle,
-            onTap: () {
-              if (widget.redButtonCallBack != null) {
-                widget.redButtonCallBack!(widget.selectedSize!);
-              }
-              Navigator.of(context).pop();
-            },
+    return GestureDetector(
+      onPanUpdate: (details) {
+        if (details.delta.dy > 10) {
+          Navigator.of(context).pop();
+        }
+      },
+      child: Container(
+        height: 360,
+        width: double.maxFinite,
+        padding: const EdgeInsets.only(top: 6),
+        margin:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        decoration: BoxDecoration(
+            color: CupertinoColors.systemBackground.resolveFrom(context),
+            borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(40), topRight: Radius.circular(40))),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+          Container(
+            width: 60,
+            height: 6,
+            margin: const EdgeInsets.only(top: 10, bottom: 20),
+            decoration: BoxDecoration(
+                color: Colors.grey, borderRadius: BorderRadius.circular(5)),
           ),
-        ),
-        const SizedBox(
-          height: 16,
-        ),
-      ]),
+          const Text(
+            "Select size",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          Container(
+            padding: const EdgeInsets.only(left: 16),
+            height: 112,
+            child: Column(children: [
+              Row(
+                children: sizeWigets.sublist(0, 3),
+              ),
+              Row(
+                children: sizeWigets.sublist(3, 5),
+              ),
+            ]),
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          const InfoWidget(text: "Size info"),
+          const SizedBox(
+            height: 24,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: RedButton(
+              text: widget.buttonTitle,
+              onTap: () {
+                if (widget.redButtonCallBack != null) {
+                  widget.redButtonCallBack!(widget.selectedSize!);
+                }
+                Navigator.of(context).pop();
+              },
+            ),
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+        ]),
+      ),
     );
   }
 }

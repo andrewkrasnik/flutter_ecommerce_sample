@@ -37,7 +37,7 @@ class NewProductsList extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (BuildContext context) =>
-                            ShopPage.newProducts()));
+                            ShopPage.newProducts(context)));
                   },
                   child: const Text("View all",
                       textAlign: TextAlign.end,
