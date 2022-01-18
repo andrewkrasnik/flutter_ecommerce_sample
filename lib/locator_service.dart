@@ -11,6 +11,7 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/repositories/
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/repositories/delivery_methods_repository.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/repositories/favorites_repository.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/repositories/products_repository.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/repositories/promocode_repository.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/add_to_bag.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/apply_promocode.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/change_item_count.dart';
@@ -39,11 +40,13 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/pr
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/shop/shop_page_cubit.dart';
 import 'package:get_it/get_it.dart';
 
+import 'features/ecommerce/data/datasources/promocode_data_source.dart';
 import 'features/ecommerce/data/repositories/bag_repository_impl.dart';
 import 'features/ecommerce/data/repositories/catalog_repository_impl.dart';
 import 'features/ecommerce/data/repositories/delivery_methods_repository_impl.dart';
 import 'features/ecommerce/data/repositories/favorites_repository_impl.dart';
 import 'features/ecommerce/data/repositories/products_repository_impl.dart';
+import 'features/ecommerce/data/repositories/promocode_repository_impl.dart';
 
 final sl = GetIt.instance;
 
@@ -73,12 +76,17 @@ Future<void> init() async {
         deleteFavorite: sl(),
         addToBag: sl(),
       ));
-  sl.registerFactory(() => BagBloc(
+  sl.registerFactory(
+    () => BagBloc(
       getBag: sl(),
       deleteFromBag: sl(),
       changeItemCount: sl(),
       getDeliveryMethods: sl(),
-      addFavorite: sl()));
+      addFavorite: sl(),
+      getPromocodes: sl(),
+      applyPromocode: sl(),
+    ),
+  );
 
   //UseCases
   sl.registerLazySingleton(() => GetCategoriesBySCategory(sl()));
@@ -114,6 +122,8 @@ Future<void> init() async {
   sl.registerLazySingleton<BagRepository>(() => BagRepositoryImpl(sl()));
   sl.registerLazySingleton<DeliveryMethodsRepository>(
       () => DeliveryMethodsRepositoryImpl(sl()));
+  sl.registerLazySingleton<PromocodeRepository>(
+      () => PromocodeRepositoryImpl(sl()));
 
   sl.registerLazySingleton<CategoryDataSource>(() => CategoryDataSourceImpl());
   sl.registerLazySingleton<CatalogDataSource>(() => CatalogDataSourceImpl());
@@ -123,4 +133,6 @@ Future<void> init() async {
   sl.registerLazySingleton<BagDataSource>(() => BagDataSourceImpl());
   sl.registerLazySingleton<DeliveryMethodsDataSource>(
       () => DeliveryMethodsDataSourceImpl());
+  sl.registerLazySingleton<PromocodeDataSource>(
+      () => PromocodeDataSourceImpl());
 }

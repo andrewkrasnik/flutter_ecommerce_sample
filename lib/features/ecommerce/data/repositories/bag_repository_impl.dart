@@ -4,6 +4,7 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emum
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/product_colors.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/delivery_method.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/bag.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/promocode.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/repositories/bag_repository.dart';
 
 class BagRepositoryImpl implements BagRepository {
@@ -20,7 +21,7 @@ class BagRepositoryImpl implements BagRepository {
   }
 
   @override
-  Future<Bag> applyPromocode(Promocode promocode) {
+  Future<Bag> applyPromocode(Promocode? promocode) {
     return dataSource.applyPromocode(promocode);
   }
 
@@ -42,10 +43,5 @@ class BagRepositoryImpl implements BagRepository {
   @override
   Future<List<DeliveryMethod>> getDeliveryMethods() {
     return dataSource.getDeliveryMethods();
-  }
-
-  @override
-  Future<List<Promocode>> getPromocodes() {
-    return dataSource.getPromocodes();
   }
 }

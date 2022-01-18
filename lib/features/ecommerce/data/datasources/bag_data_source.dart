@@ -3,17 +3,18 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/deli
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/product_colors.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/product_sizes.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/promocode.dart';
 
 abstract class BagDataSource {
   Future<Bag> getBag();
-  Future<List<Promocode>> getPromocodes();
+
   Future<List<DeliveryMethod>> getDeliveryMethods();
   Future<void> addToBag(
       {required Product product,
       required ProductSize size,
       required ProductColor color});
   Future<Bag> deleteFromBag(BagItem item);
-  Future<Bag> applyPromocode(Promocode promocode);
+  Future<Bag> applyPromocode(Promocode? promocode);
   Future<Bag> changeItemCount({required BagItem item, required double count});
 }
 
@@ -34,9 +35,9 @@ class BagDataSourceImpl implements BagDataSource {
   }
 
   @override
-  Future<Bag> applyPromocode(Promocode promocode) {
-    // TODO: implement applyPromocode
-    throw UnimplementedError();
+  Future<Bag> applyPromocode(Promocode? promocode) {
+    _bag.applyPromocode(promocode);
+    return Future.value(_bag);
   }
 
   @override
@@ -60,12 +61,6 @@ class BagDataSourceImpl implements BagDataSource {
   @override
   Future<List<DeliveryMethod>> getDeliveryMethods() {
     // TODO: implement getPaymentsMethods
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<List<Promocode>> getPromocodes() {
-    // TODO: implement getPromocodes
     throw UnimplementedError();
   }
 }
