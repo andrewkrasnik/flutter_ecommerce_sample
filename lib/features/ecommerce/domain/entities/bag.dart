@@ -5,6 +5,8 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emum
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/payment_method.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
 
+import 'promocode.dart';
+
 class Bag {
   double _totalSum = 0;
   double _itemsSum = 0;
@@ -24,7 +26,8 @@ class Bag {
     for (BagItem bagItem in _items) {
       sum += bagItem._sum;
     }
-    return sum;
+    double sale = _promocode == null ? 0 : _promocode!.sale;
+    return sum * (100 - sale) / 100;
   }
 
   BagItem getItem(int index) => _items[index];
@@ -40,6 +43,12 @@ class Bag {
   void deleteItem(BagItem item) {
     _items.remove(item);
   }
+
+  void applyPromocode(Promocode? promocode) {
+    _promocode = promocode;
+  }
+
+  Promocode? get promocode => _promocode;
 }
 
 class BagItem {
@@ -70,5 +79,3 @@ class BagItem {
     }
   }
 }
-
-class Promocode {}

@@ -18,7 +18,6 @@ class BagPage extends StatelessWidget {
         } else if (state is BagPageState) {
           return const BagListPage();
         }
-
         return Container();
       },
     );
