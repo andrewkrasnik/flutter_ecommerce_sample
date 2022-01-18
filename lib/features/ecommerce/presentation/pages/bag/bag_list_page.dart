@@ -195,24 +195,29 @@ class BagListPage extends StatelessWidget {
                 const SizedBox(
                   height: 25,
                 ),
-                bag.promocode == null
-                    ? PromocodeSearchFieldWidget(
-                        onPressed: () {
-                          BlocProvider.of<BagBloc>(context)
-                              .add(BagPromocodeToSelectEvent());
-                          showCupertinoModalPopup<void>(
-                              context: context,
-                              builder: (context) =>
-                                  const SelectPromocodeWidget());
-                        },
-                      )
-                    : PromocodeSearchFieldWidget(
-                        code: bag.promocode!.code,
-                        onPressed: () {
-                          BlocProvider.of<BagBloc>(context)
-                              .add(BagPromocodeApplyEvent());
-                        },
-                      ),
+                PromocodeSearchFieldWidget(
+                  code: bag.promocode == null ? null : bag.promocode!.code,
+                  applyPromocode: () {
+                    BlocProvider.of<BagBloc>(context)
+                        .add(BagPromocodeApplyEvent());
+                  },
+                  searchPromocode: (code) {
+                    BlocProvider.of<BagBloc>(context)
+                        .add(BagPromocodeSearchEvent(code: code));
+                  },
+                  showPromocodeMenu: () {
+                    BlocProvider.of<BagBloc>(context)
+                        .add(BagPromocodeToSelectEvent());
+                    showCupertinoModalPopup<void>(
+                        context: context,
+                        builder: (context) => SelectPromocodeWidget(
+                              searchPromocode: (code) {
+                                BlocProvider.of<BagBloc>(context)
+                                    .add(BagPromocodeSearchEvent(code: code));
+                              },
+                            ));
+                  },
+                ),
                 const SizedBox(
                   height: 28,
                 ),

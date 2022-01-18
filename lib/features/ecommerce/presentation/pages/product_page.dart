@@ -13,6 +13,7 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/favorite_icon_button.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/price_text_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/star_rating_widget.dart';
+import 'package:get_it/get_it.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProductPage extends StatelessWidget {
@@ -21,6 +22,25 @@ class ProductPage extends StatelessWidget {
     Key? key,
     required this.product,
   }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) =>
+          GetIt.instance.get<ProductCubit>(param1: product, param2: 0)
+            ..loadRecomendedProducts(),
+      child: NewWidget(product: product),
+    );
+  }
+}
+
+class NewWidget extends StatelessWidget {
+  const NewWidget({
+    Key? key,
+    required this.product,
+  }) : super(key: key);
+
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +108,7 @@ class ProductPage extends StatelessWidget {
                             onTap: () {
                               showCupertinoModalPopup<void>(
                                 context: context,
-                                builder: (context) => SelectSizeWidget(
+                                builder: (modalContext) => SelectSizeWidget(
                                     product: product,
                                     buttonTitle: "ADD TO CARD",
                                     selectedSize: (state).size,
@@ -98,7 +118,9 @@ class ProductPage extends StatelessWidget {
                                               product: product,
                                               size: state.size!,
                                               color: state.color!);
-                                      Navigator.of(context).pop();
+                                      Navigator.of(context,
+                                              rootNavigator: false)
+                                          .pop();
                                     },
                                     selectSize:
                                         BlocProvider.of<ProductCubit>(context)
@@ -118,8 +140,22 @@ class ProductPage extends StatelessWidget {
                             onTap: () {
                               showCupertinoModalPopup<void>(
                                   context: context,
-                                  builder: (context) => SelectColorWidget(
+                                  builder: (modalContext) => SelectColorWidget(
                                         product: product,
+                                        selectColor:
+                                            BlocProvider.of<ProductCubit>(
+                                                    context)
+                                                .selectColor,
+                                        redButtonCallBack: () {
+                                          BlocProvider.of<ProductCubit>(context)
+                                              .addToBag(
+                                                  product: product,
+                                                  size: state.size!,
+                                                  color: state.color!);
+                                          Navigator.of(context,
+                                                  rootNavigator: false)
+                                              .pop();
+                                        },
                                       ));
                             },
                           ),
@@ -209,6 +245,7 @@ class ProductPage extends StatelessWidget {
                           product: product,
                           size: state.size!,
                           color: state.color!);
+                      Navigator.of(context).pop();
                       // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       //     content: Container(
                       //         color: AppColors.shadow, child: Text("test"))));

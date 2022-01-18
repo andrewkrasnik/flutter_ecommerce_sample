@@ -1,8 +1,9 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/brand.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/product_colors.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/product_sizes.dart';
 
-class Product {
+class Product extends Equatable {
   final int id;
   final String name;
   final String description;
@@ -17,8 +18,6 @@ class Product {
   String shortName;
   final bool isNew;
   final bool outOfStock;
-  // late List<ProductColor> colors;
-  // late List<ProductSize> sizes;
   Product(
       {required this.id,
       required this.name,
@@ -42,4 +41,7 @@ class Product {
   List<ProductSize> get sizes => ProductSizes.values;
 
   double get realPrice => salePrice == 0 ? price : salePrice;
+
+  @override
+  List<Object?> get props => [id];
 }
