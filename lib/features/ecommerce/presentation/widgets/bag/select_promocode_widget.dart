@@ -9,8 +9,10 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/profile/promocode_tile_widget.dart';
 
 class SelectPromocodeWidget extends StatefulWidget {
+  final Function(String) searchPromocode;
   const SelectPromocodeWidget({
     Key? key,
+    required this.searchPromocode,
   }) : super(key: key);
 
   @override
@@ -53,7 +55,14 @@ class _SelectPromocodeWidgetState extends State<SelectPromocodeWidget> {
           const SizedBox(
             height: 16,
           ),
-          const PromocodeSearchFieldWidget(),
+          PromocodeSearchFieldWidget(
+            searchPromocode: (code) {
+              widget.searchPromocode(code);
+              Navigator.of(context).pop();
+            },
+            applyPromocode: () {},
+            showPromocodeMenu: () {},
+          ),
           const SizedBox(
             height: 32,
           ),

@@ -5,6 +5,7 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/data/datasources/del
 import 'package:flutter_ecommerce_sample/features/ecommerce/data/datasources/favorites_data_source.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/data/datasources/products_data_source.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/data/repositories/categories_repository_impl.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/repositories/bag_repository.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/repositories/catalog_repository.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/repositories/categories_repository.dart';
@@ -19,6 +20,7 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/get_bag.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/get_delivery_methods.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/get_promocodes.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/search_promocode.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/favorites/add_favorite.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/favorites/delete_favorite.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/favorites/get_favorites.dart';
@@ -66,11 +68,13 @@ Future<void> init() async {
         getSaleProducts: sl(),
         addFavorite: sl(),
       ));
-  sl.registerFactory(() => ProductCubit(
-        getRecomendedProducts: sl(),
-        addFavorite: sl(),
-        addToBag: sl(),
-      ));
+  sl.registerFactoryParam<ProductCubit, Product, int>(
+      ((Product product, int _) => ProductCubit(
+            product: product,
+            getRecomendedProducts: sl(),
+            addFavorite: sl(),
+            addToBag: sl(),
+          )));
   sl.registerFactory(() => FavoritesPageCubit(
         getFavorites: sl(),
         deleteFavorite: sl(),
@@ -85,6 +89,7 @@ Future<void> init() async {
       addFavorite: sl(),
       getPromocodes: sl(),
       applyPromocode: sl(),
+      searchPromocode: sl(),
     ),
   );
 
@@ -109,6 +114,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => AddPaymentsMethod(sl()));
   sl.registerLazySingleton(() => GetDeliveryAdresses(sl()));
   sl.registerLazySingleton(() => GetPaymentsMethods(sl()));
+  sl.registerLazySingleton(() => SearchPromocode(sl(), sl()));
 
   //Repository
   sl.registerLazySingleton<CategoriesRepository>(

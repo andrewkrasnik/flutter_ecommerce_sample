@@ -2,25 +2,60 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
 
-class PromocodeSearchFieldWidget extends StatelessWidget {
+class PromocodeSearchFieldWidget extends StatefulWidget {
   final String? code;
-  final VoidCallback? onPressed;
-  const PromocodeSearchFieldWidget({Key? key, this.onPressed, this.code})
-      : super(key: key);
+  final VoidCallback showPromocodeMenu;
+  final Function(String) searchPromocode;
+  final VoidCallback applyPromocode;
+  PromocodeSearchFieldWidget({
+    Key? key,
+    required this.showPromocodeMenu,
+    required this.applyPromocode,
+    required this.searchPromocode,
+    this.code,
+  }) : super(key: key);
+
+  @override
+  State<PromocodeSearchFieldWidget> createState() =>
+      _PromocodeSearchFieldWidgetState();
+}
+
+class _PromocodeSearchFieldWidgetState
+    extends State<PromocodeSearchFieldWidget> {
+  late final TextEditingController controller;
+
+  @override
+  void initState() {
+    controller = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    if (code == null) {
+    if (widget.code == null) {
       return SizedBox(
         child: Stack(children: [
           CupertinoTextField(
+            controller: controller,
             decoration: BoxDecoration(
                 border: null,
                 color: AppColors.white,
                 borderRadius: const BorderRadius.horizontal(
                     left: Radius.circular(8), right: Radius.circular(19))),
             suffix: GestureDetector(
-              onTap: onPressed,
+              onTap: () {
+                if (controller.text.isNotEmpty) {
+                  widget.searchPromocode(controller.text);
+                } else {
+                  widget.showPromocodeMenu();
+                }
+              },
               child: Container(
                 width: 36,
                 height: 36,
@@ -41,25 +76,30 @@ class PromocodeSearchFieldWidget extends StatelessWidget {
         ]),
       );
     }
+    controller.text = "";
     return CupertinoTextField(
+      controller: controller,
       readOnly: true,
-      placeholder: code,
+      placeholder: widget.code,
       padding: const EdgeInsets.only(top: 12, bottom: 12, left: 20, right: 20),
       placeholderStyle: TextStyle(color: AppColors.black, fontSize: 14),
       decoration: BoxDecoration(
           border: null,
           color: AppColors.white,
           borderRadius: BorderRadius.circular(8)),
-      suffix: CupertinoButton(
-          borderRadius: null,
-          padding: null,
-          minSize: 0,
+      suffix: Padding(
+        padding: const EdgeInsets.only(right: 12),
+        child: GestureDetector(
+          onTap: () {
+            widget.applyPromocode();
+          },
           child: Icon(
             Icons.close,
             color: AppColors.grayText,
             size: 24,
           ),
-          onPressed: onPressed),
+        ),
+      ),
     );
   }
 }

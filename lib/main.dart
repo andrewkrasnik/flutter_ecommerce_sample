@@ -5,7 +5,6 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/ba
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/favorites/favorites_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/home/home_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/login/login_cubit.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/product/product_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/shop/shop_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/login_page.dart';
 import 'features/ecommerce/presentation/pages/tab_bar_page.dart';
@@ -22,9 +21,6 @@ void main() async {
           BlocProvider<LoginCubit>(create: (context) => di.sl<LoginCubit>()),
           BlocProvider<HomePageCubit>(
               create: (context) => di.sl<HomePageCubit>()..loadNewProducts()),
-          BlocProvider<ProductCubit>(
-              create: (context) =>
-                  di.sl<ProductCubit>()..loadRecomendedProducts()),
           BlocProvider<FavoritesPageCubit>(
               create: (context) => di.sl<FavoritesPageCubit>()..loadList()),
           BlocProvider<BagBloc>(

@@ -7,6 +7,7 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/get_bag.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/get_delivery_methods.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/get_promocodes.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/search_promocode.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/favorites/add_favorite.dart';
 import 'package:meta/meta.dart';
 
@@ -21,6 +22,7 @@ class BagBloc extends Bloc<BagEvent, BagState> {
   final AddFavorite addFavorite;
   final GetPromocodes getPromocodes;
   final ApplyPromocode applyPromocode;
+  final SearchPromocode searchPromocode;
 
   BagBloc({
     required this.getBag,
@@ -30,6 +32,7 @@ class BagBloc extends Bloc<BagEvent, BagState> {
     required this.addFavorite,
     required this.getPromocodes,
     required this.applyPromocode,
+    required this.searchPromocode,
   }) : super(BagInitial()) {
     on<BagInitListEvent>((event, emit) async {
       // emit(BagPageState(bag: Bag()));
@@ -67,7 +70,11 @@ class BagBloc extends Bloc<BagEvent, BagState> {
         promocodeList: await getPromocodes(),
       ));
     });
-    on<BagPromocodeSearchEvent>((event, emit) async {});
+    on<BagPromocodeSearchEvent>((event, emit) async {
+      emit(BagPageState(
+        bag: await searchPromocode(event.code),
+      ));
+    });
     on<BagPromocodeApplyEvent>((event, emit) async {
       emit(BagPageState(
         bag: await applyPromocode(event.promocode),

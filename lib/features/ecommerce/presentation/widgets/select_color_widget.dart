@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/product_colors.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/product/product_cubit.dart';
+
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/info_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/red_button.dart';
 
@@ -11,8 +11,15 @@ import 'shop/filter_color_button.dart';
 
 class SelectColorWidget extends StatefulWidget {
   ProductColor? selectedColor;
+  void Function(ProductColor) selectColor;
   final Product product;
-  SelectColorWidget({Key? key, this.selectedColor, required this.product})
+  final void Function()? redButtonCallBack;
+  SelectColorWidget(
+      {Key? key,
+      this.selectedColor,
+      required this.product,
+      required this.selectColor,
+      this.redButtonCallBack})
       : super(key: key);
 
   @override
@@ -64,8 +71,7 @@ class _SelectColorWidgetState extends State<SelectColorWidget> {
                             color: color.color,
                             selected: color == widget.selectedColor,
                             onTap: () {
-                              BlocProvider.of<ProductCubit>(context)
-                                  .selectColor(color);
+                              widget.selectColor(color);
                               setState(() {
                                 widget.selectedColor = color;
                               });
@@ -82,7 +88,15 @@ class _SelectColorWidgetState extends State<SelectColorWidget> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: RedButton(text: "ADD TO CARD"),
+              child: RedButton(
+                text: "ADD TO CARD",
+                onTap: () {
+                  if (widget.redButtonCallBack != null) {
+                    widget.redButtonCallBack!();
+                  }
+                  Navigator.of(context).pop();
+                },
+              ),
             ),
             const SizedBox(
               height: 16,
