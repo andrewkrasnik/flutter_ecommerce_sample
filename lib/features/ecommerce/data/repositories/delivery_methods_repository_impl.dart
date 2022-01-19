@@ -8,8 +8,7 @@ class DeliveryMethodsRepositoryImpl implements DeliveryMethodsRepository {
   DeliveryMethodsRepositoryImpl(this.dataSource);
 
   @override
-  Future<List<DeliveryMethod>> getDeliveryMethods() {
-    // TODO: implement getDeliveryMethods
-    throw UnimplementedError();
+  Future<List<DeliveryMethod>> getDeliveryMethods() async {
+    return await dataSource.getDeliveryMethods();
   }
 }

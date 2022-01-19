@@ -1,4 +1,4 @@
-import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/delivery_adress.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/delivery_address.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/delivery_method.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/product_colors.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/product_sizes.dart';
@@ -8,12 +8,10 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/prod
 import 'promocode.dart';
 
 class Bag {
-  double _totalSum = 0;
-  double _itemsSum = 0;
-  double _deliverySum = 0;
+  double _deliverySum = 15;
   List<BagItem> _items = [];
   Promocode? _promocode;
-  DeliveryAdress? deliveryAdress;
+  DeliveryAddress? deliveryAddress;
   PaymentMethod? paymentMethod;
   DeliveryMethod? deliveryMethod;
 
@@ -49,6 +47,11 @@ class Bag {
   }
 
   Promocode? get promocode => _promocode;
+
+  void clear() async {
+    _items.clear();
+    _promocode = null;
+  }
 }
 
 class BagItem {

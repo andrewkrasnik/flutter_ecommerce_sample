@@ -38,11 +38,21 @@ class BagPromocodeApplyEvent extends BagEvent {
   });
 }
 
-class BagShippingAdressChangeEvent extends BagEvent {}
+class BagShippingAdressChangeEvent extends BagEvent {
+  final DeliveryAddress address;
+  BagShippingAdressChangeEvent({
+    required this.address,
+  });
+}
 
 class BagShippingAdressApplyEvent extends BagEvent {}
 
-class BagPaymentMethodChangeEvent extends BagEvent {}
+class BagPaymentMethodChangeEvent extends BagEvent {
+  final PaymentMethod method;
+  BagPaymentMethodChangeEvent({
+    required this.method,
+  });
+}
 
 class BagPaymentMethodApplyEvent extends BagEvent {}
 
@@ -51,3 +61,5 @@ class BagCheckOutTapEvent extends BagEvent {}
 class BagSubmitOrderTapEvent extends BagEvent {}
 
 class BagContinueShoppintTapEvent extends BagEvent {}
+
+class BagBackFromChechOut extends BagEvent {}

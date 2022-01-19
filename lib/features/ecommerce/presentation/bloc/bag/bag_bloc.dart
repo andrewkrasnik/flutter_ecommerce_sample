@@ -1,12 +1,17 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/bag.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/delivery_address.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/delivery_method.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/payment_method.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/promocode.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/apply_promocode.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/change_item_count.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/delete_from_bag.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/get_bag.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/get_delivery_methods.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/get_promocodes.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/profile/get_default_delivery_address.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/profile/get_default_payment_method.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/profile/get_delivery_methods.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/profile/get_promocodes.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/search_promocode.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/favorites/add_favorite.dart';
 import 'package:meta/meta.dart';
@@ -23,6 +28,8 @@ class BagBloc extends Bloc<BagEvent, BagState> {
   final GetPromocodes getPromocodes;
   final ApplyPromocode applyPromocode;
   final SearchPromocode searchPromocode;
+  final GetDefaultDeliveryAdress getDefaultDeliveryAdress;
+  final GetDefaultPaymentMethod getDefaultPaymentMethod;
 
   BagBloc({
     required this.getBag,
@@ -33,20 +40,22 @@ class BagBloc extends Bloc<BagEvent, BagState> {
     required this.getPromocodes,
     required this.applyPromocode,
     required this.searchPromocode,
+    required this.getDefaultDeliveryAdress,
+    required this.getDefaultPaymentMethod,
   }) : super(BagInitial()) {
     on<BagInitListEvent>((event, emit) async {
-      // emit(BagPageState(bag: Bag()));
-      // await Future.delayed(const Duration(milliseconds: 500));
       emit(BagPageState(
         bag: await getBag(),
         promocodeList: await getPromocodes(),
       ));
     });
+
     on<BagItemChangeCountEvent>((event, emit) async {
       emit(BagPageState(
         bag: await changeItemCount(item: event.item, count: event.count),
       ));
     });
+
     on<BagItemToFavoritesEvent>(((event, emit) async {
       await deleteFromBag(event.item);
       await addFavorite(
@@ -57,6 +66,7 @@ class BagBloc extends Bloc<BagEvent, BagState> {
         bag: await getBag(),
       ));
     }));
+
     on<BagItemDeleteEvent>(((event, emit) async {
       await deleteFromBag(event.item);
       emit(BagPageState(
@@ -70,22 +80,50 @@ class BagBloc extends Bloc<BagEvent, BagState> {
         promocodeList: await getPromocodes(),
       ));
     });
+
     on<BagPromocodeSearchEvent>((event, emit) async {
       emit(BagPageState(
         bag: await searchPromocode(event.code),
       ));
     });
+
     on<BagPromocodeApplyEvent>((event, emit) async {
       emit(BagPageState(
         bag: await applyPromocode(event.promocode),
       ));
     });
-    on<BagShippingAdressChangeEvent>((event, emit) async {});
-    on<BagShippingAdressApplyEvent>((event, emit) async {});
-    on<BagPaymentMethodChangeEvent>((event, emit) async {});
+
+    on<BagShippingAdressChangeEvent>((event, emit) async {
+      Bag bag = await getBag();
+      bag.deliveryAddress = event.address;
+      emit(BagCheckoutState(
+          bag: bag, deliveryMethods: await getDeliveryMethods()));
+    });
+    on<BagBackFromChechOut>((event, emit) async {
+      emit(BagPageState(
+        bag: await getBag(),
+        promocodeList: await getPromocodes(),
+      ));
+    });
+    on<BagPaymentMethodChangeEvent>((event, emit) async {
+      Bag bag = await getBag();
+      bag.paymentMethod = event.method;
+      emit(BagCheckoutState(
+          bag: bag, deliveryMethods: await getDeliveryMethods()));
+    });
     on<BagPaymentMethodApplyEvent>((event, emit) async {});
-    on<BagCheckOutTapEvent>((event, emit) async {});
-    on<BagSubmitOrderTapEvent>((event, emit) async {});
+    on<BagCheckOutTapEvent>((event, emit) async {
+      Bag bag = await getBag();
+      bag.deliveryAddress = await getDefaultDeliveryAdress();
+      bag.paymentMethod = await getDefaultPaymentMethod();
+      emit(BagCheckoutState(
+          bag: bag, deliveryMethods: await getDeliveryMethods()));
+    });
+    on<BagSubmitOrderTapEvent>((event, emit) async {
+      Bag bag = await getBag();
+      bag.clear();
+      emit(BagSuccessState());
+    });
     on<BagContinueShoppintTapEvent>((event, emit) async {});
   }
 }
