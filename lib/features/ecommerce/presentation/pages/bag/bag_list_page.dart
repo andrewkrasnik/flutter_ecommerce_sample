@@ -8,6 +8,8 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/ba
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/product_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/bag/bag_change_count_button.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/bag/select_promocode_widget.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/bag/sum_row_widget.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/bordered_button.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/caption_field_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/circle_bordered_image.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/profile/promocode_search_field_widget.dart';
@@ -172,6 +174,72 @@ class BagListPage extends StatelessWidget {
       );
     });
 
+    if (itemsList.isEmpty) {
+      itemsList = [
+        const SizedBox(
+          height: 40,
+        ),
+        const Image(image: AssetImage("assets/images/bag/bags.png")),
+        const SizedBox(
+          height: 40,
+        ),
+        RedButton(text: "TO CATALOGE"),
+        const SizedBox(
+          height: 16,
+        ),
+        const BorderedButton(
+          text: "TO FAVORITES",
+          color: Colors.black,
+        ),
+      ];
+    } else {
+      itemsList.addAll([
+        const SizedBox(
+          height: 25,
+        ),
+        PromocodeSearchFieldWidget(
+          code: bag.promocode == null ? null : bag.promocode!.code,
+          applyPromocode: () {
+            BlocProvider.of<BagBloc>(context).add(BagPromocodeApplyEvent());
+          },
+          searchPromocode: (code) {
+            BlocProvider.of<BagBloc>(context)
+                .add(BagPromocodeSearchEvent(code: code));
+          },
+          showPromocodeMenu: () {
+            BlocProvider.of<BagBloc>(context).add(BagPromocodeToSelectEvent());
+            showCupertinoModalPopup<void>(
+                context: context,
+                builder: (context) => SelectPromocodeWidget(
+                      searchPromocode: (code) {
+                        BlocProvider.of<BagBloc>(context)
+                            .add(BagPromocodeSearchEvent(code: code));
+                      },
+                    ));
+          },
+        ),
+        const SizedBox(
+          height: 28,
+        ),
+        SunRowWidget(
+          sum: bag.itemsSum,
+          title: "Total amount:",
+        ),
+        const SizedBox(
+          height: 24,
+        ),
+        RedButton(
+          text: "CHECK OUT",
+          onTap: () {
+            BlocProvider.of<BagBloc>(context).add(BagCheckOutTapEvent());
+          },
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+      ]);
+    }
+
     return CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
           backgroundColor: AppColors.mainColor,
@@ -192,56 +260,6 @@ class BagListPage extends StatelessWidget {
                   ),
                 ),
                 ...itemsList,
-                const SizedBox(
-                  height: 25,
-                ),
-                PromocodeSearchFieldWidget(
-                  code: bag.promocode == null ? null : bag.promocode!.code,
-                  applyPromocode: () {
-                    BlocProvider.of<BagBloc>(context)
-                        .add(BagPromocodeApplyEvent());
-                  },
-                  searchPromocode: (code) {
-                    BlocProvider.of<BagBloc>(context)
-                        .add(BagPromocodeSearchEvent(code: code));
-                  },
-                  showPromocodeMenu: () {
-                    BlocProvider.of<BagBloc>(context)
-                        .add(BagPromocodeToSelectEvent());
-                    showCupertinoModalPopup<void>(
-                        context: context,
-                        builder: (context) => SelectPromocodeWidget(
-                              searchPromocode: (code) {
-                                BlocProvider.of<BagBloc>(context)
-                                    .add(BagPromocodeSearchEvent(code: code));
-                              },
-                            ));
-                  },
-                ),
-                const SizedBox(
-                  height: 28,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Total amount:",
-                      style: TextStyle(color: AppColors.grayText),
-                    ),
-                    Text(
-                      "${priceToString(bag.itemsSum)}\$",
-                      style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 24,
-                ),
-                RedButton(text: "CHECK OUT"),
-                const SizedBox(
-                  height: 20,
-                ),
               ],
             ),
           ),

@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/bag/bag_bloc.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/bag/bag_list_page.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/bag/checkout_page.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/bag/success_page_with_girl.dart';
 
 class BagPage extends StatelessWidget {
   const BagPage({
@@ -17,6 +19,10 @@ class BagPage extends StatelessWidget {
               .add(BagInitListEvent());
         } else if (state is BagPageState) {
           return const BagListPage();
+        } else if (state is BagCheckoutState) {
+          return const CheckoutPage();
+        } else if (state is BagSuccessState) {
+          return const SuccessPageWithGirl();
         }
         return Container();
       },

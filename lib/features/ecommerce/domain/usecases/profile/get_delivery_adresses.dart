@@ -1,12 +1,12 @@
-import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/delivery_adress.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/domain/repositories/delivery_adresses_repository.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/delivery_address.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/repositories/delivery_addresses_repository.dart';
 
 class GetDeliveryAdresses {
-  final DeliveryAdressesRepository repository;
+  final DeliveryAddressesRepository repository;
 
   GetDeliveryAdresses(this.repository);
 
-  Future<List<DeliveryAdress>> call() async {
-    return await repository.getDeliveryAdresses();
+  Future<List<DeliveryAddress>> call() async {
+    return await repository.getDeliveryAddresses();
   }
 }

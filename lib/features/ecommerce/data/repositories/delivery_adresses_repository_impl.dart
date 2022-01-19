@@ -1,16 +1,29 @@
-import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/delivery_adress.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/domain/repositories/delivery_adresses_repository.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/data/datasources/delivery_adresses_data_store.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/delivery_address.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/repositories/delivery_addresses_repository.dart';
 
-class DeliveryAdressesRepositoryImpl implements DeliveryAdressesRepository {
+class DeliveryAddressesRepositoryImpl implements DeliveryAddressesRepository {
+  final DeliveryAddressesDataStore dataStore;
+
+  DeliveryAddressesRepositoryImpl(this.dataStore);
+
   @override
-  Future<void> addDeliveryAdress(DeliveryAdress adress) {
-    // TODO: implement addDeliveryAdress
-    throw UnimplementedError();
+  Future<void> addDeliveryAddress(DeliveryAddress adress) async {
+    return await dataStore.addDeliveryAddress(adress);
   }
 
   @override
-  Future<List<DeliveryAdress>> getDeliveryAdresses() {
-    // TODO: implement getDeliveryAdresses
-    throw UnimplementedError();
+  Future<List<DeliveryAddress>> getDeliveryAddresses() async {
+    return await dataStore.getDeliveryAddresses();
+  }
+
+  @override
+  Future<DeliveryAddress> getDefaultAddress() async {
+    return await dataStore.getDefaultAddress();
+  }
+
+  @override
+  Future<DeliveryAddress> setDefaultAddress(DeliveryAddress address) async {
+    return await dataStore.setDefaultAddress(address);
   }
 }

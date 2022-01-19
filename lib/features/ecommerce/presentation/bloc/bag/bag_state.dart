@@ -11,3 +11,14 @@ class BagPageState extends BagState {
 
   BagPageState({required this.bag, this.promocodeList});
 }
+
+class BagCheckoutState extends BagState {
+  final Bag bag;
+  final List<DeliveryMethod> deliveryMethods;
+  BagCheckoutState({
+    required this.bag,
+    required this.deliveryMethods,
+  });
+}
+
+class BagSuccessState extends BagState {}

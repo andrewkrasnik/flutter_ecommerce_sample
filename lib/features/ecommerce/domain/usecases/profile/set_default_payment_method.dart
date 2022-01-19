@@ -1,12 +1,12 @@
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/payment_method.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/repositories/payment_methods_repository.dart';
 
-class GetPaymentMethods {
+class SetDefaultPaymentMethod {
   final PaymentMethodsRepository repository;
 
-  GetPaymentMethods(this.repository);
+  SetDefaultPaymentMethod(this.repository);
 
-  Future<List<PaymentMethod>> call() async {
-    return await repository.getPaymentMethods();
+  Future<PaymentMethod> call(PaymentMethod method) async {
+    return await repository.setDefaultMethod(method);
   }
 }
