@@ -16,4 +16,6 @@ class Promocode {
     this.color,
     this.image,
   });
+
+  String get presentation => "${sale.toStringAsFixed(0)}%, $title";
 }

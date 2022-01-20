@@ -48,7 +48,7 @@ class Bag {
 
   Promocode? get promocode => _promocode;
 
-  void clear() async {
+  void clear() {
     _items.clear();
     _promocode = null;
   }

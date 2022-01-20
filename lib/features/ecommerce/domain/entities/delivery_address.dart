@@ -1,4 +1,6 @@
-class DeliveryAddress {
+import 'package:equatable/equatable.dart';
+
+class DeliveryAddress extends Equatable {
   String fullName;
   String address;
   String city;
@@ -15,4 +17,10 @@ class DeliveryAddress {
     required this.country,
     this.defaultAddress = false,
   });
+
+  String get presentation => "$address, $city, $region $zipCode, $country";
+
+  @override
+  List<Object?> get props =>
+      [defaultAddress, fullName, address, city, region, zipCode, country];
 }

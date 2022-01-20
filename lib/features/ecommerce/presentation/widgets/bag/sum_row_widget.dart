@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
 import 'package:flutter_ecommerce_sample/core/utils/formating.dart';
 
-class SunRowWidget extends StatelessWidget {
+class SumRowWidget extends StatelessWidget {
   final double sum;
   final String title;
-  const SunRowWidget({Key? key, required this.sum, required this.title})
+  const SumRowWidget({Key? key, required this.sum, required this.title})
       : super(key: key);
 
   @override
@@ -15,7 +15,7 @@ class SunRowWidget extends StatelessWidget {
       children: [
         Text(
           title,
-          style: TextStyle(color: AppColors.grayText),
+          style: const TextStyle(color: AppColors.grayText),
         ),
         Text(
           "${priceToString(sum)}\$",

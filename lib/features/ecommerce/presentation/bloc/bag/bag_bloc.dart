@@ -8,6 +8,7 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/change_item_count.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/delete_from_bag.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/get_bag.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/submit_order.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/profile/get_default_delivery_address.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/profile/get_default_payment_method.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/profile/get_delivery_methods.dart';
@@ -30,6 +31,7 @@ class BagBloc extends Bloc<BagEvent, BagState> {
   final SearchPromocode searchPromocode;
   final GetDefaultDeliveryAdress getDefaultDeliveryAdress;
   final GetDefaultPaymentMethod getDefaultPaymentMethod;
+  final SubmitOrder submitOrder;
 
   BagBloc({
     required this.getBag,
@@ -42,6 +44,7 @@ class BagBloc extends Bloc<BagEvent, BagState> {
     required this.searchPromocode,
     required this.getDefaultDeliveryAdress,
     required this.getDefaultPaymentMethod,
+    required this.submitOrder,
   }) : super(BagInitial()) {
     on<BagInitListEvent>((event, emit) async {
       emit(BagPageState(
@@ -120,8 +123,7 @@ class BagBloc extends Bloc<BagEvent, BagState> {
           bag: bag, deliveryMethods: await getDeliveryMethods()));
     });
     on<BagSubmitOrderTapEvent>((event, emit) async {
-      Bag bag = await getBag();
-      bag.clear();
+      await submitOrder();
       emit(BagSuccessState());
     });
     on<BagContinueShoppintTapEvent>((event, emit) async {});

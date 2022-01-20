@@ -8,3 +8,13 @@ abstract class PromocodesState extends Equatable {
 }
 
 class PromocodesInitial extends PromocodesState {}
+
+class PromocodesListPageState extends PromocodesState {
+  final List<Promocode> list;
+  const PromocodesListPageState({
+    required this.list,
+  });
+
+  @override
+  List<Object> get props => [list];
+}

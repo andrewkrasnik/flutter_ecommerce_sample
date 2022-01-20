@@ -4,6 +4,7 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/data/datasources/cat
 import 'package:flutter_ecommerce_sample/features/ecommerce/data/datasources/delivery_adresses_data_store.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/data/datasources/delivery_methods_data_source.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/data/datasources/favorites_data_source.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/data/datasources/orders_data_source.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/data/datasources/payment_methods_data_soufce.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/data/datasources/products_data_source.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/data/repositories/categories_repository_impl.dart';
@@ -14,6 +15,7 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/repositories/
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/repositories/delivery_addresses_repository.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/repositories/delivery_methods_repository.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/repositories/favorites_repository.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/repositories/orders_repository.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/repositories/payment_methods_repository.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/repositories/products_repository.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/repositories/promocode_repository.dart';
@@ -22,9 +24,11 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/change_item_count.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/delete_from_bag.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/get_bag.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/submit_order.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/profile/get_default_delivery_address.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/profile/get_default_payment_method.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/profile/get_delivery_methods.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/profile/get_orders.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/profile/get_promocodes.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/search_promocode.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/favorites/add_favorite.dart';
@@ -43,13 +47,17 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/prof
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/profile/set_default_delivery_address.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/profile/set_default_payment_method.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/bag/bag_bloc.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/delivery_addresses/delivery_addresses_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/favorites/favorites_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/home/home_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/login/login_cubit.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/order/order_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/product/product_cubit.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/promocodes/promocodes_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/shop/shop_page_cubit.dart';
 import 'package:get_it/get_it.dart';
 
+import 'features/ecommerce/data/datasources/orders_repository_impl.dart';
 import 'features/ecommerce/data/datasources/promocode_data_source.dart';
 import 'features/ecommerce/data/repositories/bag_repository_impl.dart';
 import 'features/ecommerce/data/repositories/catalog_repository_impl.dart';
@@ -102,8 +110,22 @@ Future<void> init() async {
       searchPromocode: sl(),
       getDefaultDeliveryAdress: sl(),
       getDefaultPaymentMethod: sl(),
+      submitOrder: sl(),
     ),
   );
+
+  sl.registerFactory(() => DeliveryAddressesCubit(
+      getDeliveryAdresses: sl(),
+      addDeliveryAdress: sl(),
+      setDefaultDeliveryAdress: sl()));
+
+  sl.registerFactory(() => PromocodesCubit(
+        getPromocodes: sl(),
+      ));
+
+  sl.registerFactory(() => OrderCubit(
+        getOrders: sl(),
+      ));
 
   //UseCases
   sl.registerLazySingleton(() => GetCategoriesBySCategory(sl()));
@@ -131,6 +153,11 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetDefaultPaymentMethod(sl()));
   sl.registerLazySingleton(() => SetDefaultDeliveryAdress(sl()));
   sl.registerLazySingleton(() => SetDefaultPaymentMethod(sl()));
+  sl.registerLazySingleton(() => SubmitOrder(
+      bagRepository: sl(),
+      ordersRepository: sl(),
+      deliveryMethodsRepository: sl()));
+  sl.registerLazySingleton(() => GetOrders(sl()));
 
   //Repository
   sl.registerLazySingleton<CategoriesRepository>(
@@ -152,6 +179,8 @@ Future<void> init() async {
   sl.registerLazySingleton<PaymentMethodsRepository>(
       () => PaymentMethodsRepositoryImpl(sl()));
 
+  sl.registerLazySingleton<OrdersRepository>(() => OrdersRepositoryImpl(sl()));
+
   sl.registerLazySingleton<CategoryDataSource>(() => CategoryDataSourceImpl());
   sl.registerLazySingleton<CatalogDataSource>(() => CatalogDataSourceImpl());
   sl.registerLazySingleton<ProductsDataSource>(() => ProductsDataSourceImpl());
@@ -166,4 +195,6 @@ Future<void> init() async {
       () => DeliveryAddressesDataStoreImpl());
   sl.registerLazySingleton<PaymentMethodsDataStore>(
       () => PaymentMethodsDataStoreImpl());
+
+  sl.registerLazySingleton<OrdersDataSource>(() => OrdersDataSourceImpl());
 }

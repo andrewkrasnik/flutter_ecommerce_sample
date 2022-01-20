@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/bag.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/delivery_method.dart';
+
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/product_colors.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/product_sizes.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
@@ -9,7 +9,6 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/prom
 
 abstract class BagRepository {
   Future<Bag> getBag();
-  Future<List<DeliveryMethod>> getDeliveryMethods();
   Future<void> addToBag(
       {required Product product,
       required ProductSize size,
