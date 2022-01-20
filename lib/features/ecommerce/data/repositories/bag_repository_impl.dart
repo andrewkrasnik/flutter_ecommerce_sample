@@ -39,9 +39,4 @@ class BagRepositoryImpl implements BagRepository {
   Future<Bag> getBag() {
     return dataSource.getBag();
   }
-
-  @override
-  Future<List<DeliveryMethod>> getDeliveryMethods() {
-    return dataSource.getDeliveryMethods();
-  }
 }

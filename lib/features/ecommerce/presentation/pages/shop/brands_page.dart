@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/bordered_button.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/checkbox_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/red_button.dart';
 
 class BrandsPage extends StatefulWidget {
@@ -82,18 +84,14 @@ class _BrandsPageState extends State<BrandsPage> {
                                   ? const Color.fromRGBO(219, 48, 34, 1)
                                   : Colors.black),
                         ),
-                        Material(
-                          child: Checkbox(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(3)),
-                              activeColor: const Color.fromRGBO(219, 48, 34, 1),
-                              value: brands[brand],
-                              onChanged: (value) {
-                                setState(() {
-                                  brands[brand] = value!;
-                                });
-                              }),
-                        )
+                        CheckboxWidget(
+                            value: brands[brand],
+                            onChanged: (value) {
+                              setState(() {
+                                brands[brand] = value!;
+                              });
+                            },
+                            activeColor: AppColors.red)
                       ],
                     ),
                   );

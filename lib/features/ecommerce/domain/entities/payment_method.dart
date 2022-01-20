@@ -16,7 +16,7 @@ class PaymentMethod {
 
   String get endCardNumber => cardNumber.substring(cardNumber.length - 5);
   String get cardNumberPresentation => "**** **** **** ${endCardNumber}";
-  String get cardLogo {
+  static String cardLogo(CardType cardType) {
     if (cardType == CardType.MasterCard) {
       return "assets/images/bag/mastercard_logo.png";
     } else {

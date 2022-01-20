@@ -11,13 +11,15 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/ho
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/bag/bag_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/home_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/product_page.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/profile/order_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/profile/orders_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/profile/payment_methods_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/profile/profile_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/profile/promocodes_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/profile/reviews_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/profile/settings_page.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/profile/shipping_adresses_page.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/profile/shipping_address_page.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/profile/shipping_addresses_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/shop/filters_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/shop/shop_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/visual_search_page.dart';
@@ -128,6 +130,8 @@ class TabBarPage extends StatelessWidget {
                 "/reviews": (context) => ReviewsPage(),
                 "/orders": (context) => OrdersPage(),
                 "/search": (context) => VisualSearchPage(),
+                "/adress": (context) => ShippingAddressPage(),
+                "/order": (context) => OrderPage(),
                 // "/product": (context) => ProductPage(product: product),
               },
               builder: (context) {

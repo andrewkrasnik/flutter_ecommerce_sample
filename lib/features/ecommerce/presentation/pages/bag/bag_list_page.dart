@@ -86,11 +86,11 @@ class BagListPage extends StatelessWidget {
                                       SizedBox(
                                         width: 80,
                                         child: CaptionFieldWidget(
-                                            caption: "Color",
+                                            caption: "Color:",
                                             text: item.color.name),
                                       ),
                                       CaptionFieldWidget(
-                                          caption: "Size",
+                                          caption: "Size:",
                                           text: item.size.name),
                                     ],
                                   ),
@@ -221,7 +221,7 @@ class BagListPage extends StatelessWidget {
         const SizedBox(
           height: 28,
         ),
-        SunRowWidget(
+        SumRowWidget(
           sum: bag.itemsSum,
           title: "Total amount:",
         ),
@@ -241,10 +241,10 @@ class BagListPage extends StatelessWidget {
     }
 
     return CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(
+        navigationBar: const CupertinoNavigationBar(
           backgroundColor: AppColors.mainColor,
           border: null,
-          trailing: const SearchBarButton(),
+          trailing: SearchBarButton(),
         ),
         child: SingleChildScrollView(
           child: Padding(

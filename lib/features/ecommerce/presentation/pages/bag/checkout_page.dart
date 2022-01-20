@@ -74,7 +74,7 @@ class CheckoutPage extends StatelessWidget {
                                 ),
                                 onTap: () async {
                                   var newAdress = await Navigator.of(context)
-                                      .pushNamed("/adresses");
+                                      .pushNamed("/adresses", arguments: true);
                                   if (newAdress is DeliveryAddress) {
                                     BlocProvider.of<BagBloc>(context).add(
                                         BagShippingAdressChangeEvent(
@@ -128,8 +128,8 @@ class CheckoutPage extends StatelessWidget {
                                   Image(
                                       width: 64,
                                       height: 38,
-                                      image: AssetImage(
-                                          state.bag.paymentMethod!.cardLogo)),
+                                      image: AssetImage(PaymentMethod.cardLogo(
+                                          state.bag.paymentMethod!.cardType))),
                                   const SizedBox(
                                     width: 17,
                                   ),
@@ -210,21 +210,21 @@ class CheckoutPage extends StatelessWidget {
                     const SizedBox(
                       height: 52,
                     ),
-                    SunRowWidget(
+                    SumRowWidget(
                       title: "Order:",
                       sum: state.bag.itemsSum,
                     ),
                     const SizedBox(
                       height: 14,
                     ),
-                    SunRowWidget(
+                    SumRowWidget(
                       title: "Delivery:",
                       sum: state.bag.deliverySum,
                     ),
                     const SizedBox(
                       height: 14,
                     ),
-                    SunRowWidget(
+                    SumRowWidget(
                       title: "Summary:",
                       sum: state.bag.totalSum,
                     ),

@@ -56,6 +56,12 @@ class DeliveryAddressesDataStoreImpl implements DeliveryAddressesDataStore {
 
   @override
   Future<DeliveryAddress> setDefaultAddress(DeliveryAddress address) async {
+    for (DeliveryAddress deliveryAddress in _list) {
+      if (deliveryAddress.defaultAddress) {
+        deliveryAddress.defaultAddress = false;
+      }
+    }
+    address.defaultAddress = true;
     return Future.value(address);
   }
 }
