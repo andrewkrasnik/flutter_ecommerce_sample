@@ -73,8 +73,13 @@ class CheckoutPage extends StatelessWidget {
                                   style: TextStyle(color: AppColors.red),
                                 ),
                                 onTap: () async {
-                                  var newAdress = await Navigator.of(context)
-                                      .pushNamed("/adresses", arguments: true);
+                                  var newAdress = await Navigator.of(
+                                    context,
+                                    rootNavigator: true,
+                                  ).pushNamed(
+                                    "/adresses",
+                                    arguments: true,
+                                  );
                                   if (newAdress is DeliveryAddress) {
                                     BlocProvider.of<BagBloc>(context).add(
                                         BagShippingAdressChangeEvent(
@@ -145,7 +150,8 @@ class CheckoutPage extends StatelessWidget {
                               style: TextStyle(color: AppColors.red),
                             ),
                             onTap: () async {
-                              var newMethod = await Navigator.of(context)
+                              var newMethod = await Navigator.of(context,
+                                      rootNavigator: true)
                                   .pushNamed("/payments");
                               if (newMethod is PaymentMethod) {
                                 BlocProvider.of<BagBloc>(context).add(

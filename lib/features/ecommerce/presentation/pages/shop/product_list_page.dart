@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/catalog_item.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/product_sizes.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/sort_types.dart';
@@ -91,7 +92,7 @@ class ProductListPage extends StatelessWidget {
                       Container(
                         margin: const EdgeInsets.only(top: 18, bottom: 10),
                         height: 24,
-                        color: const Color(0xFFF9F9F9),
+                        color: AppColors.mainColor,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -225,9 +226,9 @@ class ProductListPage extends StatelessWidget {
                                                   Text(
                                                     product.brand.name,
                                                     style: const TextStyle(
-                                                        fontSize: 11,
-                                                        color:
-                                                            Color(0xFF9B9B9B)),
+                                                      fontSize: 11,
+                                                      color: AppColors.grayText,
+                                                    ),
                                                   ),
                                                   const SizedBox(
                                                     height: 8,
@@ -309,7 +310,7 @@ class ProductListPage extends StatelessWidget {
                                         product.brand.name,
                                         style: const TextStyle(
                                             fontSize: 11,
-                                            color: Color(0xFF9B9B9B)),
+                                            color: AppColors.grayText),
                                       ),
                                       const SizedBox(
                                         height: 4,
@@ -333,7 +334,7 @@ class ProductListPage extends StatelessWidget {
                                   child: ProductLabelWidget(product: product),
                                 ),
                                 Positioned(
-                                    right: 30,
+                                    left: 142,
                                     top: 178,
                                     child: FavoriteIconButton(
                                       product: product,

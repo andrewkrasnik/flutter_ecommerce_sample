@@ -34,7 +34,7 @@ class CatalogPage extends StatelessWidget {
                 width: double.maxFinite,
                 child: CupertinoButton(
                   borderRadius: BorderRadius.circular(30),
-                  color: const Color.fromRGBO(219, 48, 34, 1),
+                  color: AppColors.red,
                   onPressed: () {
                     BlocProvider.of<ShopPageCubit>(context).viewAllItems();
                   },

@@ -4,8 +4,8 @@ part of 'shop_page_cubit.dart';
 abstract class ShopPageState extends Equatable {}
 
 class ShopPageCategories extends ShopPageState {
-  SCategory sCategory;
-  List<Category> categoriesList;
+  final SCategory sCategory;
+  final List<Category> categoriesList;
   ShopPageCategories({
     required this.sCategory,
     required this.categoriesList,

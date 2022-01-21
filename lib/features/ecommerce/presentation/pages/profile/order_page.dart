@@ -157,9 +157,10 @@ class OrderPage extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            Navigator.of(context).push(CupertinoPageRoute(
-                                builder: (context) =>
-                                    ProductPage(product: item.product)));
+                            Navigator.of(context, rootNavigator: true).push(
+                                CupertinoPageRoute(
+                                    builder: (context) =>
+                                        ProductPage(product: item.product)));
                           },
                           child: CircleBorderedImage(
                               height: 104,

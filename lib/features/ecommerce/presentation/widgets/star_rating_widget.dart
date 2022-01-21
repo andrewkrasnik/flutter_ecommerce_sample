@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
 
 class StarRatingWidget extends StatelessWidget {
@@ -10,11 +11,17 @@ class StarRatingWidget extends StatelessWidget {
     List<Widget> starList = [];
     for (var i = 0; i < 5; i++) {
       if (product.rating >= i + 1) {
-        starList.add(const Icon(CupertinoIcons.star_fill,
-            size: 14, color: Color(0xFFFFBA49)));
+        starList.add(const Icon(
+          CupertinoIcons.star_fill,
+          size: 14,
+          color: AppColors.yellow,
+        ));
       } else {
-        starList.add(const Icon(CupertinoIcons.star,
-            size: 14, color: Color(0xFF9B9B9B)));
+        starList.add(const Icon(
+          CupertinoIcons.star,
+          size: 14,
+          color: AppColors.grayText,
+        ));
       }
       starList.add(const SizedBox(
         width: 2,
@@ -25,7 +32,10 @@ class StarRatingWidget extends StatelessWidget {
         ...starList,
         Text(
           "(${product.reviewCount.toString()})",
-          style: const TextStyle(fontSize: 10, color: Color(0xFF9B9B9B)),
+          style: const TextStyle(
+            fontSize: 10,
+            color: AppColors.grayText,
+          ),
         )
       ],
     );

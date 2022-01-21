@@ -18,4 +18,9 @@ class OrdersRepositoryImpl implements OrdersRepository {
   Future<List<Order>> getOrderList(OrderStatus status) async {
     return await dataSource.getOrderList(status);
   }
+
+  @override
+  Future<int> getOrdersCount() async {
+    return await dataSource.getOrdersCount();
+  }
 }

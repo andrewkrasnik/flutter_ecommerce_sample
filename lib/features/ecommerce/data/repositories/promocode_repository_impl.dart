@@ -9,11 +9,16 @@ class PromocodeRepositoryImpl implements PromocodeRepository {
   );
   @override
   Future<List<Promocode>> getPromocodes() async {
-    return dataSource.getPromocodes();
+    return await dataSource.getPromocodes();
   }
 
   @override
   Future<Promocode?> searchPromocode(String code) async {
-    return dataSource.searchPromocode(code);
+    return await dataSource.searchPromocode(code);
+  }
+
+  @override
+  Future<bool> havePromocodes() async {
+    return await dataSource.havePromocodes();
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/category.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/scategory.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/shop/shop_page_cubit.dart';
@@ -43,9 +44,8 @@ class CategoriesPage extends StatelessWidget {
                       color: Colors.white,
                       border: (sCategory == SCategory.Woman)
                           ? const Border(
-                              bottom: BorderSide(
-                                  color: Color.fromRGBO(219, 48, 34, 1),
-                                  width: 3),
+                              bottom:
+                                  BorderSide(color: AppColors.red, width: 3),
                             )
                           : null,
                     ),
@@ -69,9 +69,8 @@ class CategoriesPage extends StatelessWidget {
                       color: Colors.white,
                       border: (sCategory == SCategory.Men)
                           ? const Border(
-                              bottom: BorderSide(
-                                  color: Color.fromRGBO(219, 48, 34, 1),
-                                  width: 3),
+                              bottom:
+                                  BorderSide(color: AppColors.red, width: 3),
                             )
                           : null,
                     ),
@@ -93,9 +92,8 @@ class CategoriesPage extends StatelessWidget {
                       color: Colors.white,
                       border: (sCategory == SCategory.Kids)
                           ? const Border(
-                              bottom: BorderSide(
-                                  color: Color.fromRGBO(219, 48, 34, 1),
-                                  width: 3),
+                              bottom:
+                                  BorderSide(color: AppColors.red, width: 3),
                             )
                           : null,
                     ),
@@ -116,7 +114,7 @@ class CategoriesPage extends StatelessWidget {
                 margin:
                     EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
                 decoration: BoxDecoration(
-                    color: Color.fromRGBO(219, 48, 34, 1),
+                    color: AppColors.red,
                     borderRadius: BorderRadius.circular(10)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -125,12 +123,12 @@ class CategoriesPage extends StatelessWidget {
                       "SUMMER SALES",
                       style: TextStyle(
                           fontSize: 24,
-                          color: Colors.white,
+                          color: AppColors.white,
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
                       "Up to 50% off",
-                      style: TextStyle(fontSize: 14, color: Colors.white),
+                      style: TextStyle(fontSize: 14, color: AppColors.white),
                     )
                   ],
                 ),

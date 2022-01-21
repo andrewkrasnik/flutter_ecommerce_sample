@@ -25,9 +25,10 @@ class OrderListPageState extends OrderState {
 
 class OrderPageState extends OrderState {
   final Order order;
+  final OrderStatus status;
 
-  const OrderPageState(this.order);
+  const OrderPageState({required this.order, required this.status});
 
   @override
-  List<Object> get props => [order];
+  List<Object> get props => [order, status];
 }

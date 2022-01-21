@@ -40,7 +40,7 @@ class FavoritesPageCubit extends Cubit<FavoritesPageState> {
 
   void toFilters(BuildContext context) async {
     //Navigator.of(context).pushNamed("/shop/filters");
-    ProductFilter filter = await Navigator.of(context)
+    ProductFilter? filter = await Navigator.of(context, rootNavigator: true)
         .push(MaterialPageRoute(builder: (context) => const FiltersPage()));
     emit((state as FavoritesListState).copyWith(filter: filter));
   }
@@ -52,7 +52,7 @@ class FavoritesPageCubit extends Cubit<FavoritesPageState> {
   }
 
   void toProductPage(BuildContext context, Product product) {
-    Navigator.of(context).push(
+    Navigator.of(context, rootNavigator: true).push(
         MaterialPageRoute(builder: (context) => ProductPage(product: product)));
   }
 

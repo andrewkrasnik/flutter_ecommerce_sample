@@ -3,4 +3,5 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/prom
 abstract class PromocodeRepository {
   Future<List<Promocode>> getPromocodes();
   Future<Promocode?> searchPromocode(String code);
+  Future<bool> havePromocodes();
 }

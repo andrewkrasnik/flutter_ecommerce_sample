@@ -25,6 +25,7 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/delete_from_bag.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/get_bag.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/bag/submit_order.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/get_profile_statistic.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/profile/get_default_delivery_address.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/profile/get_default_payment_method.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/profile/get_delivery_methods.dart';
@@ -57,7 +58,7 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/pr
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/shop/shop_page_cubit.dart';
 import 'package:get_it/get_it.dart';
 
-import 'features/ecommerce/data/datasources/orders_repository_impl.dart';
+import 'features/ecommerce/data/repositories/orders_repository_impl.dart';
 import 'features/ecommerce/data/datasources/promocode_data_source.dart';
 import 'features/ecommerce/data/repositories/bag_repository_impl.dart';
 import 'features/ecommerce/data/repositories/catalog_repository_impl.dart';
@@ -158,6 +159,11 @@ Future<void> init() async {
       ordersRepository: sl(),
       deliveryMethodsRepository: sl()));
   sl.registerLazySingleton(() => GetOrders(sl()));
+  sl.registerLazySingleton(() => GetProfileStatistic(
+      ordersRepository: sl(),
+      deliveryAddressesRepository: sl(),
+      paymentMethodsRepository: sl(),
+      promocodeRepository: sl()));
 
   //Repository
   sl.registerLazySingleton<CategoriesRepository>(

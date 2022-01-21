@@ -1,13 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/bag/bag_bloc.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/favorites/favorites_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/home/home_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/login/login_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/shop/shop_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/login_page.dart';
+import 'features/ecommerce/presentation/pages/profile/order_page.dart';
+import 'features/ecommerce/presentation/pages/profile/orders_page.dart';
+import 'features/ecommerce/presentation/pages/profile/payment_methods_page.dart';
+import 'features/ecommerce/presentation/pages/profile/promocodes_page.dart';
+import 'features/ecommerce/presentation/pages/profile/reviews_page.dart';
+import 'features/ecommerce/presentation/pages/profile/settings_page.dart';
+import 'features/ecommerce/presentation/pages/profile/shipping_address_page.dart';
+import 'features/ecommerce/presentation/pages/profile/shipping_addresses_page.dart';
+import 'features/ecommerce/presentation/pages/shop/filters_page.dart';
 import 'features/ecommerce/presentation/pages/tab_bar_page.dart';
+import 'features/ecommerce/presentation/pages/visual_search_page.dart';
 import 'locator_service.dart' as di;
 
 void main() async {
@@ -17,7 +28,7 @@ void main() async {
     MultiBlocProvider(
         providers: [
           BlocProvider<ShopPageCubit>(
-              create: (context) => di.sl<ShopPageCubit>()),
+              create: (context) => di.sl<ShopPageCubit>()..init()),
           BlocProvider<LoginCubit>(create: (context) => di.sl<LoginCubit>()),
           BlocProvider<HomePageCubit>(
               create: (context) => di.sl<HomePageCubit>()..loadNewProducts()),
@@ -33,8 +44,19 @@ void main() async {
           routes: {
             "/": (context) => const LoginPage(),
             "/main": (context) => const TabBarPage(),
+            "/filters": (context) => FiltersPage(),
+            "/settings": (context) => SettingsPage(),
+            "/promocodes": (context) => PromocodesPage(),
+            "/adresses": (context) => ShippingAdressesPage(),
+            "/payments": (context) => PaymentsMethodsPage(),
+            "/reviews": (context) => ReviewsPage(),
+            "/orders": (context) => OrdersPage(),
+            "/search": (context) => VisualSearchPage(),
+            "/adress": (context) => ShippingAddressPage(),
+            "/order": (context) => OrderPage(),
+            // "/product": (context) => ProductPage(product: product),
           },
-          theme: CupertinoThemeData(
+          theme: const CupertinoThemeData(
             textTheme: _textTheme,
             scaffoldBackgroundColor: _mainColor,
             primaryColor: _mainColor,
@@ -46,12 +68,12 @@ void main() async {
   );
 }
 
-final Color _mainColor = Color(0xFFF9F9F9);
+const Color _mainColor = AppColors.mainColor;
 
-final TextStyle _textStyle =
-    TextStyle(fontFamily: "Metropolis", color: Colors.black);
+const TextStyle _textStyle =
+    TextStyle(fontFamily: "Metropolis", color: AppColors.black);
 
-final CupertinoTextThemeData _textTheme = CupertinoTextThemeData(
+const CupertinoTextThemeData _textTheme = CupertinoTextThemeData(
   textStyle: _textStyle,
   actionTextStyle: _textStyle,
   tabLabelTextStyle: _textStyle,

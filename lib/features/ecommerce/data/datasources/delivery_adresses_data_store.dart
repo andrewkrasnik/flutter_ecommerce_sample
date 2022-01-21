@@ -5,6 +5,7 @@ abstract class DeliveryAddressesDataStore {
   Future<void> addDeliveryAddress(DeliveryAddress adress);
   Future<DeliveryAddress> getDefaultAddress();
   Future<DeliveryAddress> setDefaultAddress(DeliveryAddress address);
+  Future<int> getAddressesCount();
 }
 
 class DeliveryAddressesDataStoreImpl implements DeliveryAddressesDataStore {
@@ -63,5 +64,10 @@ class DeliveryAddressesDataStoreImpl implements DeliveryAddressesDataStore {
     }
     address.defaultAddress = true;
     return Future.value(address);
+  }
+
+  @override
+  Future<int> getAddressesCount() {
+    return Future.value(_list.length);
   }
 }

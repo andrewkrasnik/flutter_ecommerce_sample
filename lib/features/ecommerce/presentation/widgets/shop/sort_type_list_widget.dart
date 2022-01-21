@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/sort_types.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/shop/shop_page_cubit.dart';
 
@@ -49,7 +50,7 @@ class SortTypeListWiget extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     padding: const EdgeInsets.only(left: 16),
                     color: selected
-                        ? const Color.fromRGBO(219, 48, 34, 1)
+                        ? AppColors.red
                         : CupertinoColors.systemBackground.resolveFrom(context),
                     child: Text(
                       SortTypes.values[index].name,

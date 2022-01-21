@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/shop/brands_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/bordered_button.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/red_button.dart';
@@ -248,7 +249,9 @@ class _FiltersPageState extends State<FiltersPage> {
                           ),
                           Text("adidas Originals, Jack & Jones, s.Oliver",
                               style: TextStyle(
-                                  fontSize: 11, color: Color(0xFF9B9B9B)))
+                                fontSize: 11,
+                                color: AppColors.grayText,
+                              ))
                         ],
                       ),
                       CupertinoButton(

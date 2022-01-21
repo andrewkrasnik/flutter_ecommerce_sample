@@ -44,8 +44,9 @@ class ProductCubit extends Cubit<ProductState> {
         size: (state as ProductPageState).size!,
         color: (state as ProductPageState).color!);
     await Future.delayed(const Duration(milliseconds: 500));
-    emit((state as ProductPageState)
-        .copyWith(recomendedProducts: await getRecomendedProducts()));
+    emit((state as ProductPageState).copyWith(
+        recomendedProducts: await getRecomendedProducts(),
+        isFavorite: product.isFavorite));
   }
 
   void addToCart(

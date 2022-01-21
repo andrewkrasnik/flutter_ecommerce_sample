@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/login/login_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/castom_text_input.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/login_socials.dart';
@@ -194,7 +195,7 @@ class LoginPage extends StatelessWidget {
                       color: Colors.black,
                     )),
                 border: null,
-                backgroundColor: Color(0xFFF9F9F9),
+                backgroundColor: AppColors.mainColor,
               ),
               child: SingleChildScrollView(
                 child: Padding(

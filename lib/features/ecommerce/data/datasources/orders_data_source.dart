@@ -4,6 +4,7 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/orde
 abstract class OrdersDataSource {
   Future<void> addFromBag(Bag bag);
   Future<List<Order>> getOrderList(OrderStatus status);
+  Future<int> getOrdersCount();
 }
 
 class OrdersDataSourceImpl implements OrdersDataSource {
@@ -18,5 +19,10 @@ class OrdersDataSourceImpl implements OrdersDataSource {
   Future<void> addFromBag(Bag bag) async {
     _list.add(Order.fromBag(bag));
     return Future.value();
+  }
+
+  @override
+  Future<int> getOrdersCount() {
+    return Future.value(_list.length);
   }
 }

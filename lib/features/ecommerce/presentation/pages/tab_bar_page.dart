@@ -5,6 +5,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/bag/bag_bloc.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/favorites/favorites_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/home/home_page_cubit.dart';
@@ -75,7 +76,7 @@ class TabBarPage extends StatelessWidget {
         //controller: CupertinoTabController(),
         restorationId: 'cupertino_tab_scaffold',
         tabBar: CupertinoTabBar(
-          activeColor: const Color.fromRGBO(219, 48, 34, 1),
+          activeColor: AppColors.red,
           onTap: (value) {
             if (value == 0) {
               BlocProvider.of<HomePageCubit>(context).reload();

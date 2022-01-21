@@ -12,7 +12,7 @@ class PaymentMethodsDataStoreImpl extends PaymentMethodsDataStore {
   PaymentMethodsDataStoreImpl() {
     _list.add(PaymentMethod(
         nameOnCard: "",
-        cardType: CardType.MasterCard,
+        cardType: CardType.masterCard,
         cardNumber: "5546 8205 3693 3947",
         expireDate: "05/23 ",
         cvv: 567,
@@ -20,7 +20,7 @@ class PaymentMethodsDataStoreImpl extends PaymentMethodsDataStore {
 
     _list.add(PaymentMethod(
       nameOnCard: "",
-      cardType: CardType.VISA,
+      cardType: CardType.visa,
       cardNumber: "4203 8205 3693 4546",
       expireDate: "11/22 ",
       cvv: 123,
