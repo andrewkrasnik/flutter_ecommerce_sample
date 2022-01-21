@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/shop/shop_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/product_card.dart';
@@ -29,13 +30,13 @@ class NewProductsList extends StatelessWidget {
                   ),
                   Text(
                     "You’ve never seen it before!",
-                    style: TextStyle(color: Color(0xFF9B9B9B), fontSize: 11),
+                    style: TextStyle(color: AppColors.grayText, fontSize: 11),
                   )
                 ],
               ),
               TextButton(
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
+                    Navigator.of(context).push(CupertinoPageRoute(
                         builder: (BuildContext context) =>
                             ShopPage.newProducts(context)));
                   },

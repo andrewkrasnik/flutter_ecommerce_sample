@@ -34,7 +34,7 @@ class OrdersListPage extends StatelessWidget {
     return BlocBuilder<OrderCubit, OrderState>(
       builder: (context, state) {
         if (state is OrderPageState) {
-          return const OrderPage();
+          return OrderPage();
         }
         (state as OrderListPageState);
 

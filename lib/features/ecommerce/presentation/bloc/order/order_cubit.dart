@@ -18,7 +18,7 @@ class OrderCubit extends Cubit<OrderState> {
   }
 
   void toOrderPage(Order order) {
-    emit(OrderPageState(order));
+    emit(OrderPageState(order: order, status: order.status));
   }
 
   void goBack(OrderStatus status) async {
@@ -29,11 +29,11 @@ class OrderCubit extends Cubit<OrderState> {
 
   deliver(Order order) {
     order.status = OrderStatuses.delivered;
-    emit(OrderPageState(order));
+    emit(OrderPageState(order: order, status: order.status));
   }
 
   cancell(Order order) {
     order.status = OrderStatuses.cancelled;
-    emit(OrderPageState(order));
+    emit(OrderPageState(order: order, status: order.status));
   }
 }

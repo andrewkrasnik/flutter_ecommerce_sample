@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/product_card.dart';
 
@@ -17,14 +18,14 @@ class RecomendedProductsList extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("You can also like this",
+              const Text("You can also like this",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
               TextButton(
                   onPressed: () {},
                   child: Text("${productList.length} items",
                       textAlign: TextAlign.end,
                       style: const TextStyle(
-                          color: Color(0xFF9B9B9B), fontSize: 11)))
+                          color: AppColors.grayText, fontSize: 11)))
             ],
           ),
           const SizedBox(

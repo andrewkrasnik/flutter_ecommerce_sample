@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
 
 class FavoriteIconButton extends StatelessWidget {
@@ -30,7 +31,7 @@ class FavoriteIconButton extends StatelessWidget {
           child: product.isFavorite
               ? const Icon(
                   Icons.favorite,
-                  color: Color.fromRGBO(219, 48, 34, 1),
+                  color: AppColors.red,
                   size: 16,
                 )
               : const Icon(

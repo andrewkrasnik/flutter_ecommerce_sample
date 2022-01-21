@@ -1,21 +1,41 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/profile_statistic.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/domain/usecases/get_profile_statistic.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/profile/profile_item_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/search_bar_button.dart';
+import 'package:get_it/get_it.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  ProfileStatistic statistic = ProfileStatistic();
+  @override
+  void initState() {
+    super.initState();
+
+    GetIt.instance.get<GetProfileStatistic>().call().then((value) {
+      setState(() {
+        statistic = value;
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(
+        navigationBar: const CupertinoNavigationBar(
           backgroundColor: AppColors.mainColor,
           border: null,
-          trailing: const SearchBarButton(),
+          trailing: SearchBarButton(),
         ),
         child: SingleChildScrollView(
           child: Column(
@@ -45,13 +65,13 @@ class ProfilePage extends StatelessWidget {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
+                      children: const [
+                        Text(
                           "Matilda Brown",
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
-                        const SizedBox(
+                        SizedBox(
                           height: 4,
                         ),
                         Text(
@@ -66,37 +86,49 @@ class ProfilePage extends StatelessWidget {
               ),
               ProfileItemWidget(
                 title: "My orders",
-                subtitle: "Already have 12 orders",
+                subtitle: statistic.ordersCountString,
                 onTap: () {
                   Navigator.of(context).pushNamed("/orders");
                 },
               ),
               ProfileItemWidget(
                 title: "Shipping addresses",
-                subtitle: "3 ddresses",
+                subtitle: statistic.deliveryAddressesCountString,
                 onTap: () {
-                  Navigator.of(context).pushNamed("/adresses");
+                  Navigator.of(
+                    context,
+                    rootNavigator: true,
+                  ).pushNamed("/adresses");
                 },
               ),
               ProfileItemWidget(
                 title: "Payment methods",
-                subtitle: "Visa **34",
+                subtitle: statistic.paymentMethod,
                 onTap: () {
-                  Navigator.of(context).pushNamed("/payments");
+                  Navigator.of(
+                    context,
+                    rootNavigator: true,
+                  ).pushNamed("/payments");
                 },
               ),
               ProfileItemWidget(
                 title: "Promocodes",
-                subtitle: "You have special promocodes",
+                subtitle: statistic.havePromocodesString,
                 onTap: () {
-                  Navigator.of(context).pushNamed("/promocodes");
+                  Navigator.of(
+                    context,
+                    rootNavigator: true,
+                  ).pushNamed("/promocodes");
                 },
               ),
               ProfileItemWidget(
                 title: "My reviews",
-                subtitle: "Reviews for 4 items",
+                subtitle: statistic.reviewCountString,
                 onTap: () {
-                  Navigator.of(context).pushNamed("/reviews");
+                  Navigator.of(
+                    context,
+                    rootNavigator: true,
+                  ).pushNamed("/reviews");
                 },
               ),
               ProfileItemWidget(
@@ -104,7 +136,10 @@ class ProfilePage extends StatelessWidget {
                 subtitle: "Notifications, password",
                 withBorder: false,
                 onTap: () {
-                  Navigator.of(context).pushNamed("/settings");
+                  Navigator.of(
+                    context,
+                    rootNavigator: true,
+                  ).pushNamed("/settings");
                 },
               ),
               const SizedBox(

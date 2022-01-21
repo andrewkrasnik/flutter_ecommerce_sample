@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
 import 'package:flutter_ecommerce_sample/core/utils/formating.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
 
@@ -23,7 +24,7 @@ class PriceTextWiget extends StatelessWidget {
             style: TextStyle(
                 fontSize: fontSize,
                 fontWeight: FontWeight.bold,
-                color: const Color(0xFF9B9B9B),
+                color: AppColors.grayText,
                 decoration: TextDecoration.lineThrough,
                 decorationThickness: 6),
           ),
@@ -33,9 +34,10 @@ class PriceTextWiget extends StatelessWidget {
           Text(
             "${priceToString(product.salePrice)}\$",
             style: TextStyle(
-                fontSize: fontSize,
-                fontWeight: FontWeight.bold,
-                color: const Color.fromRGBO(219, 48, 34, 1)),
+              fontSize: fontSize,
+              fontWeight: FontWeight.bold,
+              color: AppColors.red,
+            ),
           )
         ],
       );

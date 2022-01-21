@@ -98,13 +98,13 @@ class FavoritesPage extends StatelessWidget {
                           Container(
                             margin: const EdgeInsets.only(top: 18, bottom: 10),
                             height: 24,
-                            color: const Color(0xFFF9F9F9),
+                            color: AppColors.mainColor,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    BlocProvider.of<ShopPageCubit>(context)
+                                    BlocProvider.of<FavoritesPageCubit>(context)
                                         .toFilters(context);
                                   },
                                   child: Row(
@@ -423,7 +423,7 @@ class FavoritesPage extends StatelessWidget {
                                             product.brand.name,
                                             style: const TextStyle(
                                                 fontSize: 11,
-                                                color: Color(0xFF9B9B9B)),
+                                                color: AppColors.grayText),
                                           ),
                                           const SizedBox(
                                             height: 4,
@@ -470,7 +470,7 @@ class FavoritesPage extends StatelessWidget {
                                     product.outOfStock
                                         ? Container()
                                         : Positioned(
-                                            right: 25,
+                                            left: 140,
                                             top: 178,
                                             child: BagIconButton(
                                                 product: product)),
@@ -485,10 +485,10 @@ class FavoritesPage extends StatelessWidget {
                                           )
                                         : Container(),
                                     Positioned(
-                                        right: 15,
+                                        left: 136,
                                         top: 5,
                                         child: CupertinoButton(
-                                          child: Icon(
+                                          child: const Icon(
                                             Icons.close,
                                             size: 20,
                                             color: AppColors.shadow,
@@ -510,7 +510,7 @@ class FavoritesPage extends StatelessWidget {
                                                     .withOpacity(0.8),
                                                 padding: const EdgeInsets.only(
                                                     top: 4, left: 8),
-                                                child: Text(
+                                                child: const Text(
                                                   "Sorry, this item is currently sold out",
                                                   style: TextStyle(
                                                       color: AppColors.black,

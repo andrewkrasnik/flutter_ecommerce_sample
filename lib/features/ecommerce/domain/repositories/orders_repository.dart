@@ -4,4 +4,5 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/orde
 abstract class OrdersRepository {
   Future<void> addFromBag(Bag bag);
   Future<List<Order>> getOrderList(OrderStatus status);
+  Future<int> getOrdersCount();
 }

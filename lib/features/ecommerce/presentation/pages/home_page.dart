@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
         List<Widget> headWigets = [];
         if (state is HomePageInitial) {
           headWigets = [
-            Container(
+            SizedBox(
               width: double.maxFinite,
               height: 536,
               child: Stack(fit: StackFit.expand, children: [

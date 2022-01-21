@@ -47,7 +47,7 @@ class _BrandsPageState extends State<BrandsPage> {
                       BoxShadow(
                           blurRadius: 1,
                           offset: Offset(0, 1),
-                          color: Color(0xFF9B9B9B))
+                          color: AppColors.grayText)
                     ],
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -55,21 +55,22 @@ class _BrandsPageState extends State<BrandsPage> {
                   padding: EdgeInsets.symmetric(horizontal: 12),
                   child: Icon(
                     CupertinoIcons.search,
-                    color: Color(0xFF9B9B9B),
+                    color: AppColors.grayText,
                   ),
                 ),
                 suffixMode: OverlayVisibilityMode.notEditing,
                 // padding: EdgeInsets.all(20),
                 placeholder: "Search",
                 placeholderStyle:
-                    TextStyle(fontSize: 16, color: Color(0xFF9B9B9B)),
+                    TextStyle(fontSize: 16, color: AppColors.grayText),
               ),
             ),
             Expanded(
               child: ListView(
                 children: brands.keys.map((brand) {
                   return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 12),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -81,8 +82,8 @@ class _BrandsPageState extends State<BrandsPage> {
                                   ? FontWeight.bold
                                   : FontWeight.normal,
                               color: brands[brand]!
-                                  ? const Color.fromRGBO(219, 48, 34, 1)
-                                  : Colors.black),
+                                  ? AppColors.red
+                                  : AppColors.black),
                         ),
                         CheckboxWidget(
                             value: brands[brand],

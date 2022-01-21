@@ -15,9 +15,14 @@ class PaymentMethod {
   });
 
   String get endCardNumber => cardNumber.substring(cardNumber.length - 5);
-  String get cardNumberPresentation => "**** **** **** ${endCardNumber}";
+  String get cardNumberPresentation => "**** **** **** $endCardNumber";
+  String get cardTypeName =>
+      cardType == CardType.masterCard ? "MasterCard" : "Visa";
+  String get presentation =>
+      "$cardTypeName **${cardNumber.substring(cardNumber.length - 3)}";
+
   static String cardLogo(CardType cardType) {
-    if (cardType == CardType.MasterCard) {
+    if (cardType == CardType.masterCard) {
       return "assets/images/bag/mastercard_logo.png";
     } else {
       return "assets/images/bag/visa_logo.png";
@@ -25,4 +30,4 @@ class PaymentMethod {
   }
 }
 
-enum CardType { VISA, MasterCard }
+enum CardType { visa, masterCard }

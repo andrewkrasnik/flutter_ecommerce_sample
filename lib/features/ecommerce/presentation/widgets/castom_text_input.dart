@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
 
 class CastomTextInput extends StatelessWidget {
   final String placeholder;
@@ -18,8 +19,10 @@ class CastomTextInput extends StatelessWidget {
         suffixMode: OverlayVisibilityMode.notEditing,
         padding: const EdgeInsets.all(20),
         placeholder: placeholder,
-        placeholderStyle:
-            const TextStyle(fontSize: 14, color: Color(0xFF9B9B9B)),
+        placeholderStyle: const TextStyle(
+          fontSize: 14,
+          color: AppColors.grayText,
+        ),
       ),
     );
   }

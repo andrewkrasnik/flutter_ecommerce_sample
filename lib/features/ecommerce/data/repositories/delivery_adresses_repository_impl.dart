@@ -26,4 +26,9 @@ class DeliveryAddressesRepositoryImpl implements DeliveryAddressesRepository {
   Future<DeliveryAddress> setDefaultAddress(DeliveryAddress address) async {
     return await dataStore.setDefaultAddress(address);
   }
+
+  @override
+  Future<int> getAddressesCount() async {
+    return await dataStore.getAddressesCount();
+  }
 }

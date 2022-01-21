@@ -7,19 +7,17 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/s
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/shop/product_list_page.dart';
 
 class ShopPage extends StatelessWidget {
-  ShopPage.newProducts(BuildContext context) {
+  ShopPage.newProducts(BuildContext context, {Key? key}) : super(key: key) {
     BlocProvider.of<ShopPageCubit>(context).showNewProducts();
   }
-  ShopPage.saleProducts(BuildContext context) {
+  ShopPage.saleProducts(BuildContext context, {Key? key}) : super(key: key) {
     BlocProvider.of<ShopPageCubit>(context).showSaleProducts();
   }
 
-  ShopPage({
+  const ShopPage({
     Key? key,
     required BuildContext context,
-  }) : super(key: key) {
-    BlocProvider.of<ShopPageCubit>(context).init(context);
-  }
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

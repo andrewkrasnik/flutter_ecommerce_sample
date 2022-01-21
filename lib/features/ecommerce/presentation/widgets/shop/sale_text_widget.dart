@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
 
 class SaleTextWidget extends StatelessWidget {
@@ -17,7 +18,7 @@ class SaleTextWidget extends StatelessWidget {
       height: 24,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: const Color.fromRGBO(219, 48, 34, 1),
+        color: AppColors.red,
       ),
       child: Center(
         child: Text(

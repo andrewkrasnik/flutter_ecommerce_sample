@@ -29,13 +29,13 @@ class ProductPage extends StatelessWidget {
       create: (context) =>
           GetIt.instance.get<ProductCubit>(param1: product, param2: 0)
             ..loadRecomendedProducts(),
-      child: NewWidget(product: product),
+      child: ProductPageWidget(product: product),
     );
   }
 }
 
-class NewWidget extends StatelessWidget {
-  const NewWidget({
+class ProductPageWidget extends StatelessWidget {
+  const ProductPageWidget({
     Key? key,
     required this.product,
   }) : super(key: key);
@@ -226,34 +226,38 @@ class NewWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              Positioned(
-                child: Container(
-                  height: 80,
-                  padding: const EdgeInsets.only(
-                      left: 16, right: 16, top: 16, bottom: 16),
-                  decoration: BoxDecoration(color: AppColors.white, boxShadow: [
-                    BoxShadow(
-                        color: AppColors.shadow,
-                        spreadRadius: 0.2,
-                        blurRadius: 1,
-                        offset: const Offset(0, -1))
-                  ]),
-                  child: RedButton(
-                    text: "ADD TO CARD",
-                    onTap: () {
-                      BlocProvider.of<ProductCubit>(context).addToBag(
-                          product: product,
-                          size: state.size!,
-                          color: state.color!);
-                      Navigator.of(context).pop();
-                      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      //     content: Container(
-                      //         color: AppColors.shadow, child: Text("test"))));
-                    },
-                    height: 48,
-                  ),
-                ),
-              )
+              product.outOfStock
+                  ? Container()
+                  : Positioned(
+                      child: Container(
+                        height: 80,
+                        padding: const EdgeInsets.only(
+                            left: 16, right: 16, top: 16, bottom: 16),
+                        decoration: const BoxDecoration(
+                            color: AppColors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                  color: AppColors.shadow,
+                                  spreadRadius: 0.2,
+                                  blurRadius: 1,
+                                  offset: Offset(0, -1))
+                            ]),
+                        child: RedButton(
+                          text: "ADD TO CARD",
+                          onTap: () {
+                            BlocProvider.of<ProductCubit>(context).addToBag(
+                                product: product,
+                                size: state.size!,
+                                color: state.color!);
+                            Navigator.of(context).pop();
+                            // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            //     content: Container(
+                            //         color: AppColors.shadow, child: Text("test"))));
+                          },
+                          height: 48,
+                        ),
+                      ),
+                    )
             ]),
           ),
         );

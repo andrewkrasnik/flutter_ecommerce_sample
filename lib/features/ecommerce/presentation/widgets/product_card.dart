@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/product_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/favorite_icon_button.dart';
@@ -22,10 +23,8 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-            context,
-            CupertinoPageRoute(
-                builder: (context) => ProductPage(product: product)));
+        Navigator.of(context, rootNavigator: true).push(CupertinoPageRoute(
+            builder: (context) => ProductPage(product: product)));
       },
       child: Stack(
         children: [
@@ -52,8 +51,10 @@ class ProductCard extends StatelessWidget {
                 ),
                 Text(
                   product.brand.name,
-                  style:
-                      const TextStyle(fontSize: 11, color: Color(0xFF9B9B9B)),
+                  style: const TextStyle(
+                    fontSize: 11,
+                    color: AppColors.grayText,
+                  ),
                 ),
                 const SizedBox(
                   height: 4,

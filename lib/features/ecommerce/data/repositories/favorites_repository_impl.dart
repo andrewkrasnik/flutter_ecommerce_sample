@@ -1,7 +1,5 @@
-import 'package:flutter_ecommerce_sample/features/ecommerce/data/datasources/catalog_data_source.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/data/datasources/favorites_data_source.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/catalog_item.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/category.dart';
+
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product_filter.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/favorite.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/sort_types.dart';

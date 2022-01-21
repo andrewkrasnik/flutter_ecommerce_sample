@@ -4,6 +4,7 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/prom
 abstract class PromocodeDataSource {
   Future<List<Promocode>> getPromocodes();
   Future<Promocode?> searchPromocode(String code);
+  Future<bool> havePromocodes();
 }
 
 class PromocodeDataSourceImpl implements PromocodeDataSource {
@@ -45,5 +46,10 @@ class PromocodeDataSourceImpl implements PromocodeDataSource {
     } catch (e) {
       return Future.value(null);
     }
+  }
+
+  @override
+  Future<bool> havePromocodes() {
+    return Future.value(_promocodeList.isNotEmpty);
   }
 }

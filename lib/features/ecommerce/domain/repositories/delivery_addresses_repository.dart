@@ -5,4 +5,5 @@ abstract class DeliveryAddressesRepository {
   Future<void> addDeliveryAddress(DeliveryAddress adress);
   Future<DeliveryAddress> getDefaultAddress();
   Future<DeliveryAddress> setDefaultAddress(DeliveryAddress address);
+  Future<int> getAddressesCount();
 }

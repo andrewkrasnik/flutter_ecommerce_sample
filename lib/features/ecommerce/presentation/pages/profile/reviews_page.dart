@@ -8,10 +8,10 @@ class ReviewsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(
+        navigationBar: const CupertinoNavigationBar(
             backgroundColor: AppColors.mainColor,
             border: null,
-            trailing: const SearchBarButton()),
+            trailing: SearchBarButton()),
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -21,7 +21,7 @@ class ReviewsPage extends StatelessWidget {
                   height: 64,
                   alignment: Alignment.bottomLeft,
                   child: const Text(
-                    "My Promocodes",
+                    "My Reviews",
                     style: TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
                   ),
                 ),

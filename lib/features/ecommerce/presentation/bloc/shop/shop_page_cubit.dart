@@ -37,7 +37,7 @@ class ShopPageCubit extends Cubit<ShopPageState> {
   }) : super(
             ShopPageCategories(sCategory: SCategory.Woman, categoriesList: []));
 
-  void init(BuildContext context) {
+  void init() {
     selectSCategory(SCategory.Woman);
   }
 
@@ -50,14 +50,14 @@ class ShopPageCubit extends Cubit<ShopPageState> {
   }
 
   void toCatalog(Category category) async {
-    emit(ShopPageCatalog(catalog: [], category: category));
+    emit(ShopPageCatalog(catalog: const [], category: category));
     await Future.delayed(const Duration(milliseconds: 500));
     List<CatalogItem> catalog = await getCatalogByCategory(category);
     emit(ShopPageCatalog(catalog: catalog, category: category));
   }
 
   void toProductList(CatalogItem catalogItem) async {
-    emit(ShopPageProductList(productList: [], catalogItem: catalogItem));
+    emit(ShopPageProductList(productList: const [], catalogItem: catalogItem));
     await Future.delayed(const Duration(milliseconds: 500));
     List<Product> productList = await getProductsByCatalogItem(catalogItem);
     emit(ShopPageProductList(
@@ -78,6 +78,8 @@ class ShopPageCubit extends Cubit<ShopPageState> {
     } else {
       if (Navigator.of(context).canPop()) {
         Navigator.of(context).pop();
+      } else {
+        selectSCategory(SCategory.Woman);
       }
     }
   }
@@ -94,7 +96,7 @@ class ShopPageCubit extends Cubit<ShopPageState> {
   }
 
   void toFilters(BuildContext context) async {
-    Navigator.pushNamed(context, "/filters");
+    Navigator.of(context, rootNavigator: true).pushNamed("/filters");
   }
 
   void changeSortType(BuildContext context, SortType sortBy) async {
@@ -107,7 +109,7 @@ class ShopPageCubit extends Cubit<ShopPageState> {
   }
 
   void toProductPage(BuildContext context, Product product) {
-    Navigator.of(context).push(
+    Navigator.of(context, rootNavigator: true).push(
         MaterialPageRoute(builder: (context) => ProductPage(product: product)));
   }
 
@@ -119,6 +121,9 @@ class ShopPageCubit extends Cubit<ShopPageState> {
   }
 
   void showNewProducts() async {
+    emit(ShopPageNewProductList(
+      productList: const [],
+    ));
     await Future.delayed(const Duration(milliseconds: 500));
     emit(
       ShopPageNewProductList(
@@ -129,7 +134,7 @@ class ShopPageCubit extends Cubit<ShopPageState> {
 
   void showSaleProducts() async {
     emit(ShopPageSaleProductList(
-      productList: [],
+      productList: const [],
     ));
     await Future.delayed(const Duration(milliseconds: 500));
     emit(
@@ -140,8 +145,8 @@ class ShopPageCubit extends Cubit<ShopPageState> {
   }
 
   viewAllItems() async {
-    emit(ShopPageViewAllProducts(productList: []));
+    emit(ShopPageViewAllProducts(productList: const []));
     await Future.delayed(const Duration(milliseconds: 500));
-    emit(ShopPageViewAllProducts(productList: []));
+    emit(ShopPageViewAllProducts(productList: const []));
   }
 }
