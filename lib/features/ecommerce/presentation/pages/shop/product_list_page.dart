@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/catalog_item.dart';
+
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/product_sizes.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/emums/sort_types.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/product.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/shop/shop_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/circle_bordered_image.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/product_label_widget.dart';
-import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/red_button.dart';
+
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/select_size_widget.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/favorite_icon_button.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/shop/price_text_widget.dart';

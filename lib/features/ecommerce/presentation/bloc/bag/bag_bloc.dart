@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/bag.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/delivery_address.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/delivery_method.dart';
@@ -117,8 +118,9 @@ class BagBloc extends Bloc<BagEvent, BagState> {
     on<BagPaymentMethodApplyEvent>((event, emit) async {});
     on<BagCheckOutTapEvent>((event, emit) async {
       Bag bag = await getBag();
-      bag.deliveryAddress = await getDefaultDeliveryAdress();
-      bag.paymentMethod = await getDefaultPaymentMethod();
+      bag.deliveryAddress ??=
+          await getDefaultDeliveryAdress(); //это бизнеслогика, нужно ее перенести
+      bag.paymentMethod ??= await getDefaultPaymentMethod();
       emit(BagCheckoutState(
           bag: bag, deliveryMethods: await getDeliveryMethods()));
     });

@@ -11,7 +11,7 @@ class PaymentMethodsDataStoreImpl extends PaymentMethodsDataStore {
   List<PaymentMethod> _list = [];
   PaymentMethodsDataStoreImpl() {
     _list.add(PaymentMethod(
-        nameOnCard: "",
+        nameOnCard: "Jennyfer Doe",
         cardType: CardType.masterCard,
         cardNumber: "5546 8205 3693 3947",
         expireDate: "05/23 ",
@@ -19,7 +19,7 @@ class PaymentMethodsDataStoreImpl extends PaymentMethodsDataStore {
         defaultMethod: true));
 
     _list.add(PaymentMethod(
-      nameOnCard: "",
+      nameOnCard: "Jennyfer Doe",
       cardType: CardType.visa,
       cardNumber: "4203 8205 3693 4546",
       expireDate: "11/22 ",

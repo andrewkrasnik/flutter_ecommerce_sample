@@ -16,14 +16,19 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/red_button.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/search_bar_button.dart';
 
+import 'checkout_page.dart';
+
 class BagListPage extends StatelessWidget {
   const BagListPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<BagBloc>().state;
-
-    Bag bag = (state as BagPageState).bag;
+    //final state = context.watch<BagBloc>().state;
+    final state = BlocProvider.of<BagBloc>(context).state as BagPageState;
+    // if (state is! BagPageState) {
+    //   return Container();
+    // }
+    Bag bag = (state).bag;
 
     List<Widget> itemsList = List.generate(bag.itemCount, (int index) {
       BagItem item = bag.getItem(index);
@@ -233,6 +238,8 @@ class BagListPage extends StatelessWidget {
           text: "CHECK OUT",
           onTap: () {
             BlocProvider.of<BagBloc>(context).add(BagCheckOutTapEvent());
+            Navigator.of(context, rootNavigator: true).push(
+                CupertinoPageRoute(builder: (context) => const CheckoutPage()));
           },
         ),
         const SizedBox(
