@@ -117,7 +117,7 @@ class ShopPageCubit extends Cubit<ShopPageState> {
       {required Product product, required ProductSize size}) async {
     await addFavorite(product: product, size: size, color: product.colors[0]);
 
-    emit(state);
+    emit(state.copyWith());
   }
 
   void showNewProducts() async {

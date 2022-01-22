@@ -7,4 +7,26 @@ abstract class PaymentMethodsState extends Equatable {
   List<Object> get props => [];
 }
 
-class PaymentMethodsInitial extends PaymentMethodsState {}
+class PaymentMethodsListState extends PaymentMethodsState {
+  final List<PaymentMethod> methods;
+  final PaymentMethod? defaultMethod;
+
+  const PaymentMethodsListState({
+    required this.methods,
+    this.defaultMethod,
+  });
+
+  @override
+  List<Object> get props =>
+      [methods, defaultMethod ?? ""]; //непонятно можно ли так делать
+}
+
+class PaymentMethodsPageState extends PaymentMethodsState {
+  final PaymentMethod method;
+  const PaymentMethodsPageState({
+    required this.method,
+  });
+
+  @override
+  List<Object> get props => [method];
+}

@@ -6,6 +6,7 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/ba
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/favorites/favorites_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/home/home_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/login/login_cubit.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/profile/profile_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/shop/shop_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/login_page.dart';
 import 'features/ecommerce/presentation/pages/profile/order_page.dart';
@@ -34,9 +35,9 @@ void main() async {
               create: (context) => di.sl<HomePageCubit>()..loadNewProducts()),
           BlocProvider<FavoritesPageCubit>(
               create: (context) => di.sl<FavoritesPageCubit>()..loadList()),
-          BlocProvider<BagBloc>(
-            create: (context) => di.sl<BagBloc>(),
-          )
+          BlocProvider<BagBloc>(create: (context) => di.sl<BagBloc>()),
+          BlocProvider<ProfileCubit>(
+              create: (context) => di.sl<ProfileCubit>()..updateStatistic()),
         ],
         child: CupertinoApp(
           title: "eCommerce Sample",

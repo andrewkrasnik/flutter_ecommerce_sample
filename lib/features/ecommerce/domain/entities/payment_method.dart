@@ -19,13 +19,21 @@ class PaymentMethod {
   String get cardTypeName =>
       cardType == CardType.masterCard ? "MasterCard" : "Visa";
   String get presentation =>
-      "$cardTypeName **${cardNumber.substring(cardNumber.length - 3)}";
+      "$cardTypeName **${cardNumber.substring(cardNumber.length - 2)}";
 
   static String cardLogo(CardType cardType) {
     if (cardType == CardType.masterCard) {
       return "assets/images/bag/mastercard_logo.png";
     } else {
       return "assets/images/bag/visa_logo.png";
+    }
+  }
+
+  String get cardImage {
+    if (cardType == CardType.masterCard) {
+      return "assets/images/bag/mastercard.png";
+    } else {
+      return "assets/images/bag/visa_card.png";
     }
   }
 }

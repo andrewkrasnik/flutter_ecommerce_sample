@@ -16,7 +16,7 @@ class ProfileStatistic {
     if (ordersCount == 0) {
       return "Already have no orders";
     } else if (ordersCount == 1) {
-      return "Already have one orders";
+      return "Already have one order";
     } else {
       return "Already have $ordersCount orders";
     }

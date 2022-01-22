@@ -32,6 +32,9 @@ class DeliveryAddressesCubit extends Cubit<DeliveryAddressesState> {
 
   void setDefaultAddress(DeliveryAddress address) async {
     await setDefaultDeliveryAdress(address);
-    emit(DeliveryAddressesListState(addresses: await getDeliveryAdresses()));
+    emit(DeliveryAddressesListState(
+      addresses: await getDeliveryAdresses(),
+      defaultAddress: address,
+    ));
   }
 }

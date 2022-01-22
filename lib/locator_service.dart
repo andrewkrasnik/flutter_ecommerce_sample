@@ -53,7 +53,9 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/fa
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/home/home_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/login/login_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/order/order_cubit.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/payment_methods/payment_methods_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/product/product_cubit.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/profile/profile_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/promocodes/promocodes_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/shop/shop_page_cubit.dart';
 import 'package:get_it/get_it.dart';
@@ -127,6 +129,13 @@ Future<void> init() async {
   sl.registerFactory(() => OrderCubit(
         getOrders: sl(),
       ));
+
+  sl.registerFactory(() => ProfileCubit(getProfileStatistic: sl()));
+
+  sl.registerFactory(() => PaymentMethodsCubit(
+      getPaymentMethods: sl(),
+      getDefaultPaymentMethod: sl(),
+      setDefaultPaymentMethod: sl()));
 
   //UseCases
   sl.registerLazySingleton(() => GetCategoriesBySCategory(sl()));

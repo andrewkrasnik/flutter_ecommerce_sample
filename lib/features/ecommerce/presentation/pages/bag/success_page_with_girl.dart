@@ -10,6 +10,7 @@ class SuccessPageWithGirl extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BagBloc, BagState>(
+      buildWhen: (previous, current) => current is BagSuccessState,
       builder: (context, state) {
         return CupertinoPageScaffold(
           child: Container(
@@ -54,6 +55,7 @@ class SuccessPageWithGirl extends StatelessWidget {
                   height: 36,
                   onTap: () {
                     BlocProvider.of<BagBloc>(context).add(BagInitListEvent());
+                    Navigator.of(context).pop();
                   },
                 ),
               ],

@@ -9,6 +9,7 @@ import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/bag/bag_bloc.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/favorites/favorites_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/home/home_page_cubit.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/profile/profile_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/bag/bag_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/home_page.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/product_page.dart';
@@ -86,6 +87,8 @@ class TabBarPage extends StatelessWidget {
               }
             } else if (value == 3) {
               BlocProvider.of<FavoritesPageCubit>(context).loadList();
+            } else if (value == 4) {
+              BlocProvider.of<ProfileCubit>(context).updateStatistic();
             }
           },
           items: [
