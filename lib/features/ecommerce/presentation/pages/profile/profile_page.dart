@@ -89,7 +89,10 @@ class ProfilePage extends StatelessWidget {
                       Navigator.of(
                         context,
                         rootNavigator: true,
-                      ).pushNamed("/adresses");
+                      ).pushNamed("/adresses").then((value) {
+                        BlocProvider.of<ProfileCubit>(context)
+                            .updateStatistic();
+                      });
                     },
                   ),
                   ProfileItemWidget(
@@ -99,7 +102,10 @@ class ProfilePage extends StatelessWidget {
                       Navigator.of(
                         context,
                         rootNavigator: true,
-                      ).pushNamed("/payments");
+                      ).pushNamed("/payments").then((value) {
+                        BlocProvider.of<ProfileCubit>(context)
+                            .updateStatistic();
+                      });
                     },
                   ),
                   ProfileItemWidget(

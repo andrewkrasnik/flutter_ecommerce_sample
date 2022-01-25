@@ -14,6 +14,13 @@ class PaymentMethod {
     this.defaultMethod = false,
   });
 
+  factory PaymentMethod.empty() => PaymentMethod(
+      nameOnCard: "",
+      cardType: CardType.none,
+      cardNumber: "",
+      expireDate: "",
+      cvv: 0);
+
   String get endCardNumber => cardNumber.substring(cardNumber.length - 5);
   String get cardNumberPresentation => "**** **** **** $endCardNumber";
   String get cardTypeName =>
@@ -38,4 +45,4 @@ class PaymentMethod {
   }
 }
 
-enum CardType { visa, masterCard }
+enum CardType { visa, masterCard, none }

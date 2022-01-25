@@ -9,13 +9,13 @@ import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/lo
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/profile/profile_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/shop/shop_page_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/pages/login_page.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'features/ecommerce/presentation/pages/profile/order_page.dart';
 import 'features/ecommerce/presentation/pages/profile/orders_page.dart';
 import 'features/ecommerce/presentation/pages/profile/payment_methods_page.dart';
 import 'features/ecommerce/presentation/pages/profile/promocodes_page.dart';
 import 'features/ecommerce/presentation/pages/profile/reviews_page.dart';
 import 'features/ecommerce/presentation/pages/profile/settings_page.dart';
-import 'features/ecommerce/presentation/pages/profile/shipping_address_page.dart';
 import 'features/ecommerce/presentation/pages/profile/shipping_addresses_page.dart';
 import 'features/ecommerce/presentation/pages/shop/filters_page.dart';
 import 'features/ecommerce/presentation/pages/tab_bar_page.dart';
@@ -53,10 +53,15 @@ void main() async {
             "/reviews": (context) => ReviewsPage(),
             "/orders": (context) => OrdersPage(),
             "/search": (context) => VisualSearchPage(),
-            "/adress": (context) => ShippingAddressPage(),
+            // "/adress": (context) => ShippingAddressPage(),
             "/order": (context) => OrderPage(),
             // "/product": (context) => ProductPage(product: product),
           },
+          localizationsDelegates: <LocalizationsDelegate<dynamic>>[
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+          ],
           theme: const CupertinoThemeData(
             textTheme: _textTheme,
             scaffoldBackgroundColor: _mainColor,
