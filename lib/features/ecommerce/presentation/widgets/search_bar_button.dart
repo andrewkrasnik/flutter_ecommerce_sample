@@ -9,7 +9,7 @@ class SearchBarButton extends StatelessWidget {
     return CupertinoButton(
         padding: const EdgeInsets.only(bottom: 4),
         onPressed: () {
-          Navigator.of(context).pushNamed("/search");
+          Navigator.of(context, rootNavigator: true).pushNamed("/search");
         },
         child: const Icon(
           Icons.search,

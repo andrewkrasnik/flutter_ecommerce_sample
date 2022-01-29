@@ -18,6 +18,15 @@ class DeliveryAddress extends Equatable {
     this.defaultAddress = false,
   });
 
+  factory DeliveryAddress.empty() {
+    return DeliveryAddress(
+        fullName: "",
+        address: "",
+        city: "",
+        region: "",
+        zipCode: "",
+        country: "");
+  }
   String get presentation => "$address, $city, $region $zipCode, $country";
 
   @override

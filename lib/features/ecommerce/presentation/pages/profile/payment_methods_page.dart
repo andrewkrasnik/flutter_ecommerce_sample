@@ -4,6 +4,8 @@ import 'package:flutter_ecommerce_sample/core/themes/app_colors.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/domain/entities/payment_method.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/bloc/payment_methods/payment_methods_cubit.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/checkbox_widget.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/profile/add_card_widget.dart';
+import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/profile/black_add_button.dart';
 import 'package:flutter_ecommerce_sample/features/ecommerce/presentation/widgets/profile/maybe_detector.dart';
 import 'package:get_it/get_it.dart';
 
@@ -68,39 +70,81 @@ class PaymentsMethodsPage extends StatelessWidget {
                                       fit: BoxFit.cover,
                                       image: AssetImage(method.cardImage)),
                                   Positioned(
-                                    left: imageWidth / 10 * 6,
+                                    left: imageWidth / 16,
                                     top: isVisa
                                         ? imageWidth / 4.6
                                         : imageWidth / 4.3,
-                                    child: Text(
-                                      method.endCardNumber,
-                                      style: const TextStyle(
-                                          color: AppColors.white, fontSize: 24),
+                                    child: Row(
+                                      children: [
+                                        const Text(
+                                          "**** **** **** **** ",
+                                          style: TextStyle(
+                                              letterSpacing: 1.5,
+                                              color: AppColors.white,
+                                              fontSize: 28),
+                                        ),
+                                        Text(
+                                          method.endCardNumber,
+                                          style: const TextStyle(
+                                              color: AppColors.white,
+                                              fontSize: 24),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                   Positioned(
                                     left: imageWidth / 16,
                                     top: isVisa
-                                        ? imageWidth / 2.15
-                                        : imageWidth / 2.13,
-                                    child: Text(
-                                      method.nameOnCard,
-                                      style: const TextStyle(
-                                          color: AppColors.white, fontSize: 14),
-                                    ),
+                                        ? imageWidth / 2.3
+                                        : imageWidth / 2.36,
+                                    child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const Text(
+                                            "Card Holder name",
+                                            style: TextStyle(
+                                                color: AppColors.white,
+                                                fontSize: 10),
+                                          ),
+                                          const SizedBox(
+                                            height: 8,
+                                          ),
+                                          Text(
+                                            method.nameOnCard,
+                                            style: const TextStyle(
+                                                color: AppColors.white,
+                                                fontSize: 14),
+                                          ),
+                                        ]),
                                   ),
                                   Positioned(
                                     left: isVisa
                                         ? imageWidth / 10 * 7.1
                                         : imageWidth / 10 * 4.8,
                                     top: isVisa
-                                        ? imageWidth / 2.15
-                                        : imageWidth / 2.13,
-                                    child: Text(
-                                      method.expireDate,
-                                      style: const TextStyle(
-                                          color: AppColors.white, fontSize: 14),
-                                    ),
+                                        ? imageWidth / 2.3
+                                        : imageWidth / 2.36,
+                                    child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const Text(
+                                            "Expiry Date",
+                                            style: TextStyle(
+                                                color: AppColors.white,
+                                                fontSize: 10),
+                                          ),
+                                          const SizedBox(
+                                            height: 8,
+                                          ),
+                                          Text(
+                                            method.expireDate,
+                                            style: const TextStyle(
+                                                color: AppColors.white,
+                                                fontSize: 14),
+                                          ),
+                                        ]),
                                   ),
                                 ]),
                               ),
@@ -130,6 +174,29 @@ class PaymentsMethodsPage extends StatelessWidget {
                           ),
                         );
                       }),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                        BlackAddButton(
+                          onTap: () {
+                            showCupertinoModalPopup<void>(
+                                context: context,
+                                builder: (currentContext) {
+                                  return AddCardWidget(
+                                    setDefault:
+                                        BlocProvider.of<PaymentMethodsCubit>(
+                                                context)
+                                            .setDefaultMethod,
+                                    addCard:
+                                        BlocProvider.of<PaymentMethodsCubit>(
+                                                context)
+                                            .addCard,
+                                  );
+                                });
+                          },
+                        ),
+                      ]),
                       const SizedBox(
                         height: 25,
                       ),

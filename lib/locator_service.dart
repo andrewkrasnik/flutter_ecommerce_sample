@@ -133,9 +133,11 @@ Future<void> init() async {
   sl.registerFactory(() => ProfileCubit(getProfileStatistic: sl()));
 
   sl.registerFactory(() => PaymentMethodsCubit(
-      getPaymentMethods: sl(),
-      getDefaultPaymentMethod: sl(),
-      setDefaultPaymentMethod: sl()));
+        getPaymentMethods: sl(),
+        getDefaultPaymentMethod: sl(),
+        setDefaultPaymentMethod: sl(),
+        addPaymentsMethod: sl(),
+      ));
 
   //UseCases
   sl.registerLazySingleton(() => GetCategoriesBySCategory(sl()));

@@ -30,6 +30,11 @@ class DeliveryAddressesCubit extends Cubit<DeliveryAddressesState> {
     emit(DeliveryAddressPageState(address: address));
   }
 
+  void addAddress(DeliveryAddress address) async {
+    await addDeliveryAdress(address);
+    loadList();
+  }
+
   void setDefaultAddress(DeliveryAddress address) async {
     await setDefaultDeliveryAdress(address);
     emit(DeliveryAddressesListState(
